@@ -7,6 +7,7 @@ on:
 
 permissions:
   contents: read
+  pull-requests: read
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -120,8 +121,8 @@ jobs:
           $null = [scriptblock]::Create((Get-Content -Raw ./scripts/demo.ps1))
           $null = [scriptblock]::Create((Get-Content -Raw ./scripts/check-repository.ps1))
           ./scripts/check-links.ps1
-      - name: Portable unit tests
-        run: uv run pytest -m "not integration and not slow"
+      - name: Portable tests and coverage
+        run: uv run pytest -m "not slow"
 
   secrets:
     name: Secret scanning
