@@ -1,0 +1,15 @@
+schema_version: "1.0"
+id: EVID-POL-02
+path: assessment/policies/POL-02.md
+sha256: e47f42346695a775edfebd657c0c6c7f577175b1ba08377f7a689ec047d08a63
+size: 354
+media_type: text/markdown
+collector: project_owner_assessor
+collected_at: 2026-09-25T13:45:00Z
+source_period: effective-from-2026-08-01
+run_id: RUN-S01-BASELINE
+provenance: authored_policy
+sensitivity: sanitized
+query_or_action: Register versioned exercise criterion POL-02.
+tool_version: manual-authoring
+redactions: []

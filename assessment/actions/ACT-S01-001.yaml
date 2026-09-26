@@ -1,0 +1,17 @@
+schema_version: "1.0"
+id: ACT-S01-001
+finding_id: FIND-S01-001
+owner_role: simulated_system_administrator
+target_date: 2026-10-09
+status: implemented
+fix_reference: bank_lab S01 remediation adapter
+implementation_summary: Account deactivation now revokes all active sessions in the same workflow.
+closure_criteria:
+  - New login for USR-021 is denied.
+  - The frozen baseline session for USR-021 is rejected as revoked.
+proposed_likelihood: 1
+proposed_impact: 4
+proposed_residual_risk_rationale: >-
+  The direct scenario path is blocked, but impact remains unchanged and broader identity
+  infrastructure was not assessed.
+implemented_at: 2026-09-25T15:00:00Z

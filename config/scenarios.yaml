@@ -1,0 +1,28 @@
+schema_version: "1.0"
+resource_name_pattern: "^cyber-assess-scenario-[a-z0-9-]{8,64}$"
+secure_default: true
+scenarios:
+  - id: S01
+    name: retained-leaver-access
+    injected_condition: A terminated synthetic identity remains active with one reusable session.
+    remediation: Deactivate the identity and revoke every active session.
+  - id: S02
+    name: unjustified-admin-role
+    injected_condition: A synthetic staff account receives an admin role without an approved request.
+    remediation: Restore the approved role and invalidate existing sessions.
+  - id: S03
+    name: password-only-privileged-action
+    injected_condition: A privileged action accepts a password-only scenario session.
+    remediation: Require completed MFA and invalidate weak privileged sessions.
+  - id: S04
+    name: self-approved-change
+    injected_condition: A deployed change is self-approved and has no test evidence.
+    remediation: Enforce separation and required evidence before deployment.
+  - id: S05
+    name: corrupt-successful-backup
+    injected_condition: A backup job reports success for a corrupt artifact.
+    remediation: Validate content and restoration before recording success.
+  - id: S06
+    name: omitted-admin-event
+    injected_condition: One administrative action omits its required audit event.
+    remediation: Restore event emission and verify the action-to-alert chain.

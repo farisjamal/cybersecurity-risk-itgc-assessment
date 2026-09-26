@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "fixture_seed": 42,
+  "population_query": "synthetic identities with leave_date on or before 2026-08-30",
+  "population_count": 3,
+  "records": [
+    {"user_id": "USR-007", "name": "Amina Example", "leave_date": "2026-08-10"},
+    {"user_id": "USR-014", "name": "Ravi Example", "leave_date": "2026-08-18"},
+    {"user_id": "USR-021", "name": "Wei Example", "leave_date": "2026-08-25"}
+  ],
+  "provenance": "synthetic_record",
+  "contains_real_personal_data": false
+}

@@ -1,0 +1,95 @@
+[build-system]
+requires = ["hatchling>=1.27,<2"]
+build-backend = "hatchling.build"
+
+[project]
+name = "cybersecurity-risk-itgc-assessment"
+version = "0.1.0"
+description = "Evidence-based cybersecurity risk and ITGC assessment for a simulated financial institution"
+readme = "README.md"
+requires-python = ">=3.12,<3.13"
+license = { text = "MIT" }
+authors = [
+  { name = "Faris Jamal", email = "111167160+farisjamal@users.noreply.github.com" },
+]
+dependencies = [
+  "aiosqlite>=0.21,<1",
+  "alembic>=1.16,<2",
+  "asyncpg>=0.30,<1",
+  "fastapi>=0.116,<1",
+  "httpx>=0.28,<1",
+  "jinja2>=3.1,<4",
+  "markdown>=3.8,<4",
+  "openpyxl>=3.1,<4",
+  "pwdlib[argon2]>=0.2,<1",
+  "pydantic>=2.11,<3",
+  "pydantic-settings>=2.10,<3",
+  "pyotp>=2.9,<3",
+  "python-multipart>=0.0.20,<1",
+  "pyyaml>=6,<7",
+  "sqlalchemy[asyncio]>=2.0.41,<3",
+  "uvicorn[standard]>=0.35,<1",
+]
+
+[dependency-groups]
+dev = [
+  "mypy>=1.16,<2",
+  "pip-audit>=2.9,<3",
+  "pytest>=8.4,<9",
+  "pytest-asyncio>=1.0,<2",
+  "pytest-cov>=6.2,<8",
+  "ruff>=0.12,<1",
+  "types-pyyaml>=6.0.12,<7",
+]
+
+[project.scripts]
+cyber-assess = "cyber_assess.cli:main"
+bank-lab = "bank_lab.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/bank_lab", "src/cyber_assess"]
+
+[tool.pytest.ini_options]
+addopts = [
+  "--strict-config",
+  "--strict-markers",
+  "--cov=bank_lab",
+  "--cov=cyber_assess",
+  "--cov-report=term-missing",
+  "--cov-fail-under=80",
+]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+markers = [
+  "integration: requires a database-backed integration boundary",
+  "acceptance: validates a PRD acceptance path",
+  "slow: longer-running recovery or export exercise",
+]
+
+[tool.coverage.run]
+branch = true
+source = ["bank_lab", "cyber_assess"]
+
+[tool.coverage.report]
+exclude_also = [
+  "if TYPE_CHECKING:",
+  "if __name__ == .__main__.:",
+  "raise NotImplementedError",
+]
+show_missing = true
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "B", "UP", "S", "SIM", "ASYNC", "RUF"]
+ignore = ["S101"]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**/*.py" = ["S105", "S106", "S108"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+packages = ["bank_lab", "cyber_assess"]

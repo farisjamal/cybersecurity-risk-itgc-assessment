@@ -1,0 +1,135 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  quality:
+    name: Lint, unit, schema, links
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.26"
+          enable-cache: true
+      - name: Install locked environment
+        run: uv sync --frozen --all-groups
+      - name: Ruff
+        run: |
+          uv run ruff check .
+          uv run ruff format --check .
+      - name: Strict type checking
+        run: uv run python -m mypy src
+      - name: Locked dependency audit
+        run: uv run python -m pip_audit --requirement requirements.lock --disable-pip --progress-spinner off
+      - name: Tests and acceptance paths with coverage
+        run: uv run pytest -m "not slow" --cov-report=term-missing --cov-report=xml
+      - name: Validate canonical assessment
+        run: |
+          uv run python -m cyber_assess assess validate --engagement ENG-001
+          uv run python -m cyber_assess findings validate --engagement ENG-001
+      - name: Validate local Markdown links
+        shell: pwsh
+        run: ./scripts/check-links.ps1
+      - name: Upload coverage result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: coverage.xml
+          if-no-files-found: error
+          retention-days: 14
+
+  postgres:
+    name: PostgreSQL integration
+    runs-on: ubuntu-24.04
+    services:
+      postgres:
+        image: postgres:17.6-alpine3.22
+        env:
+          POSTGRES_DB: bank_lab_test
+          POSTGRES_USER: bank_lab_test
+          POSTGRES_PASSWORD: ci-ephemeral-password
+          POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U bank_lab_test -d bank_lab_test"
+          --health-interval 5s
+          --health-timeout 3s
+          --health-retries 12
+    env:
+      BANK_LAB_ENVIRONMENT: test
+      BANK_LAB_DATABASE_URL: postgresql+asyncpg://bank_lab_test:ci-ephemeral-password@127.0.0.1:5432/bank_lab_test
+      BANK_LAB_SESSION_PEPPER: ci-only-ephemeral-session-pepper-32-bytes
+      BANK_LAB_COOKIE_SECURE: "false"
+      CYBER_ASSESS_DATABASE_URL: postgresql+asyncpg://bank_lab_test:ci-ephemeral-password@127.0.0.1:5432/bank_lab_test
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.26"
+          enable-cache: true
+      - run: uv sync --frozen --all-groups
+      - name: Integration and scenario acceptance
+        run: uv run pytest -m "integration or acceptance" --no-cov
+
+  compose-model:
+    name: Compose containment
+    runs-on: ubuntu-24.04
+    env:
+      POSTGRES_DB: bank_lab
+      POSTGRES_USER: bank_lab_app
+      POSTGRES_PASSWORD: compose-validation-placeholder
+      BANK_LAB_SESSION_PEPPER: compose-validation-placeholder-at-least-32-bytes
+    steps:
+      - uses: actions/checkout@v4
+      - name: Validate effective Compose model
+        run: docker compose config --quiet
+      - name: Assert loopback app and unexposed database
+        shell: pwsh
+        run: |
+          $model = docker compose config --format json | ConvertFrom-Json
+          if ($model.services.app.ports[0].host_ip -ne '127.0.0.1') { throw 'App port is not loopback-only.' }
+          if ($null -ne $model.services.db.ports) { throw 'Database must not publish a host port.' }
+
+  windows:
+    name: Windows PowerShell path
+    runs-on: windows-2025
+    steps:
+      - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
+        with:
+          version: "0.11.26"
+          enable-cache: true
+      - run: uv sync --frozen --all-groups
+      - name: Validate PowerShell and local links
+        shell: pwsh
+        run: |
+          $null = [scriptblock]::Create((Get-Content -Raw ./scripts/doctor.ps1))
+          $null = [scriptblock]::Create((Get-Content -Raw ./scripts/demo.ps1))
+          $null = [scriptblock]::Create((Get-Content -Raw ./scripts/check-repository.ps1))
+          ./scripts/check-links.ps1
+      - name: Portable unit tests
+        run: uv run pytest -m "not integration and not slow"
+
+  secrets:
+    name: Secret scanning
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+      - uses: gitleaks/gitleaks-action@v2
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

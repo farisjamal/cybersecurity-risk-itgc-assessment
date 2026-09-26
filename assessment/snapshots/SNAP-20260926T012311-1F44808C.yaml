@@ -1,0 +1,66 @@
+schema_version: '1.0'
+id: SNAP-20260926T012311-1F44808C
+engagement_id: ENG-001
+generator_version: 0.1.0
+created_at: '2026-09-26T01:23:11.424684Z'
+source_hashes:
+- schema_version: '1.0'
+  path: assessment/actions/ACT-S01-001.yaml
+  sha256: 3b1b0683e10ce075c7aac025d75aed3dd0a562491cedbd179b9d03068c4e0ef0
+  size: 660
+- schema_version: '1.0'
+  path: assessment/controls.yaml
+  sha256: c67f271d58d3ce8fd8058e6245b605423c101efa473c8e854d50e4a5d6444c3a
+  size: 8467
+- schema_version: '1.0'
+  path: assessment/engagement.yaml
+  sha256: b005fae71c766f96178b9d090b06dd9c87991e9a119141d74936b3836d94bf47
+  size: 1032
+- schema_version: '1.0'
+  path: assessment/evidence/EVID-POL-02.yaml
+  sha256: e39644241deb15f1c04f1168d6ca0b9799c9786bcb513679686e11df5b7d875d
+  size: 478
+- schema_version: '1.0'
+  path: assessment/evidence/EVID-S01-BASELINE.yaml
+  sha256: 5e8174b01dccf8bec199d7200ae09840def9d0fc8ad4aee11a460269b97b8c94
+  size: 554
+- schema_version: '1.0'
+  path: assessment/evidence/EVID-S01-POPULATION.yaml
+  sha256: 94df5af363f5cae3b327221258a2dee64ca15e1e02fc36523ed37ae70dc57d2a
+  size: 527
+- schema_version: '1.0'
+  path: assessment/evidence/EVID-S01-RETEST.yaml
+  sha256: 5877072780b774dfa1d9d27ff909852510be8ef202e8549bfd8a2bd1298a42ec
+  size: 589
+- schema_version: '1.0'
+  path: assessment/findings/FIND-S01-001.yaml
+  sha256: 35d459e447ec446bbfc6f9b10b1121f15828c0292dd2d5525c4e153298cac895
+  size: 1261
+- schema_version: '1.0'
+  path: assessment/policies/POL-02.md
+  sha256: e47f42346695a775edfebd657c0c6c7f577175b1ba08377f7a689ec047d08a63
+  size: 354
+- schema_version: '1.0'
+  path: assessment/retests/RETEST-S01-001.yaml
+  sha256: 2c3f7541275056a336741ab588fccff57f3e3b9d653de53ea116f73afa31d9c5
+  size: 458
+- schema_version: '1.0'
+  path: assessment/workpapers/WP-IAM-02-S01.yaml
+  sha256: a259cf712b19a32f8a2d3c47079d9c7e2a82b2989f70e81522665c9ee6735bfd
+  size: 1631
+- schema_version: '1.0'
+  path: fixtures/evidence/s01/baseline_access_observation.json
+  sha256: 1e674907c16afb033f4c973ffb87ae774b095934c43a4769da635294922da10a
+  size: 514
+- schema_version: '1.0'
+  path: fixtures/evidence/s01/leaver_population.json
+  sha256: 30e739fd559206358538085f6eef29e6f65f38f609166dbcaa2de7683b62bfc3
+  size: 498
+- schema_version: '1.0'
+  path: fixtures/evidence/s01/retest_access_observation.json
+  sha256: 00c52621d3fc0a0211423a7288986bfdb4c6a96203834c728fe85fc389a485b4
+  size: 594
+baseline_ids:
+- FIND-S01-001
+retest_ids:
+- RETEST-S01-001

@@ -1,0 +1,70 @@
+name: cybersecurity-itgc-lab
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    init: true
+    restart: unless-stopped
+    environment:
+      BANK_LAB_ENVIRONMENT: ${BANK_LAB_ENVIRONMENT:-development}
+      BANK_LAB_DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:?Set POSTGRES_USER in .env}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/${POSTGRES_DB:?Set POSTGRES_DB in .env}
+      BANK_LAB_SESSION_PEPPER: ${BANK_LAB_SESSION_PEPPER:?Set BANK_LAB_SESSION_PEPPER in .env}
+      BANK_LAB_COOKIE_SECURE: ${BANK_LAB_COOKIE_SECURE:-false}
+      BANK_LAB_AUTO_CREATE_SCHEMA: ${BANK_LAB_AUTO_CREATE_SCHEMA:-false}
+      BANK_LAB_RUN_ID: ${BANK_LAB_RUN_ID:-BASELINE}
+      CYBER_ASSESS_DATABASE_URL: postgresql+asyncpg://${POSTGRES_USER:?Set POSTGRES_USER in .env}:${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}@db:5432/${POSTGRES_DB:?Set POSTGRES_DB in .env}
+    ports:
+      - "127.0.0.1:8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - lab-internal
+    volumes:
+      - app-runtime:/app/runtime
+    read_only: true
+    tmpfs:
+      - /tmp:rw,noexec,nosuid,size=64m
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL
+    pids_limit: 256
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://127.0.0.1:8000/health', timeout=2).read()"]
+      interval: 10s
+      timeout: 3s
+      start_period: 20s
+      retries: 6
+
+  db:
+    image: postgres:17.6-alpine3.22
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: ${POSTGRES_DB:?Set POSTGRES_DB in .env}
+      POSTGRES_USER: ${POSTGRES_USER:?Set POSTGRES_USER in .env}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:?Set POSTGRES_PASSWORD in .env}
+      POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256
+    networks:
+      - lab-internal
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    shm_size: 128mb
+    security_opt:
+      - no-new-privileges:true
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U \"$${POSTGRES_USER}\" -d \"$${POSTGRES_DB}\""]
+      interval: 5s
+      timeout: 3s
+      retries: 12
+      start_period: 10s
+
+networks:
+  lab-internal:
+    internal: true
+
+volumes:
+  postgres-data:
+  app-runtime:

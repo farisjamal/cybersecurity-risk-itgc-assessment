@@ -1,0 +1,14 @@
+schema_version: "1.0"
+id: RETEST-S01-001
+finding_id: FIND-S01-001
+action_id: ACT-S01-001
+test_run_id: RUN-S01-RETEST
+evidence_ids: [EVID-S01-RETEST]
+closure_criteria:
+  - New login for USR-021 is denied.
+  - The frozen baseline session for USR-021 is rejected as revoked.
+executed_at: 2026-09-25T15:10:00Z
+fresh_evidence: true
+result: passed
+decision: accept_closure
+limitations: Local deterministic fixture replay; wider identity systems remain unassessed.

@@ -1,0 +1,37 @@
+name: Implementation unit
+description: Plan a bounded change linked to the PRD and an acceptance test.
+title: "[REQ] "
+labels: ["implementation"]
+body:
+  - type: markdown
+    attributes:
+      value: This repository uses requirement -> branch -> test -> pull request -> self-review -> release.
+  - type: input
+    id: requirements
+    attributes:
+      label: Requirement IDs
+      description: Reference FR, NFR, AT, DEL, scenario, or control IDs.
+      placeholder: FR-03, AT-04
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Intended outcome
+      description: State the observable behavior and boundaries.
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Verification plan
+      description: Include positive, negative, integrity, and failure-path checks where relevant.
+    validations:
+      required: true
+  - type: textarea
+    id: risks
+    attributes:
+      label: Security and evidence risks
+      description: Identify secure-default, privacy, evidence, or publication impacts.
+    validations:
+      required: true

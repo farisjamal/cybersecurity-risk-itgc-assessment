@@ -1,0 +1,15 @@
+schema_version: "1.0"
+id: EVID-S01-BASELINE
+path: fixtures/evidence/s01/baseline_access_observation.json
+sha256: 1e674907c16afb033f4c973ffb87ae774b095934c43a4769da635294922da10a
+size: 514
+media_type: application/json
+collector: cyber_assess_acceptance_fixture
+collected_at: 2026-09-25T14:00:00Z
+source_period: 2026-09-25T14:00:00Z/2026-09-25T14:01:00Z
+run_id: RUN-S01-BASELINE
+provenance: observed_lab
+sensitivity: sanitized
+query_or_action: Replay S01 and attempt both a new login and the retained baseline session.
+tool_version: "0.1.0"
+redactions: []

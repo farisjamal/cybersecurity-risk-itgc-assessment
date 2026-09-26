@@ -1,0 +1,18 @@
+schema_version: "1.0"
+generator_version: "0.1.0"
+seed: 42
+synthetic_only: true
+reserved_email_domains:
+  - example.com
+  - example.org
+expected_counts:
+  staff_identities: 24
+  terminated_identities: 3
+  joiner_events: 6
+  service_requests: 50
+  access_reviews: 1
+  changes: 12
+  emergency_changes: 2
+  backup_history: 8
+  incidents: 4
+  suppliers: 2

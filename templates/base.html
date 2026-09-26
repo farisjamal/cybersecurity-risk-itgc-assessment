@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Example Bank Lab{% endblock %}</title>
+    <style>
+      :root { color-scheme: light; font-family: system-ui, sans-serif; line-height: 1.5; }
+      body { max-width: 64rem; margin: 0 auto; padding: 1rem; color: #172033; background: #f6f8fb; }
+      header, main { background: white; border: 1px solid #dbe2ea; border-radius: .5rem; padding: 1rem; margin-bottom: 1rem; }
+      .banner { border-left: .35rem solid #a14b00; background: #fff4df; padding: .75rem; }
+      label { display: block; font-weight: 650; margin-top: .75rem; }
+      input { width: min(100%, 28rem); padding: .55rem; }
+      button { margin-top: 1rem; padding: .6rem 1rem; }
+      a:focus, input:focus, button:focus { outline: .2rem solid #175cd3; outline-offset: .15rem; }
+    </style>
+  </head>
+  <body>
+    <div class="banner" role="note"><strong>Simulation:</strong> fictional local bank lab; synthetic data only.</div>
+    {% block content %}{% endblock %}
+  </body>
+</html>

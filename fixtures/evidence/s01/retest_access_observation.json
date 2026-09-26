@@ -1,0 +1,16 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "S01",
+  "run_id": "RUN-S01-RETEST",
+  "baseline_run_id": "RUN-S01-BASELINE",
+  "resource_name": "cyber-assess-scenario-s01fixture",
+  "execution_mode": "deterministic_acceptance_fixture_replay",
+  "observed_at": "2026-09-25T15:10:00Z",
+  "user_id": "USR-021",
+  "employment_status": "terminated",
+  "account_status": "inactive",
+  "new_login_result": "denied",
+  "existing_session_result": "revoked",
+  "closure_criteria_met": true,
+  "claim_limit": "Local fixture replay only; broader directory and regulatory effectiveness remain unassessed."
+}

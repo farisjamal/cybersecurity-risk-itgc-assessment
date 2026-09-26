@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}{{ title }}{% endblock %}
+{% block content %}
+<header><h1>{{ title }}</h1><p>Evidence-oriented IT controls training environment.</p></header>
+<main>
+  <h2>Run information</h2>
+  <dl>
+    <dt>Environment</dt><dd>{{ environment }}</dd>
+    <dt>Run ID</dt><dd>{{ run_id }}</dd>
+    <dt>Scenario</dt><dd>{{ scenario_id or "secure baseline" }}</dd>
+    <dt>Provenance</dt><dd>Observed lab actions and synthetic fixture records are labeled separately.</dd>
+  </dl>
+  <p><a href="/auth/login">Sign in to the local portal</a></p>
+</main>
+{% endblock %}

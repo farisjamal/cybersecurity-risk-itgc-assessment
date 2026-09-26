@@ -1,0 +1,19 @@
+site_name: Cybersecurity Risk and ITGC Assessment
+site_description: Documentation for an independent simulated financial-institution assessment
+repo_name: cybersecurity-risk-itgc-assessment
+docs_dir: docs
+strict: true
+nav:
+  - Home: index.md
+  - Setup: setup.md
+  - Architecture: architecture.md
+  - Methodology: methodology.md
+  - Testing: testing.md
+  - Demonstration: demo.md
+  - Limitations: limitations.md
+  - Source register: source-register.md
+  - Claims register: claims-register.md
+  - Decisions:
+      - Architecture baseline: decisions/0001-architecture-baseline.md
+      - Evidence boundary: decisions/0002-evidence-boundary.md
+      - Local containment: decisions/0003-local-containment.md
