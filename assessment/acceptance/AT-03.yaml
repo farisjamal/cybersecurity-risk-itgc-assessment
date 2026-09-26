@@ -1,0 +1,14 @@
+schema_version: "1.0"
+id: AT-03
+requirement_ids: [FR-03, FR-04]
+status: partial
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 tests with in-process application and SQLite database.
+evidence_ids: []
+evidence_references:
+  - tests/unit/test_bank_security.py::test_object_authorization_matrix
+  - tests/integration/test_bank_portal.py::test_staff_object_scope_and_read_only_mutation_denial
+result: Representative role, wrong-owner, and read-only denial paths are tested without accepted mutation.
+limitations:
+  - The complete role/action matrix and a PostgreSQL-backed no-mutation reconciliation are not recorded.
+recorded_at: 2026-09-26T02:34:58Z

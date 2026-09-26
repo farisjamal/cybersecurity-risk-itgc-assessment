@@ -1,0 +1,13 @@
+schema_version: "1.0"
+id: AT-10
+requirement_ids: [FR-10]
+status: missing
+revision: uncommitted-working-tree
+environment: Canonical mapping-register structural validation only.
+evidence_ids: []
+evidence_references: [assessment/mappings.yaml, docs/source-register.md]
+result: All controls have structural NIST mappings and selected RMiT rows, but references remain unverified.
+limitations:
+  - Every external mapping is explicitly marked unverified_reference pending an official-source recheck.
+  - Unsupported regulatory and framework coverage claims remain blocked.
+recorded_at: 2026-09-26T02:34:58Z

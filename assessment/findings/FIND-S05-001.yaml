@@ -1,0 +1,28 @@
+schema_version: "1.0"
+id: FIND-S05-001
+title: Corrupt scenario backup was reported as successful
+service_ids: [example-bank-portal]
+control_ids: [OPS-01]
+criteria_reference: POL-06
+condition: >-
+  The S05 baseline fixture replay observed a completed backup record whose
+  referenced artifact failed integrity validation.
+evidence_ids: [EVID-S05-BASELINE]
+cause: The isolated scenario path trusted job completion without enforcing artifact validation.
+cause_status: confirmed
+consequence: Unusable backup material could be relied upon during a recovery attempt.
+likelihood: 4
+impact: 5
+rating: 20
+rating_rationale: The mismatch was directly reproducible and could prevent recovery in the tested scope.
+recommendation: Mark backup success only after integrity validation and a separate restore test.
+alternatives_tradeoff: Hash validation detects corruption but does not replace restore acceptance testing.
+owner_role: simulated_system_administrator
+effort: small
+target_date: 2026-10-10
+status: closed_verified
+limitations: >-
+  Closure covers rejection of the deterministic corrupt fixture only. No production backup
+  platform, full restore acceptance, measured RTO, or measured RPO was assessed.
+created_at: 2026-09-26T02:07:30Z
+closed_at: 2026-09-26T02:08:30Z

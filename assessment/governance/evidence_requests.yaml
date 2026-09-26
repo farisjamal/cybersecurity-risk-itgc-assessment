@@ -1,0 +1,60 @@
+schema_version: "1.0"
+requests:
+  - schema_version: "1.0"
+    id: ER-S01-001
+    requested_evidence: S01 leaver population, failed baseline observation, authored policy, and fresh retest.
+    provider_role: project_owner_assessor
+    due_date: 2026-09-25
+    status: received
+    response_evidence_ids: [EVID-POL-02, EVID-S01-POPULATION, EVID-S01-BASELINE, EVID-S01-RETEST]
+    limitations:
+      - Evidence is a deterministic local simulation and not an enterprise directory observation.
+  - schema_version: "1.0"
+    id: ER-CONTROLS-001
+    requested_evidence: Operational populations and procedure evidence for the nineteen unexecuted controls.
+    provider_role: project_owner_assessor
+    due_date: 2026-10-15
+    status: incomplete
+    response_evidence_ids:
+      - EVID-POL-01
+      - EVID-POL-03
+      - EVID-POL-04
+      - EVID-POL-05
+      - EVID-POL-06
+      - EVID-POL-07
+      - EVID-POL-08
+      - EVID-POL-09
+      - EVID-POL-10
+    limitations:
+      - Authored policies define intended practice but do not prove operation.
+      - Required populations, observations, and owner review are outstanding.
+  - schema_version: "1.0"
+    id: ER-RUNTIME-001
+    requested_evidence: Live Docker/PostgreSQL health, backup, restore, containment, and performance records.
+    provider_role: project_owner_assessor
+    due_date: 2026-10-15
+    status: blocked
+    response_evidence_ids: []
+    blocker_id: BLK-RUNTIME-001
+    limitations:
+      - The current environment did not provide verified access to a live Docker engine.
+  - schema_version: "1.0"
+    id: ER-SOURCES-001
+    requested_evidence: Current official-source verification for every NIST and selected RMiT mapping.
+    provider_role: project_owner_assessor
+    due_date: 2026-10-15
+    status: incomplete
+    response_evidence_ids: []
+    blocker_id: BLK-MAPPING-001
+    limitations:
+      - PRD source checks dated 2026-09-24 are historical provenance, not a current recheck.
+  - schema_version: "1.0"
+    id: ER-OWNER-REVIEW-001
+    requested_evidence: Project-owner substantive review comments and disposition for governance records.
+    provider_role: project_owner_assessor
+    due_date: 2026-10-15
+    status: requested
+    response_evidence_ids: []
+    blocker_id: BLK-REVIEW-001
+    limitations:
+      - Automated structural review is already recorded separately and is not owner review.

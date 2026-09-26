@@ -1,0 +1,11 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "S03",
+  "run_id": "RUN-S03-BASELINE",
+  "resource_name": "cyber-assess-scenario-s03-fixture",
+  "execution_mode": "deterministic_acceptance_fixture_replay",
+  "observed_at": "2026-09-26T02:07:20Z",
+  "password_only_privileged_allowed": true,
+  "control_exception_observed": true,
+  "claim_limit": "Local fixture replay only; not production evidence, phishing-resistant MFA proof, or independent assurance."
+}

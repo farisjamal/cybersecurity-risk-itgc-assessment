@@ -1,0 +1,34 @@
+{
+  "schema_version": "1.0",
+  "snapshot_id": "SNAP-20260926T024908-88653414",
+  "rendered_at": "2026-09-26T02:57:33.3420713Z",
+  "renderer": "Microsoft Edge 153.0.4234.48",
+  "artifacts": [
+    {
+      "path": "engagement-brief.pdf",
+      "sha256": "46e64a5064cdf2794b61f4f58163de7868a35ea6517efc827538fa6f69455464",
+      "size": 76207,
+      "source_html": "engagement-brief.html",
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "executive-report.pdf",
+      "sha256": "0e406c053d906dd4edbe2a8832d4093327607c269e1bc3792a99000eb0b3b0d3",
+      "size": 84138,
+      "source_html": "executive-report.html",
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "executive-presentation.pdf",
+      "sha256": "d4c8ea7e7108fb83fd0038844a9294b3678c5fcbbdb73084fb84cc7c9eeed00d",
+      "size": 77435,
+      "source_html": "presentation.html",
+      "classification": "sanitized_portfolio_artifact"
+    }
+  ],
+  "limitations": [
+    "PDFs are local derivatives of manifest-listed HTML artifacts.",
+    "Visual inspection is required before distribution.",
+    "The rendering environment is recorded but is not independently attested."
+  ]
+}

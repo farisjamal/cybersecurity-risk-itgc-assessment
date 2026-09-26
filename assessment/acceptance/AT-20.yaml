@@ -1,0 +1,17 @@
+schema_version: "1.0"
+id: AT-20
+requirement_ids: [NFR-01, NFR-06, NFR-07, NFR-08, NFR-09, NFR-10, NFR-12]
+status: partial
+revision: uncommitted-working-tree
+environment: Static Compose inspection and Windows local automated tests; no live performance run.
+evidence_ids: []
+evidence_references:
+  - compose.yaml
+  - tests/integration/test_bank_portal.py
+  - tests/unit/test_assessment_doctor.py
+  - docs/limitations.md
+result: Loopback/no-database-port design and selected event, secret, and failure paths are inspectable.
+limitations:
+  - Live network exposure, event traceability, startup/export performance, capacity, and scanner-feed failure are not fully tested.
+  - Accessibility and rendered-output usability require manual review.
+recorded_at: 2026-09-26T02:34:58Z

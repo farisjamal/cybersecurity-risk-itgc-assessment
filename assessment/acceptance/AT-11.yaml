@@ -1,0 +1,15 @@
+schema_version: "1.0"
+id: AT-11
+requirement_ids: [FR-11]
+status: partial
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 schema, sampling, and canonical-record tests.
+evidence_ids: [EVID-S01-POPULATION, EVID-S01-BASELINE]
+evidence_references:
+  - tests/unit/test_assessment_models.py::test_sampling_selects_all_small_populations
+  - tests/unit/test_assessment_models.py::test_sampling_is_deterministic_and_always_includes_high_risk
+  - tests/unit/test_workpaper_coverage.py
+result: Sampling rules and the prohibition on unsupported effective status are represented in tests.
+limitations:
+  - Nineteen controls have no collected population and remain not_assessed and not_tested.
+recorded_at: 2026-09-26T02:34:58Z

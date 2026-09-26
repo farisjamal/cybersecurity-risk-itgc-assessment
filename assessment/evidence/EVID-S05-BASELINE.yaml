@@ -1,0 +1,15 @@
+schema_version: "1.0"
+id: EVID-S05-BASELINE
+path: fixtures/evidence/s05/baseline_backup_observation.json
+sha256: 68e787f6a78e542cc2f1abd63dd8a162810ca0d1de55bffa4301ff53b9861127
+size: 456
+media_type: application/json
+collector: cyber_assess_acceptance_fixture
+collected_at: 2026-09-26T02:07:20Z
+source_period: 2026-09-26T02:07:20Z/2026-09-26T02:07:21Z
+run_id: RUN-S05-BASELINE
+provenance: observed_lab
+sensitivity: sanitized
+query_or_action: Replay S05 and compare reported backup success with the corrupt artifact result.
+tool_version: "0.1.0"
+redactions: []

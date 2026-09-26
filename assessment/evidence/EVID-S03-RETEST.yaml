@@ -1,0 +1,16 @@
+schema_version: "1.0"
+id: EVID-S03-RETEST
+path: fixtures/evidence/s03/retest_mfa_observation.json
+sha256: 77d510ca69a2698c97d710514f333ae58a5f516616f07dc98999517792ebe651
+size: 509
+media_type: application/json
+collector: cyber_assess_acceptance_fixture
+collected_at: 2026-09-26T02:08:20Z
+source_period: 2026-09-26T02:08:20Z/2026-09-26T02:08:21Z
+run_id: RUN-S03-RETEST
+provenance: observed_lab
+sensitivity: sanitized
+parent_evidence_id: EVID-S03-BASELINE
+query_or_action: After remediation, retry the privileged action with password-only and MFA-verified sessions.
+tool_version: "0.1.0"
+redactions: []

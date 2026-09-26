@@ -1,0 +1,305 @@
+schema_version: "1.0"
+sources:
+  - schema_version: "1.0"
+    id: SRC-NIST-CSF-2
+    framework: NIST Cybersecurity Framework
+    version: "2.0"
+    document_date: null
+    url: https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf
+    retrieval_date: 2026-09-24
+    verification_status: unverified_reference
+    local_sha256: null
+    limitations:
+      - The PRD records a historical source check; every used category requires a fresh mapping-level recheck.
+      - No permitted local reference copy and hash are retained in this repository.
+  - schema_version: "1.0"
+    id: SRC-BNM-RMIT-2025
+    framework: Bank Negara Malaysia Risk Management in Technology policy document
+    version: "2025-11-28"
+    document_date: 2025-11-28
+    url: https://www.bnm.gov.my/documents/20124/938039/pd-rmit-nov25.pdf
+    retrieval_date: 2026-09-24
+    verification_status: unverified_reference
+    local_sha256: null
+    limitations:
+      - Initial paragraph and page pointers came from the PRD and require mapping-level revalidation.
+      - Coverage is limited to selected aspects and does not establish regulatory compliance.
+mappings:
+  - &nist_mapping
+    schema_version: "1.0"
+    id: MAP-NIST-GOV-01
+    source_id: SRC-NIST-CSF-2
+    reference_locator: [GV.OC, GV.RR, ID.AM]
+    displayed_page: null
+    summary: Project control aligned at category level to CSF 2.0 outcomes; exact wording is not reproduced.
+    rationale: Scope, ownership, and asset reconciliation support governance context and asset understanding.
+    control_ids: [GOV-01]
+    evidence_ids: [EVID-POL-01]
+    current_evidence: Authored policy and limitation workpaper exist; runtime reconciliation is absent.
+    target_practice: Execute the documented control procedure and retain observed operational evidence.
+    gap: Operating evidence is unavailable except where specifically cited.
+    priority: medium
+    action: Revalidate source categories and execute the control workpaper before publication.
+    coverage_conclusion: not_assessed
+    verification_status: unverified_reference
+    limitations:
+      - Category locators are inherited from PRD v1.0 and were not rechecked in this implementation run.
+      - A project mapping is not a certification, framework tier, or complete outcome assessment.
+  - <<: *nist_mapping
+    id: MAP-NIST-GOV-02
+    reference_locator: [GV.RM, ID.RA]
+    rationale: Risk identification, ownership, review, and challenge support governance and risk assessment.
+    control_ids: [GOV-02]
+    evidence_ids: [EVID-POL-10]
+    current_evidence: Authored risk criterion and limitation workpaper exist; review evidence is absent.
+    coverage_conclusion: not_assessed
+  - <<: *nist_mapping
+    id: MAP-NIST-GOV-03
+    reference_locator: [GV.SC]
+    rationale: Supplier due diligence and responsibility records support cybersecurity supply-chain governance.
+    control_ids: [GOV-03]
+    evidence_ids: []
+    current_evidence: Limitation workpaper exists; the two fictional supplier packs are absent.
+    coverage_conclusion: not_assessed
+  - <<: *nist_mapping
+    id: MAP-NIST-IAM-01
+    reference_locator: [PR.AA]
+    rationale: Joiner approval and least-privilege checks support identity and access control outcomes.
+    control_ids: [IAM-01]
+    evidence_ids: [EVID-POL-01]
+    current_evidence: Authored access policy and limitation workpaper exist; joiner testing is absent.
+    coverage_conclusion: not_assessed
+  - <<: *nist_mapping
+    id: MAP-NIST-IAM-02
+    reference_locator: [PR.AA]
+    rationale: Timely leaver deactivation and session revocation support identity and access control outcomes.
+    control_ids: [IAM-02]
+    evidence_ids: [EVID-POL-02, EVID-S01-POPULATION, EVID-S01-BASELINE, EVID-S01-RETEST]
+    current_evidence: S01 preserves a failed baseline and fresh successful retest for the bounded fixture.
+    target_practice: Maintain account deactivation and session revocation for every in-scope leaver.
+    gap: The local S01 path is supported, but broader identity platforms and framework outcomes are unassessed.
+    priority: high
+    action: Preserve the S01 chain and revalidate the category before any framework coverage claim.
+    coverage_conclusion: supported_for_tested_aspect
+  - <<: *nist_mapping
+    id: MAP-NIST-IAM-03
+    reference_locator: [PR.AA]
+    rationale: Role and object-level restrictions support least-privilege access outcomes.
+    control_ids: [IAM-03]
+    evidence_ids: [EVID-POL-01]
+    current_evidence: Authored least-privilege policy and limitation workpaper exist; full testing is absent.
+    coverage_conclusion: not_assessed
+  - <<: *nist_mapping
+    id: MAP-NIST-IAM-04
+    reference_locator: [PR.AA]
+    rationale: MFA and session-state enforcement support privileged authentication outcomes.
+    control_ids: [IAM-04]
+    evidence_ids: [EVID-POL-03, EVID-S03-BASELINE, EVID-S03-RETEST]
+    current_evidence: S03 preserves a password-only baseline exception and a fresh bounded retest.
+    gap: Phishing resistance, enterprise identity-provider behavior, and broader outcome coverage are unassessed.
+    action: Preserve S03 evidence and revalidate the category before publishing a framework observation.
+    coverage_conclusion: supported_for_tested_aspect
+  - <<: *nist_mapping
+    id: MAP-NIST-IAM-05
+    reference_locator: [PR.AA]
+    rationale: Complete periodic access review supports managed identity and authorization outcomes.
+    control_ids: [IAM-05]
+    evidence_ids: [EVID-POL-03]
+    current_evidence: Authored review criterion and limitation workpaper exist; population testing is absent.
+    coverage_conclusion: not_assessed
+  - <<: *nist_mapping
+    id: MAP-NIST-CHG-01
+    reference_locator: [PR.AA, PR.PS]
+    rationale: Independent authorization and separation support controlled access and platform change.
+    control_ids: [CHG-01]
+    evidence_ids: [EVID-POL-04]
+    current_evidence: Authored normal-change criterion and limitation workpaper exist; population testing is absent.
+    coverage_conclusion: not_assessed
+  - <<: *nist_mapping
+    id: MAP-NIST-CHG-02
+    reference_locator: [PR.PS]
+    rationale: Version-specific testing before deployment supports platform security practice.
+    control_ids: [CHG-02]
+    evidence_ids: [EVID-POL-04]
+    current_evidence: Authored change criterion and limitation workpaper exist; deployment traces are absent.
+    coverage_conclusion: not_assessed
+  - <<: *nist_mapping
+    id: MAP-NIST-CHG-03
+    reference_locator: [PR.PS, PR.IR]
+    rationale: Controlled releases and rollback support platform security and technology resilience.
+    control_ids: [CHG-03]
+    evidence_ids: [EVID-POL-04]
+    current_evidence: Authored change criterion and limitation workpaper exist; live rollback evidence is absent.
+    coverage_conclusion: not_assessed
+  - <<: *nist_mapping
+    id: MAP-NIST-CHG-04
+    reference_locator: [PR.PS]
+    rationale: Attributable emergency changes and follow-up support secure platform practice.
+    control_ids: [CHG-04]
+    evidence_ids: [EVID-POL-05]
+    current_evidence: Authored emergency criterion and limitation workpaper exist; two required records are absent.
+    coverage_conclusion: not_assessed
+  - <<: *nist_mapping
+    id: MAP-NIST-OPS-01
+    reference_locator: [PR.DS]
+    rationale: Backup content validation supports protected data availability and integrity.
+    control_ids: [OPS-01]
+    evidence_ids: [EVID-POL-06, EVID-S05-BASELINE, EVID-S05-RETEST]
+    current_evidence: S05 preserves a corrupt-fixture baseline exception and a fresh bounded retest.
+    gap: Live PostgreSQL backup operation and complete recovery assurance remain unassessed.
+    action: Preserve S05 evidence and revalidate the category before publishing a framework observation.
+    coverage_conclusion: supported_for_tested_aspect
+  - <<: *nist_mapping
+    id: MAP-NIST-OPS-02
+    reference_locator: [PR.DS, RC.RP]
+    rationale: Isolated restoration and record reconciliation support data protection and recovery execution.
+    control_ids: [OPS-02]
+    evidence_ids: [EVID-POL-06, EVID-POL-07]
+    current_evidence: Authored backup and recovery criteria exist; observed PostgreSQL restore evidence is absent.
+    coverage_conclusion: not_assessed
+  - <<: *nist_mapping
+    id: MAP-NIST-OPS-03
+    reference_locator: [PR.PS, DE.CM]
+    rationale: Attributable event coverage and review support platform protection and monitoring.
+    control_ids: [OPS-03]
+    evidence_ids: [EVID-POL-08, EVID-S06-BASELINE, EVID-S06-RETEST]
+    current_evidence: S06 preserves one missing-event baseline exception and a fresh bounded retest.
+    gap: Complete event coverage, retention, review, and independent monitoring remain unassessed.
+    action: Preserve S06 evidence and revalidate the categories before publishing a framework observation.
+    coverage_conclusion: supported_for_tested_aspect
+  - <<: *nist_mapping
+    id: MAP-NIST-OPS-04
+    reference_locator: [ID.RA, PR.PS]
+    rationale: Dependency inventory, scan freshness, and treatment support risk assessment and platform security.
+    control_ids: [OPS-04]
+    evidence_ids: [EVID-POL-10]
+    current_evidence: Authored dependency criterion exists; canonical scan and treatment evidence is absent.
+    coverage_conclusion: not_assessed
+  - <<: *nist_mapping
+    id: MAP-NIST-IR-01
+    reference_locator: [DE.CM, DE.AE]
+    rationale: Alert thresholds, attribution, deduplication, and triage support monitoring and event analysis.
+    control_ids: [IR-01]
+    evidence_ids: [EVID-POL-09]
+    current_evidence: Authored alert criterion and code tests exist; canonical triage evidence is absent.
+    coverage_conclusion: not_assessed
+  - <<: *nist_mapping
+    id: MAP-NIST-IR-02
+    reference_locator: [RS.MA, RS.AN]
+    rationale: Incident severity, containment, escalation, and lessons support response management and analysis.
+    control_ids: [IR-02]
+    evidence_ids: []
+    current_evidence: Limitation workpaper exists; the required tabletop record is absent.
+    coverage_conclusion: not_assessed
+  - <<: *nist_mapping
+    id: MAP-NIST-DR-01
+    reference_locator: [PR.IR, RC.RP]
+    rationale: Recovery dependencies, sequence, objectives, and activation support resilience and recovery planning.
+    control_ids: [DR-01]
+    evidence_ids: [EVID-POL-07]
+    current_evidence: Authored recovery targets and limitation workpaper exist; plan inspection is absent.
+    coverage_conclusion: not_assessed
+  - <<: *nist_mapping
+    id: MAP-NIST-DR-02
+    reference_locator: [RC.RP, ID.IM]
+    rationale: Measured recovery and plan improvement support recovery execution and continuous improvement.
+    control_ids: [DR-02]
+    evidence_ids: [EVID-POL-07]
+    current_evidence: Authored recovery targets and code tests exist; measured live exercise evidence is absent.
+    coverage_conclusion: not_assessed
+  - &rmit_mapping
+    schema_version: "1.0"
+    id: MAP-RMIT-10-8
+    source_id: SRC-BNM-RMIT-2025
+    reference_locator: ["10.8"]
+    displayed_page: "15"
+    summary: Selected system-testing aspect identified in the PRD source review.
+    rationale: CHG-02 assesses version-specific predeployment test evidence.
+    control_ids: [CHG-02]
+    evidence_ids: [EVID-POL-04]
+    current_evidence: Authored criterion exists; operating evidence and source revalidation are absent.
+    target_practice: Execute the project control and separately assess the selected mapped aspect.
+    gap: Mapping applicability and operating coverage are not assessed.
+    priority: medium
+    action: Revalidate the locator and execute the control procedure before publishing the observation.
+    coverage_conclusion: not_assessed
+    verification_status: unverified_reference
+    limitations:
+      - The locator is inherited from PRD v1.0 and was not rechecked in this implementation run.
+      - The mapping covers a selected aspect only and cannot support a compliance conclusion.
+  - <<: *rmit_mapping
+    id: MAP-RMIT-10-11
+    reference_locator: ["10.11"]
+    displayed_page: "15"
+    summary: Selected change-approval and contingency aspect identified in the PRD source review.
+    rationale: CHG-01 and CHG-03 address authorization, deployment, and rollback evidence.
+    control_ids: [CHG-01, CHG-03]
+    evidence_ids: [EVID-POL-04]
+    current_evidence: Authored criterion exists; full change and rollback evidence is absent.
+    coverage_conclusion: not_assessed
+  - <<: *rmit_mapping
+    id: MAP-RMIT-10-44
+    reference_locator: ["10.44"]
+    displayed_page: "22"
+    summary: Selected backup and restoration aspect identified in the PRD source review.
+    rationale: OPS-01 and OPS-02 assess backup validation and isolated restoration.
+    control_ids: [OPS-01, OPS-02]
+    evidence_ids: [EVID-POL-06, EVID-POL-07, EVID-S05-BASELINE, EVID-S05-RETEST]
+    current_evidence: S05 supports corrupt-fixture rejection; live PostgreSQL restoration evidence is absent.
+    gap: Only backup integrity in the bounded fixture is supported; full restoration coverage is unassessed.
+    coverage_conclusion: supported_for_tested_aspect
+  - <<: *rmit_mapping
+    id: MAP-RMIT-10-47
+    reference_locator: ["10.47"]
+    displayed_page: 22-23
+    summary: Selected supplier due-diligence aspect identified in the PRD source review.
+    rationale: GOV-03 assesses fictional supplier criticality, responsibilities, and gaps.
+    control_ids: [GOV-03]
+    evidence_ids: []
+    current_evidence: The required fictional supplier packs are absent.
+    coverage_conclusion: not_assessed
+  - <<: *rmit_mapping
+    id: MAP-RMIT-10-53-54
+    reference_locator: ["10.53", "10.54"]
+    displayed_page: "25"
+    summary: Selected access-policy and principle aspects identified in the PRD source review.
+    rationale: IAM-01 and IAM-02 assess joiner approval and leaver deactivation.
+    control_ids: [IAM-01, IAM-02]
+    evidence_ids: [EVID-POL-01, EVID-POL-02, EVID-S01-BASELINE, EVID-S01-RETEST]
+    current_evidence: S01 supports a bounded leaver test; joiner testing and broader applicability are absent.
+    gap: Only the S01 project criterion is supported; broader mapped requirements remain unassessed.
+    priority: high
+    action: Preserve S01 evidence, execute IAM-01, and revalidate both locators before publication.
+    coverage_conclusion: supported_for_tested_aspect
+  - <<: *rmit_mapping
+    id: MAP-RMIT-10-55
+    reference_locator: ["10.55"]
+    displayed_page: "25"
+    summary: Selected strong-authentication aspect identified in the PRD source review.
+    rationale: IAM-04 assesses privileged MFA and session enforcement.
+    control_ids: [IAM-04]
+    evidence_ids: [EVID-POL-03, EVID-S03-BASELINE, EVID-S03-RETEST]
+    current_evidence: S03 supports a bounded password-only denial retest using the local TOTP design.
+    gap: Phishing resistance and broader strong-authentication coverage remain unassessed.
+    coverage_conclusion: supported_for_tested_aspect
+  - <<: *rmit_mapping
+    id: MAP-RMIT-10-56
+    reference_locator: ["10.56"]
+    displayed_page: "25"
+    summary: Selected access-matrix aspect identified in the PRD source review.
+    rationale: IAM-03 and IAM-05 assess least privilege and complete access review.
+    control_ids: [IAM-03, IAM-05]
+    evidence_ids: [EVID-POL-01, EVID-POL-03]
+    current_evidence: Authored criteria exist; full privilege and review populations are absent.
+    coverage_conclusion: not_assessed
+  - <<: *rmit_mapping
+    id: MAP-RMIT-10-57
+    reference_locator: ["10.57"]
+    displayed_page: "26"
+    summary: Selected access-monitoring and logging aspect identified in the PRD source review.
+    rationale: OPS-03 and IR-01 assess event coverage, alerts, attribution, and review.
+    control_ids: [OPS-03, IR-01]
+    evidence_ids: [EVID-POL-08, EVID-POL-09, EVID-S06-BASELINE, EVID-S06-RETEST]
+    current_evidence: S06 supports one bounded administrative-event retest; full monitoring coverage is absent.
+    gap: Complete event coverage, triage, and long-term retention remain unassessed.
+    coverage_conclusion: supported_for_tested_aspect

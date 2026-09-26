@@ -1,0 +1,72 @@
+{
+  "artifacts": [
+    {
+      "classification": "sanitized_portfolio_artifact",
+      "path": "assessment-workbook.xlsx",
+      "sha256": "70f2a3f80aa3cb14d1362ef6bd7665ed80fbf496fec466aa11c622649f4b51c8",
+      "size": 19280
+    },
+    {
+      "classification": "sanitized_portfolio_artifact",
+      "path": "engagement-brief.html",
+      "sha256": "9821c39b0d7a8035b1355a2215c7eed6e23b1680b748f7cf2d1341ddb93ce8d2",
+      "size": 2535
+    },
+    {
+      "classification": "sanitized_portfolio_artifact",
+      "path": "engagement-brief.md",
+      "sha256": "0ce378c82d0f440da1fddcde646878b544969d5ec3c850f9489a6d00dab04c3d",
+      "size": 1512
+    },
+    {
+      "classification": "sanitized_portfolio_artifact",
+      "path": "executive-report.html",
+      "sha256": "bbc3005003dcc204469775e9a51826ac4c2e2e4cf2fe5c5ec14cc8c504c9977e",
+      "size": 3326
+    },
+    {
+      "classification": "sanitized_portfolio_artifact",
+      "path": "executive-report.md",
+      "sha256": "10fb7d743f215f659a4a60241bdbbf3803ca79bea59d88c1e188bb77b140272e",
+      "size": 1558
+    },
+    {
+      "classification": "sanitized_portfolio_artifact",
+      "path": "pdf-status.json",
+      "sha256": "40d47c3791bff950d21ceef83da13e8805b5c2148c1ff24ed48ee09594449d54",
+      "size": 139
+    },
+    {
+      "classification": "sanitized_portfolio_artifact",
+      "path": "presentation.html",
+      "sha256": "58219a867ddc0d4c8fb5299df4ded82ddeeefccd1d0fcd513c225c5155f1da89",
+      "size": 4902
+    },
+    {
+      "classification": "sanitized_portfolio_artifact",
+      "path": "reconciliation.json",
+      "sha256": "02409ad6228d07303f74edfc957592b4e41d762925fe8c0b349db1973be4c71d",
+      "size": 722
+    },
+    {
+      "classification": "sanitized_portfolio_artifact",
+      "path": "remediation-roadmap.csv",
+      "sha256": "7cff2ba5f3dd1cd840dfcbd78998ab632964cf4d63745932d4ee75de6585686d",
+      "size": 737
+    },
+    {
+      "classification": "sanitized_portfolio_artifact",
+      "path": "remediation-roadmap.json",
+      "sha256": "abe04ce4e6694994d3d47b82b1d011b48aaf8a024b88b1da701afaca56fe105b",
+      "size": 2605
+    }
+  ],
+  "engagement_id": "ENG-001",
+  "generated_at": "2026-09-26T02:49:08.830858Z",
+  "pdf": {
+    "reason": "No locked PDF renderer is available; print-ready HTML is provided.",
+    "status": "pending"
+  },
+  "schema_version": "1.0",
+  "snapshot_id": "SNAP-20260926T024908-88653414"
+}

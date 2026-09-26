@@ -1,0 +1,14 @@
+schema_version: "1.0"
+id: AT-05
+requirement_ids: [FR-05]
+status: partial
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 deterministic S01 fixture and application tests.
+evidence_ids: [EVID-POL-02, EVID-S01-POPULATION, EVID-S01-BASELINE, EVID-S01-RETEST]
+evidence_references:
+  - tests/acceptance/test_assessment_s01.py
+  - tests/integration/test_bank_portal.py::test_deactivation_invalidates_existing_cookie_and_new_login
+result: S01 is detected and the bounded deactivation path invalidates login and an existing session.
+limitations:
+  - Joiner provisioning, role-change approval, and complete periodic access-review coverage remain unassessed.
+recorded_at: 2026-09-26T02:34:58Z

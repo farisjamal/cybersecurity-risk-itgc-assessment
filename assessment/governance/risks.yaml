@@ -1,0 +1,226 @@
+schema_version: "1.0"
+risks:
+  - schema_version: "1.0"
+    id: RISK-GOV-01
+    title: Incomplete scope, ownership, or asset understanding
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [GOV-01]
+    scenario: Components or data flows are omitted or lack an accountable owner.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [No observed deployment-to-inventory reconciliation has been executed.]
+  - schema_version: "1.0"
+    id: RISK-GOV-02
+    title: Unreviewed or weakly reasoned technology risk decisions
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [GOV-02]
+    scenario: Risks lack supported ratings, ownership, challenge, or timely actions.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [No complete risk-review population or challenge evidence has been tested.]
+  - schema_version: "1.0"
+    id: RISK-GOV-03
+    title: Unmanaged fictional supplier responsibilities
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [GOV-03]
+    scenario: Supplier criticality, due diligence, and data responsibilities are incomplete.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [The two required fictional supplier packs do not yet exist as canonical evidence.]
+  - schema_version: "1.0"
+    id: RISK-IAM-01
+    title: Inappropriate joiner access
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [IAM-01]
+    scenario: A joiner receives unapproved, premature, or excessive portal access.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [The complete joiner population and approval evidence have not been tested.]
+  - schema_version: "1.0"
+    id: RISK-IAM-02
+    title: Leaver retains portal access
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [IAM-02]
+    scenario: A terminated synthetic identity can authenticate or reuse an existing session.
+    assessment_status: assessed_observed
+    likelihood: 5
+    impact: 4
+    rating: 20
+    rating_rationale: Directly reproducible access with significant in-scope confidentiality exposure.
+    evidence_ids: [EVID-POL-02, EVID-S01-BASELINE]
+    status: monitored
+    limitations:
+      - The baseline rating is limited to deterministic local S01 evidence.
+      - Successful S01 retest does not establish enterprise directory effectiveness.
+  - schema_version: "1.0"
+    id: RISK-IAM-03
+    title: Excess privilege or object-level authorization bypass
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [IAM-03]
+    scenario: A user performs a forbidden role action or accesses another owner's request.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [No complete privileged-account reconciliation and role-action matrix run exists.]
+  - schema_version: "1.0"
+    id: RISK-IAM-04
+    title: Privileged action without valid MFA
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [IAM-04]
+    scenario: A stale, password-only, invalid-code, or replayed-code session gains privileged access.
+    assessment_status: assessed_observed
+    likelihood: 4
+    impact: 4
+    rating: 16
+    rating_rationale: The password-only bypass was directly reproducible for a privileged action.
+    evidence_ids: [EVID-S03-BASELINE]
+    status: monitored
+    limitations:
+      - The rating is limited to deterministic local S03 evidence.
+      - Phishing resistance and enterprise identity-provider behavior remain unassessed.
+  - schema_version: "1.0"
+    id: RISK-IAM-05
+    title: Incomplete periodic access review
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [IAM-05]
+    scenario: Accounts or review exceptions are omitted from periodic review and follow-up.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [No complete access-review population or action evidence has been assessed.]
+  - schema_version: "1.0"
+    id: RISK-CHG-01
+    title: Unauthorized or self-approved normal change
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [CHG-01]
+    scenario: A normal change is deployed without independent prior authorization.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [No complete normal-change population has been inspected.]
+  - schema_version: "1.0"
+    id: RISK-CHG-02
+    title: Deployment without matching predeployment tests
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [CHG-02]
+    scenario: A deployed version lacks matching test evidence or acceptance.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [No version-to-test population trace has been executed.]
+  - schema_version: "1.0"
+    id: RISK-CHG-03
+    title: Release or rollback state is unreliable
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [CHG-03]
+    scenario: Running versions differ from records or rollback cannot restore acceptable behavior.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [No controlled live release and rollback observation exists.]
+  - schema_version: "1.0"
+    id: RISK-CHG-04
+    title: Emergency change lacks timely review
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [CHG-04]
+    scenario: Emergency implementation bypasses attributable and timely retrospective review.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [The two required emergency-change records have not been assessed.]
+  - schema_version: "1.0"
+    id: RISK-OPS-01
+    title: Backup failure or corruption is not detected
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [OPS-01]
+    scenario: A failed or corrupt backup is recorded as usable.
+    assessment_status: assessed_observed
+    likelihood: 4
+    impact: 5
+    rating: 20
+    rating_rationale: The corrupt fixture was directly reproducible and could prevent recovery in scope.
+    evidence_ids: [EVID-S05-BASELINE]
+    status: monitored
+    limitations:
+      - The rating is limited to deterministic local S05 evidence.
+      - No production backup platform or full restore acceptance was assessed.
+  - schema_version: "1.0"
+    id: RISK-OPS-02
+    title: Backup cannot restore usable business records
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [OPS-02]
+    scenario: Restore completes incorrectly or does not recover acceptable service data.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [No observed isolated PostgreSQL restoration with measured RTO and RPO exists.]
+  - schema_version: "1.0"
+    id: RISK-OPS-03
+    title: Material actions lack attributable audit evidence
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [OPS-03]
+    scenario: Required actions are missing events, attribution, or review.
+    assessment_status: assessed_observed
+    likelihood: 4
+    impact: 4
+    rating: 16
+    rating_rationale: The missing administrative event was directly reproducible in the scenario path.
+    evidence_ids: [EVID-S06-BASELINE]
+    status: monitored
+    limitations:
+      - The rating is limited to one deterministic local S06 administrative action.
+      - Complete event coverage, retention, and independent monitoring remain unassessed.
+  - schema_version: "1.0"
+    id: RISK-OPS-04
+    title: Dependency vulnerability is unknown or untreated
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [OPS-04]
+    scenario: Package risk is hidden by stale or unavailable scan evidence.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [No canonical dated dependency inventory and treatment decision is registered.]
+  - schema_version: "1.0"
+    id: RISK-IR-01
+    title: Suspicious activity does not produce actionable alerts
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [IR-01]
+    scenario: Login or role-change activity is missed, duplicated, or unattributable.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [No canonical alert and triage population has been assessed.]
+  - schema_version: "1.0"
+    id: RISK-IR-02
+    title: Suspicious access is not contained or learned from
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [IR-02]
+    scenario: An incident lacks supported severity, containment, escalation, or lessons.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [The required suspicious-access tabletop has not been documented as evidence.]
+  - schema_version: "1.0"
+    id: RISK-DR-01
+    title: Recovery plan omits critical dependencies or activation criteria
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [DR-01]
+    scenario: Recovery cannot start or proceeds in an unsafe sequence.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [No canonical recovery plan inspection has been completed.]
+  - schema_version: "1.0"
+    id: RISK-DR-02
+    title: Recovery objectives are untested or improvement is not captured
+    asset_ids: [ASSET-PORTAL]
+    control_ids: [DR-02]
+    scenario: Actual recovery time or data loss is unknown and observed failures do not update the plan.
+    assessment_status: unassessed
+    evidence_ids: []
+    status: open
+    limitations: [No measured live recovery exercise or resulting plan update exists.]

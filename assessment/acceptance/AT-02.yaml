@@ -1,0 +1,13 @@
+schema_version: "1.0"
+id: AT-02
+requirement_ids: [FR-02]
+status: partial
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 tests using an isolated SQLite database.
+evidence_ids: []
+evidence_references: [tests/unit/test_bank_workflows.py::test_seed_is_idempotent_and_business_records_are_stable]
+result: Seed idempotency and stable business records are tested for seed 42.
+limitations:
+  - A separate allowlist check proving that every seeded field excludes real personal data is not recorded.
+  - PostgreSQL-backed seed reproduction was not executed in this environment.
+recorded_at: 2026-09-26T02:34:58Z

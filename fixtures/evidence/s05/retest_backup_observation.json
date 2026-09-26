@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "S05",
+  "run_id": "RUN-S05-RETEST",
+  "baseline_run_id": "RUN-S05-BASELINE",
+  "resource_name": "cyber-assess-scenario-s05-fixture",
+  "execution_mode": "deterministic_acceptance_fixture_replay",
+  "observed_at": "2026-09-26T02:08:20Z",
+  "corrupt_backup_rejected": true,
+  "failed_original_preserved": true,
+  "closure_criteria_met": true,
+  "claim_limit": "Local fixture replay only; restore acceptance, measured RTO, and measured RPO remain separate requirements."
+}

@@ -1,0 +1,60 @@
+schema_version: "1.0"
+milestones:
+  - schema_version: "1.0"
+    id: MS-FOUNDATION-001
+    name: Foundation and secure lab scaffold
+    status: partial
+    requirement_ids: [AT-01, AT-02, AT-03, AT-04, AT-19]
+    evidence_references: [src/bank_lab, src/cyber_assess, tests]
+    blocker_ids: [BLK-RUNTIME-001]
+    decision: Retain partial status until a fresh supported-host runtime is verified.
+    limitations:
+      - Passing local tests does not establish a fresh PostgreSQL-backed setup.
+  - schema_version: "1.0"
+    id: MS-S01-001
+    name: S01 leaver-access baseline, remediation, and retest
+    status: completed
+    requirement_ids: [AT-05, AT-13]
+    evidence_references:
+      - assessment/workpapers/WP-IAM-02-S01.yaml
+      - assessment/findings/FIND-S01-001.yaml
+      - assessment/retests/RETEST-S01-001.yaml
+      - tests/acceptance/test_assessment_s01.py
+    blocker_ids: []
+    decision: Treat only the bounded S01 chain as completed and preserve its simulation limitations.
+    limitations:
+      - Completion does not imply enterprise identity-control effectiveness or broader compliance.
+  - schema_version: "1.0"
+    id: MS-ASSESSMENT-001
+    name: Twenty-control assessment and mapping
+    status: partial
+    requirement_ids: [AT-10, AT-11, AT-12, DEL-06]
+    evidence_references: [assessment/workpapers, assessment/mappings.yaml]
+    blocker_ids: [BLK-ASSESS-001, BLK-MAPPING-001, BLK-REVIEW-001]
+    decision: Keep nineteen controls unassessed and all unrevalidated mappings unpublished.
+    limitations:
+      - Complete record coverage is not equivalent to completed control testing.
+  - schema_version: "1.0"
+    id: MS-REMEDIATION-001
+    name: Required bounded remediation and retest chains
+    status: completed
+    requirement_ids: [AT-13, PRD-24]
+    evidence_references:
+      - assessment/retests/RETEST-S01-001.yaml
+      - assessment/retests/RETEST-S03-001.yaml
+      - assessment/retests/RETEST-S05-001.yaml
+      - assessment/retests/RETEST-S06-001.yaml
+    blocker_ids: []
+    decision: Treat only the four stated deterministic scenario closure criteria as completed.
+    limitations:
+      - Closure does not establish wider control effectiveness, resilience, or regulatory compliance.
+  - schema_version: "1.0"
+    id: MS-RELEASE-001
+    name: Version 1 portfolio release
+    status: blocked
+    requirement_ids: [AT-01..AT-20, DEL-01..DEL-10, PRD-24]
+    evidence_references: [assessment/acceptance, docs/claims-register.md]
+    blocker_ids: [BLK-RUNTIME-001, BLK-ASSESS-001, BLK-MAPPING-001, BLK-DELIVERY-001, BLK-REVIEW-001]
+    decision: Do not label the repository a completed v1 assessment or publish completed-work claims.
+    limitations:
+      - Mandatory runtime, assessment, source, review, acceptance, and rendered-deliverable work remains.

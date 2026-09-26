@@ -1,0 +1,14 @@
+schema_version: "1.0"
+id: AT-09
+requirement_ids: [FR-09]
+status: partial
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 canonical-evidence and export tests.
+evidence_ids: [EVID-S01-POPULATION, EVID-S01-BASELINE, EVID-S01-RETEST]
+evidence_references:
+  - tests/unit/test_assessment_models.py::test_evidence_hash_is_verified
+  - tests/unit/test_assessment_snapshot.py::test_sanitized_export_manifest_excludes_restricted_evidence
+result: Evidence hashes and sanitized-export exclusion behavior are tested for the current fixture set.
+limitations:
+  - Read-only source behavior and parent-child redaction lineage are not demonstrated for every collector.
+recorded_at: 2026-09-26T02:34:58Z

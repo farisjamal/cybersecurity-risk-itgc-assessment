@@ -1,0 +1,40 @@
+schema_version: "1.0"
+id: WP-OPS-01-LIMITATION
+control_id: OPS-01
+control_version: "1.0"
+risk_ids: [RISK-OPS-01]
+criteria: [POL-06, RMIT-10.44]
+procedure_version: "1.0"
+test_type: combined
+test_period: 2026-08-01/2026-08-30
+population_source: fixtures/evidence/s05/baseline_backup_observation.json
+population_hash: 68e787f6a78e542cc2f1abd63dd8a162810ca0d1de55bffa4301ff53b9861127
+population_count: 1
+population_query: Replay the allowlisted S05 false-success backup path and validate its corrupt artifact.
+selected_record_ids: [RUN-S05-BASELINE]
+selection_rationale: The single deliberate S05 condition was tested in full and preserved as the baseline.
+sample_seed: null
+exclusions: []
+expected_behavior: Scheduled backup outcomes reconcile and valid and corrupt artifacts are distinguished.
+actual_results: >-
+  The baseline reported success for a corrupt artifact. After remediation, the fresh retest
+  rejected the corrupt artifact and confirmed preservation of the failed original record.
+evidence_ids: [EVID-POL-06, EVID-S05-BASELINE, EVID-S05-RETEST]
+exceptions:
+  - The preserved S05 baseline reported a corrupt backup artifact as successful.
+limitations:
+  - The test is a deterministic local fixture replay, not production backup-platform evidence.
+  - Only the deliberate corrupt-artifact path was included in this workpaper population.
+  - Full restore acceptance and measured RTO/RPO remain outside this conclusion.
+  - Project-owner substantive review remains outstanding; only an automated structural check occurred.
+design_status: partially_adequate
+operating_status: effective_in_tested_scope
+assessor_decision: >-
+  Conclude corrupt-artifact rejection effective only within the tested local scope; preserve
+  FIND-S05-001 and its failed baseline while retaining the recovery limitations.
+preparer: project_assessment_automation
+review_mode: self_reviewed
+review_comments:
+  - Structural schema and limitation wording checked; no independent or owner review is claimed.
+prepared_at: 2026-09-26T02:08:40Z
+reviewed_at: 2026-09-26T02:09:00Z

@@ -1,0 +1,17 @@
+schema_version: "1.0"
+id: ACT-S03-001
+finding_id: FIND-S03-001
+owner_role: simulated_system_administrator
+target_date: 2026-10-10
+status: implemented
+fix_reference: bank_lab S03 remediation adapter
+implementation_summary: The isolated scenario remediation enforces completed MFA before privileged actions.
+closure_criteria:
+  - A password-only scenario session is denied for the privileged action.
+  - An MFA-verified scenario session remains permitted for the privileged action.
+proposed_likelihood: 1
+proposed_impact: 4
+proposed_residual_risk_rationale: >-
+  The tested bypass is blocked, but impact remains unchanged and broader identity
+  infrastructure and phishing-resistant authentication were not assessed.
+implemented_at: 2026-09-26T02:07:50Z

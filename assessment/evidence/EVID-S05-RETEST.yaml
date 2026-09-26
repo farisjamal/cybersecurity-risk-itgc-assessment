@@ -1,0 +1,16 @@
+schema_version: "1.0"
+id: EVID-S05-RETEST
+path: fixtures/evidence/s05/retest_backup_observation.json
+sha256: 62b7a71954e869ec16dc54e3aa588d755151e0ae512f6d461f0e546afd993332
+size: 517
+media_type: application/json
+collector: cyber_assess_acceptance_fixture
+collected_at: 2026-09-26T02:08:20Z
+source_period: 2026-09-26T02:08:20Z/2026-09-26T02:08:21Z
+run_id: RUN-S05-RETEST
+provenance: observed_lab
+sensitivity: sanitized
+parent_evidence_id: EVID-S05-BASELINE
+query_or_action: After remediation, verify the corrupt backup is rejected and its failed baseline remains preserved.
+tool_version: "0.1.0"
+redactions: []

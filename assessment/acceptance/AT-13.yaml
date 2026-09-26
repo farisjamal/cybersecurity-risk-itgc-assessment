@@ -1,0 +1,23 @@
+schema_version: "1.0"
+id: AT-13
+requirement_ids: [FR-13]
+status: passed
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 canonical S01 chain and transition tests.
+evidence_ids:
+  - EVID-S01-BASELINE
+  - EVID-S01-RETEST
+  - EVID-S03-BASELINE
+  - EVID-S03-RETEST
+  - EVID-S05-BASELINE
+  - EVID-S05-RETEST
+  - EVID-S06-BASELINE
+  - EVID-S06-RETEST
+evidence_references:
+  - tests/acceptance/test_assessment_s01.py
+  - tests/unit/test_assessment_models.py::test_finding_cannot_close_without_fresh_accepted_retest
+  - tests/unit/test_assessment_models.py::test_failed_retest_returns_finding_to_in_progress
+result: Four bounded chains preserve baseline failures and require fresh accepted evidence for closure.
+limitations:
+  - Pass status is limited to the stated S01, S03, S05, and S06 closure criteria and fixtures.
+recorded_at: 2026-09-26T02:34:58Z

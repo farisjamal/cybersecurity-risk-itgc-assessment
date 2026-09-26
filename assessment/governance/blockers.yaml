@@ -1,0 +1,57 @@
+schema_version: "1.0"
+blockers:
+  - schema_version: "1.0"
+    id: BLK-RUNTIME-001
+    title: Live Docker and PostgreSQL verification is unavailable
+    status: open
+    affected_requirements: [AT-08, AT-14, AT-19, AT-20, NFR-01, NFR-05]
+    evidence_references: [docs/limitations.md, compose.yaml]
+    resolution_criteria:
+      - Start the documented stack on a supported host and record service health.
+      - Execute PostgreSQL-backed integration, backup, restore, and containment checks.
+    limitations:
+      - Code and configuration tests do not substitute for observed live runtime behavior.
+  - schema_version: "1.0"
+    id: BLK-ASSESS-001
+    title: Nineteen controls lack executed operating procedures
+    status: open
+    affected_requirements: [AT-11, DEL-06, PRD-24]
+    evidence_references: [assessment/workpapers, tests/unit/test_workpaper_coverage.py]
+    resolution_criteria:
+      - Collect the required populations and operational evidence.
+      - Execute and substantively self-review each control procedure.
+    limitations:
+      - Limitation workpapers establish traceable gaps but not control effectiveness.
+  - schema_version: "1.0"
+    id: BLK-MAPPING-001
+    title: Framework references require mapping-level source revalidation
+    status: open
+    affected_requirements: [AT-10, FR-10, PRD-10]
+    evidence_references: [PRD.md, docs/source-register.md, assessment/mappings.yaml]
+    resolution_criteria:
+      - Recheck every used NIST category and selected RMiT locator against official current sources.
+      - Record verified status, retrieval metadata, and permitted retained hashes where available.
+    limitations:
+      - Historical source checks do not establish that references remain current on this date.
+  - schema_version: "1.0"
+    id: BLK-DELIVERY-001
+    title: Mandatory acceptance and portfolio artifacts are incomplete
+    status: open
+    affected_requirements: [AT-15, AT-16, AT-19, AT-20, DEL-03, DEL-05, DEL-08]
+    evidence_references: [assessment/acceptance, docs/claims-register.md]
+    resolution_criteria:
+      - Complete AT-01 through AT-20 with reproducible evidence.
+      - Generate and visually inspect the required workbook, reports, PDFs, and presentation.
+    limitations:
+      - Deterministic report inputs are not equivalent to final rendered deliverables.
+  - schema_version: "1.0"
+    id: BLK-REVIEW-001
+    title: Project-owner substantive governance review is outstanding
+    status: open
+    affected_requirements: [FR-17, PRD-11.5, PRD-24]
+    evidence_references: [assessment/reviews/REV-GOV-001.yaml, assessment/workpapers]
+    resolution_criteria:
+      - Project owner performs and records a separate substantive self-review.
+      - Review comments are resolved or retained as open limitations.
+    limitations:
+      - Automated structural checks do not provide independent or owner review.

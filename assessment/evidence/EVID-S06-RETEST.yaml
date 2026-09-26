@@ -1,0 +1,16 @@
+schema_version: "1.0"
+id: EVID-S06-RETEST
+path: fixtures/evidence/s06/retest_event_observation.json
+sha256: f466edfa1123ac31d343981a460a3073b4bba8e24b1439c27f1374f1a08195fe
+size: 510
+media_type: application/json
+collector: cyber_assess_acceptance_fixture
+collected_at: 2026-09-26T02:08:20Z
+source_period: 2026-09-26T02:08:20Z/2026-09-26T02:08:21Z
+run_id: RUN-S06-RETEST
+provenance: observed_lab
+sensitivity: sanitized
+parent_evidence_id: EVID-S06-BASELINE
+query_or_action: After remediation, reperform the administrative deactivation and verify the required event exists.
+tool_version: "0.1.0"
+redactions: []

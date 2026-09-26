@@ -1,0 +1,17 @@
+schema_version: "1.0"
+id: ACT-S06-001
+finding_id: FIND-S06-001
+owner_role: simulated_system_administrator
+target_date: 2026-10-10
+status: implemented
+fix_reference: bank_lab S06 remediation adapter
+implementation_summary: The isolated scenario remediation emits an attributable event for the administrative action.
+closure_criteria:
+  - Reperforming the administrative deactivation emits its required event.
+  - The emitted event remains retrievable by its recorded identifier.
+proposed_likelihood: 1
+proposed_impact: 4
+proposed_residual_risk_rationale: >-
+  The tested omission is corrected, but broader event completeness, retention,
+  forwarding, alerting, and production monitoring were not assessed.
+implemented_at: 2026-09-26T02:07:50Z

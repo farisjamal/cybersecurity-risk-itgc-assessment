@@ -1,0 +1,15 @@
+schema_version: "1.0"
+id: EVID-S03-BASELINE
+path: fixtures/evidence/s03/baseline_mfa_observation.json
+sha256: fb824ab5b7b4e151986613f20f69cf2531fc4ff44f40c55172b1e3531568c375
+size: 456
+media_type: application/json
+collector: cyber_assess_acceptance_fixture
+collected_at: 2026-09-26T02:07:20Z
+source_period: 2026-09-26T02:07:20Z/2026-09-26T02:07:21Z
+run_id: RUN-S03-BASELINE
+provenance: observed_lab
+sensitivity: sanitized
+query_or_action: Replay S03 and attempt a privileged action with a password-only scenario session.
+tool_version: "0.1.0"
+redactions: []

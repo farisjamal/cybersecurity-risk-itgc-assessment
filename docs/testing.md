@@ -31,6 +31,21 @@ uv run python -m cyber_assess findings validate --engagement ENG-001
 docker compose --env-file .env config --quiet
 ```
 
+For snapshot and artifact reconciliation:
+
+```powershell
+uv run python -m cyber_assess snapshot create --engagement ENG-001 --json
+uv run python -m cyber_assess verify --snapshot SNAPSHOT_ID --json
+uv run python -m cyber_assess export --snapshot SNAPSHOT_ID --json
+uv run python -m cyber_assess report-inputs --snapshot SNAPSHOT_ID --json
+uv run python -m cyber_assess artifacts --snapshot SNAPSHOT_ID --json
+./scripts/render-pdfs.ps1 -SnapshotId SNAPSHOT_ID
+```
+
+The deterministic artifact manifest covers the XLSX, Markdown, HTML, CSV, JSON, and reconciliation
+outputs. Locally rendered PDFs use a separate manifest containing source HTML names, hashes, sizes,
+and the Microsoft Edge version. Inspect every rendered PDF before distribution.
+
 Tests are successful only when their asserted behavior is correct. Detecting an intentionally failing
 scenario is a successful test while the associated control conclusion remains failed.
 

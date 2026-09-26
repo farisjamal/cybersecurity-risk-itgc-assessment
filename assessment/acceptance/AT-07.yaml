@@ -1,0 +1,14 @@
+schema_version: "1.0"
+id: AT-07
+requirement_ids: [FR-07]
+status: partial
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 tests with in-process application and SQLite database.
+evidence_ids: [EVID-POL-08, EVID-POL-09, EVID-S06-BASELINE, EVID-S06-RETEST]
+evidence_references:
+  - tests/unit/test_bank_workflows.py::test_role_change_revokes_sessions_and_opens_one_deduplicated_alert
+  - tests/integration/test_bank_portal.py::test_five_failed_logins_throttle_and_raise_alert
+result: Selected alert paths test attribution and deduplication; S06 preserves an audit-gap retest chain.
+limitations:
+  - The complete required-action event coverage matrix and review record are absent.
+recorded_at: 2026-09-26T02:34:58Z

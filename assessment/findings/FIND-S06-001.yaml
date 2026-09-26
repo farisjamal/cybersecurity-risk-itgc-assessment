@@ -1,0 +1,28 @@
+schema_version: "1.0"
+id: FIND-S06-001
+title: Administrative scenario action omitted its required audit event
+service_ids: [example-bank-portal]
+control_ids: [OPS-03]
+criteria_reference: POL-08
+condition: >-
+  The S06 baseline fixture replay observed an administrative deactivation without
+  the corresponding attributable audit event.
+evidence_ids: [EVID-S06-BASELINE]
+cause: The isolated scenario path suppressed the required event-emission step.
+cause_status: confirmed
+consequence: Investigators could not reconstruct the tested administrative action from the event trail.
+likelihood: 4
+impact: 4
+rating: 16
+rating_rationale: The omitted event was directly reproducible for a security-relevant action.
+recommendation: Emit an attributable event in the same workflow as every administrative state change.
+alternatives_tradeoff: Periodic reconciliation may detect gaps later but cannot provide timely traceability.
+owner_role: simulated_system_administrator
+effort: small
+target_date: 2026-10-10
+status: closed_verified
+limitations: >-
+  Closure covers one deterministic local action. Event completeness, retention,
+  enterprise log forwarding, and independent monitoring remain unassessed.
+created_at: 2026-09-26T02:07:30Z
+closed_at: 2026-09-26T02:08:30Z

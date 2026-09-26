@@ -1,0 +1,16 @@
+schema_version: "1.0"
+id: AT-12
+requirement_ids: [FR-12]
+status: partial
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 model tests and canonical S01 records.
+evidence_ids: [EVID-S01-BASELINE]
+evidence_references:
+  - tests/unit/test_assessment_models.py::test_risk_score_uses_exact_prd_bands
+  - assessment/findings/FIND-S01-001.yaml
+  - assessment/governance/risks.yaml
+result: Exact risk arithmetic and a fully populated S01 finding are represented.
+limitations:
+  - Nineteen risk records remain explicitly unassessed without ratings or operating evidence.
+  - Not every mandatory missing-finding-field combination has a dedicated acceptance test.
+recorded_at: 2026-09-26T02:34:58Z

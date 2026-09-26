@@ -60,6 +60,216 @@ class Control(StrictRecord):
     nist_categories: list[Annotated[str, Field(min_length=1)]] = Field(min_length=1)
 
 
+class Asset(StrictRecord):
+    id: RecordId
+    asset_type: Annotated[str, Field(min_length=1)]
+    owner_role: Annotated[str, Field(min_length=1)]
+    business_process: Annotated[str, Field(min_length=1)]
+    classification: Literal["synthetic_public", "synthetic_internal", "restricted_runtime"]
+    criticality: Literal["low", "medium", "high", "critical"]
+    dependencies: list[Annotated[str, Field(min_length=1)]]
+    components: list[Annotated[str, Field(min_length=1)]] = Field(min_length=1)
+    data_categories: list[Annotated[str, Field(min_length=1)]] = Field(min_length=1)
+    verification_status: Literal["documented", "runtime_unverified", "runtime_verified"]
+    limitations: list[Annotated[str, Field(min_length=1)]]
+
+
+class DataFlow(StrictRecord):
+    id: RecordId
+    name: Annotated[str, Field(min_length=1)]
+    source: Annotated[str, Field(min_length=1)]
+    destination: Annotated[str, Field(min_length=1)]
+    data_categories: list[Annotated[str, Field(min_length=1)]] = Field(min_length=1)
+    purpose: Annotated[str, Field(min_length=1)]
+    protection: list[Annotated[str, Field(min_length=1)]] = Field(min_length=1)
+    trust_boundary: Annotated[str, Field(min_length=1)]
+    verification_status: Literal["documented", "runtime_unverified", "runtime_verified"]
+    limitations: list[Annotated[str, Field(min_length=1)]]
+
+
+class AssetRegister(StrictRecord):
+    assets: list[Asset] = Field(min_length=1)
+    data_flows: list[DataFlow] = Field(min_length=1)
+
+
+class RiskRecord(StrictRecord):
+    id: RecordId
+    title: Annotated[str, Field(min_length=1)]
+    asset_ids: list[RecordId] = Field(min_length=1)
+    control_ids: list[RecordId] = Field(min_length=1)
+    scenario: Annotated[str, Field(min_length=1)]
+    assessment_status: Literal["unassessed", "assessed_observed"]
+    likelihood: Annotated[int, Field(ge=1, le=5)] | None = None
+    impact: Annotated[int, Field(ge=1, le=5)] | None = None
+    rating: Annotated[int, Field(ge=1, le=25)] | None = None
+    rating_rationale: str | None = None
+    evidence_ids: list[RecordId]
+    status: Literal["open", "monitored", "closed_verified"]
+    limitations: list[Annotated[str, Field(min_length=1)]]
+
+    @model_validator(mode="after")
+    def assessed_risk_has_consistent_rating(self) -> RiskRecord:
+        rating_fields = (self.likelihood, self.impact, self.rating, self.rating_rationale)
+        if self.assessment_status == "unassessed":
+            if any(value is not None for value in rating_fields) or self.evidence_ids:
+                raise ValueError("unassessed risk cannot claim a rating or evidence")
+            return self
+        likelihood = self.likelihood
+        impact = self.impact
+        rating = self.rating
+        rationale = self.rating_rationale
+        if likelihood is None or impact is None or rating is None or rationale is None:
+            raise ValueError("assessed risk requires likelihood, impact, rating and rationale")
+        if rating != likelihood * impact:
+            raise ValueError("risk rating must equal likelihood multiplied by impact")
+        if not self.evidence_ids:
+            raise ValueError("assessed risk requires evidence")
+        return self
+
+
+class RiskRegister(StrictRecord):
+    risks: list[RiskRecord] = Field(min_length=1)
+
+
+VerificationStatus = Literal["verified_reference", "unverified_reference", "not_mapped"]
+CoverageConclusion = Literal[
+    "supported_for_tested_aspect",
+    "gap_identified",
+    "not_assessed",
+    "not_applicable_with_rationale",
+]
+
+
+class MappingSource(StrictRecord):
+    id: RecordId
+    framework: Annotated[str, Field(min_length=1)]
+    version: Annotated[str, Field(min_length=1)]
+    document_date: date | None
+    url: Annotated[str, Field(min_length=1)]
+    retrieval_date: date
+    verification_status: VerificationStatus
+    local_sha256: Sha256 | None = None
+    limitations: list[Annotated[str, Field(min_length=1)]]
+
+
+class FrameworkMapping(StrictRecord):
+    id: RecordId
+    source_id: RecordId
+    reference_locator: list[Annotated[str, Field(min_length=1)]] = Field(min_length=1)
+    displayed_page: Annotated[str, Field(min_length=1)] | None = None
+    summary: Annotated[str, Field(min_length=1)]
+    rationale: Annotated[str, Field(min_length=1)]
+    control_ids: list[RecordId] = Field(min_length=1)
+    evidence_ids: list[RecordId]
+    current_evidence: Annotated[str, Field(min_length=1)]
+    target_practice: Annotated[str, Field(min_length=1)]
+    gap: Annotated[str, Field(min_length=1)]
+    priority: Literal["low", "medium", "high", "critical"]
+    action: Annotated[str, Field(min_length=1)]
+    coverage_conclusion: CoverageConclusion
+    verification_status: VerificationStatus
+    limitations: list[Annotated[str, Field(min_length=1)]]
+
+
+class MappingRegister(StrictRecord):
+    sources: list[MappingSource] = Field(min_length=1)
+    mappings: list[FrameworkMapping] = Field(min_length=1)
+
+
+class EvidenceRequest(StrictRecord):
+    id: RecordId
+    requested_evidence: Annotated[str, Field(min_length=1)]
+    provider_role: Annotated[str, Field(min_length=1)]
+    due_date: date
+    status: Literal["requested", "received", "incomplete", "blocked"]
+    response_evidence_ids: list[RecordId]
+    blocker_id: RecordId | None = None
+    limitations: list[Annotated[str, Field(min_length=1)]]
+
+    @model_validator(mode="after")
+    def evidence_request_state_is_consistent(self) -> EvidenceRequest:
+        if self.status == "received" and not self.response_evidence_ids:
+            raise ValueError("received evidence request requires evidence IDs")
+        if self.status == "blocked" and self.blocker_id is None:
+            raise ValueError("blocked evidence request requires a blocker ID")
+        return self
+
+
+class EvidenceRequestRegister(StrictRecord):
+    requests: list[EvidenceRequest] = Field(min_length=1)
+
+
+class Milestone(StrictRecord):
+    id: RecordId
+    name: Annotated[str, Field(min_length=1)]
+    status: Literal["planned", "in_progress", "partial", "completed", "blocked"]
+    requirement_ids: list[Annotated[str, Field(min_length=1)]] = Field(min_length=1)
+    evidence_references: list[Annotated[str, Field(min_length=1)]]
+    blocker_ids: list[RecordId]
+    decision: Annotated[str, Field(min_length=1)]
+    limitations: list[Annotated[str, Field(min_length=1)]]
+
+
+class MilestoneRegister(StrictRecord):
+    milestones: list[Milestone] = Field(min_length=1)
+
+
+class Blocker(StrictRecord):
+    id: RecordId
+    title: Annotated[str, Field(min_length=1)]
+    status: Literal["open", "resolved"]
+    affected_requirements: list[Annotated[str, Field(min_length=1)]] = Field(min_length=1)
+    evidence_references: list[Annotated[str, Field(min_length=1)]] = Field(min_length=1)
+    resolution_criteria: list[Annotated[str, Field(min_length=1)]] = Field(min_length=1)
+    limitations: list[Annotated[str, Field(min_length=1)]]
+
+
+class BlockerRegister(StrictRecord):
+    blockers: list[Blocker] = Field(min_length=1)
+
+
+class ReviewDecision(StrictRecord):
+    id: RecordId
+    artifact: Annotated[str, Field(min_length=1)]
+    artifact_version: Annotated[str, Field(min_length=1)]
+    reviewer: Annotated[str, Field(min_length=1)]
+    review_type: Literal["automated_structural", "owner_self_review", "external_review"]
+    comment: Annotated[str, Field(min_length=1)]
+    resolution: Annotated[str, Field(min_length=1)]
+    status: Literal["open", "resolved"]
+    created_at: datetime
+    resolved_at: datetime | None = None
+
+    @model_validator(mode="after")
+    def review_resolution_is_consistent(self) -> ReviewDecision:
+        if self.status == "resolved" and self.resolved_at is None:
+            raise ValueError("resolved review decision requires resolved_at")
+        if self.status == "open" and self.resolved_at is not None:
+            raise ValueError("open review decision cannot have resolved_at")
+        return self
+
+
+class AcceptanceResult(StrictRecord):
+    id: Annotated[str, Field(pattern=r"^AT-(0[1-9]|1[0-9]|20)$")]
+    requirement_ids: list[Annotated[str, Field(min_length=1)]] = Field(min_length=1)
+    status: Literal["passed", "partial", "missing"]
+    revision: Annotated[str, Field(min_length=1)]
+    environment: Annotated[str, Field(min_length=1)]
+    evidence_ids: list[RecordId]
+    evidence_references: list[Annotated[str, Field(min_length=1)]]
+    result: Annotated[str, Field(min_length=1)]
+    limitations: list[Annotated[str, Field(min_length=1)]]
+    recorded_at: datetime
+
+    @model_validator(mode="after")
+    def acceptance_state_is_supported(self) -> AcceptanceResult:
+        if self.status == "passed" and not (self.evidence_ids or self.evidence_references):
+            raise ValueError("passed acceptance result requires evidence")
+        if self.status != "passed" and not self.limitations:
+            raise ValueError("partial or missing acceptance result requires limitations")
+        return self
+
+
 class Evidence(StrictRecord):
     id: RecordId
     path: Annotated[str, Field(min_length=1)]

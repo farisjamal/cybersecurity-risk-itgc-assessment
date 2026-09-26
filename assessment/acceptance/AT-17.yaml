@@ -1,0 +1,16 @@
+schema_version: "1.0"
+id: AT-17
+requirement_ids: [FR-17]
+status: partial
+revision: uncommitted-working-tree
+environment: Canonical governance-record structural validation.
+evidence_ids: [EVID-S01-BASELINE, EVID-S01-RETEST]
+evidence_references:
+  - assessment/governance/evidence_requests.yaml
+  - assessment/governance/milestones.yaml
+  - assessment/governance/blockers.yaml
+  - assessment/reviews/REV-GOV-001.yaml
+result: Requested, received, incomplete, and blocked evidence states plus milestones and review decisions are represented.
+limitations:
+  - Project-owner substantive review remains open and no interactive governance workflow is claimed.
+recorded_at: 2026-09-26T02:34:58Z

@@ -12,9 +12,11 @@ from typing import Any
 from pydantic import ValidationError
 
 from cyber_assess.adapters import route_scenario, run_compose, seed_lab
+from cyber_assess.artifacts import create_final_artifacts
 from cyber_assess.bootstrap import initialize_engagement
 from cyber_assess.doctor import run_doctor
 from cyber_assess.errors import AssessmentError, IntegrityError, InvalidInputError
+from cyber_assess.reporting import create_deliverable_inputs
 from cyber_assess.snapshots import create_sanitized_export, create_snapshot, verify_snapshot
 from cyber_assess.validation import validate_assessment, validate_findings
 
@@ -81,6 +83,20 @@ def build_parser() -> argparse.ArgumentParser:
     export.add_argument("--format", choices=("all", "json", "manifest"), default="all")
     _add_json(export)
 
+    report_inputs = subcommands.add_parser(
+        "report-inputs",
+        help="generate reconciled reporting inputs from a verified snapshot",
+    )
+    report_inputs.add_argument("--snapshot", required=True)
+    _add_json(report_inputs)
+
+    artifacts = subcommands.add_parser(
+        "artifacts",
+        help="render reconciled workbook, report, roadmap, and presentation artifacts",
+    )
+    artifacts.add_argument("--snapshot", required=True)
+    _add_json(artifacts)
+
     verify = subcommands.add_parser("verify")
     verify.add_argument("--snapshot", required=True)
     _add_json(verify)
@@ -145,6 +161,12 @@ def _dispatch(args: argparse.Namespace, workspace: Path) -> tuple[int, dict[str,
         # The format flag remains explicit so unsupported formats never silently succeed.
         output = create_sanitized_export(workspace, args.snapshot)
         return 0, {"status": "exported", "snapshot_id": args.snapshot, "path": str(output)}
+    if args.command == "report-inputs":
+        output = create_deliverable_inputs(workspace, args.snapshot)
+        return 0, {"status": "generated", "snapshot_id": args.snapshot, "path": str(output)}
+    if args.command == "artifacts":
+        output = create_final_artifacts(workspace, args.snapshot)
+        return 0, {"status": "rendered", "snapshot_id": args.snapshot, "path": str(output)}
     if args.command == "verify":
         verification = verify_snapshot(workspace, args.snapshot)
         return 0, {

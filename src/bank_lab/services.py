@@ -69,6 +69,17 @@ class LoginThrottledError(DomainError):
     pass
 
 
+def _add_business_days(start: datetime, days: int) -> datetime:
+    """Return a deadline after ``days`` weekdays, preserving the time and timezone."""
+    deadline = start
+    remaining = days
+    while remaining:
+        deadline += timedelta(days=1)
+        if deadline.weekday() < 5:
+            remaining -= 1
+    return deadline
+
+
 @dataclass(frozen=True)
 class AuthResult:
     session: IssuedSession
@@ -482,6 +493,17 @@ class AccessService:
             completed_at=utcnow(),
         )
         self.db.add(review)
+        await self.db.flush()
+        await emit_event(
+            self.db,
+            run_id=self.settings.run_id,
+            actor_id=reviewer.id,
+            action="access_review.completed",
+            object_type="access_review",
+            object_id=review.id,
+            result="success",
+            context={"period": period, "population_count": len(users)},
+        )
         await self.db.commit()
         return review
 
@@ -510,6 +532,7 @@ class ChangeService:
             raise ConflictError("Emergency changes require a reason")
         if change_type not in {"normal", "emergency"}:
             raise ConflictError("Unsupported change type")
+        submitted_at = utcnow()
         change = ChangeRecord(
             requester_id=requester.id,
             change_type=change_type,
@@ -519,7 +542,7 @@ class ChangeService:
             rollback_plan=rollback_plan,
             emergency_reason=emergency_reason,
             status=ChangeStatus.SUBMITTED,
-            retrospective_due_at=(utcnow() + timedelta(days=2))
+            retrospective_due_at=_add_business_days(submitted_at, 2)
             if change_type == "emergency"
             else None,
         )
@@ -533,6 +556,52 @@ class ChangeService:
             object_type="change",
             object_id=change.id,
             result="success",
+        )
+        await self.db.commit()
+        return change
+
+    async def record_emergency_review(
+        self, change_id: str, reviewer: User, review: str
+    ) -> ChangeRecord:
+        if reviewer.role != Role.CHANGE_APPROVER:
+            raise ForbiddenError("Change approver role required")
+        change = await self.db.get(ChangeRecord, change_id)
+        if change is None:
+            raise NotFoundError("Change not found")
+        if change.change_type != "emergency":
+            raise ConflictError("Retrospective review applies only to emergency changes")
+        if change.requester_id == reviewer.id:
+            raise ForbiddenError("Requester cannot review their own emergency change")
+        if change.retrospective_review is not None:
+            raise ConflictError("Emergency change already has a retrospective review")
+        if not review.strip():
+            raise ConflictError("Retrospective review text is required")
+
+        reviewed_at = utcnow()
+        history = [*change.decision_history]
+        history.append(
+            {
+                "reviewer_id": reviewer.id,
+                "decision": "retrospective_reviewed",
+                "reason": review.strip(),
+                "at": reviewed_at.isoformat(),
+                "within_target": bool(
+                    change.retrospective_due_at
+                    and reviewed_at <= aware(change.retrospective_due_at)
+                ),
+            }
+        )
+        change.decision_history = history
+        change.retrospective_review = review.strip()
+        await emit_event(
+            self.db,
+            run_id=self.settings.run_id,
+            actor_id=reviewer.id,
+            action="change.emergency_reviewed",
+            object_type="change",
+            object_id=change.id,
+            result="success",
+            context={"within_target": history[-1]["within_target"]},
         )
         await self.db.commit()
         return change

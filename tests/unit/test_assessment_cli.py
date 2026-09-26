@@ -18,6 +18,8 @@ def test_parser_exposes_the_bounded_command_surface() -> None:
     scenario = parser.parse_args(["scenario", "retest", "--id", "S01", "--baseline-run", "RUN-1"])
     assert scenario.scenario_action == "retest"
     assert parser.parse_args(["export", "--snapshot", "SNAP-1"]).format == "all"
+    assert parser.parse_args(["report-inputs", "--snapshot", "SNAP-1"]).snapshot == "SNAP-1"
+    assert parser.parse_args(["artifacts", "--snapshot", "SNAP-1"]).snapshot == "SNAP-1"
 
 
 def test_workspace_precedence(tmp_path: Path) -> None:
@@ -107,6 +109,20 @@ def test_workspace_precedence(tmp_path: Path) -> None:
             Namespace(command="export", snapshot="SNAP-1", format="all"),
             "create_sanitized_export",
             Path("outputs/SNAP-1"),
+            0,
+            "path",
+        ),
+        (
+            Namespace(command="report-inputs", snapshot="SNAP-1"),
+            "create_deliverable_inputs",
+            Path("outputs/reporting/SNAP-1"),
+            0,
+            "path",
+        ),
+        (
+            Namespace(command="artifacts", snapshot="SNAP-1"),
+            "create_final_artifacts",
+            Path("outputs/artifacts/SNAP-1"),
             0,
             "path",
         ),

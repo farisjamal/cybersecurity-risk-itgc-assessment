@@ -1,0 +1,15 @@
+schema_version: "1.0"
+id: AT-16
+requirement_ids: [FR-16]
+status: partial
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 sanitized reporting-input tests.
+evidence_ids: []
+evidence_references:
+  - tests/unit/test_assessment_snapshot.py::test_sanitized_export_manifest_excludes_restricted_evidence
+  - tests/unit/test_reporting.py::test_deliverable_inputs_are_deterministic_reconciled_and_allowlisted
+  - docs/claims-register.md
+result: Current tests exclude restricted evidence and disallowed backup or secret-like output fields.
+limitations:
+  - A final public distribution bundle, unsafe-link inspection, and completed-claim review are absent.
+recorded_at: 2026-09-26T02:34:58Z

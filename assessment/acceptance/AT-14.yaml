@@ -1,0 +1,23 @@
+schema_version: "1.0"
+id: AT-14
+requirement_ids: [FR-14]
+status: partial
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 scenario tests using isolated database state.
+evidence_ids:
+  - EVID-S01-BASELINE
+  - EVID-S01-RETEST
+  - EVID-S03-BASELINE
+  - EVID-S03-RETEST
+  - EVID-S05-BASELINE
+  - EVID-S05-RETEST
+  - EVID-S06-BASELINE
+  - EVID-S06-RETEST
+evidence_references:
+  - tests/acceptance/test_portal_scenarios.py::test_all_six_scenarios_are_bounded_and_preserve_retest_lineage
+  - tests/unit/test_assessment_adapters.py::test_scenario_router_rejects_invalid_or_inconsistent_runs
+result: Six scenario routes and bounded resource naming are covered by automated tests.
+limitations:
+  - Canonical remediation chains exist for four required scenarios, but S02 and S04 lack canonical investigation records.
+  - Live scoped-resource cleanup was not observed.
+recorded_at: 2026-09-26T02:34:58Z

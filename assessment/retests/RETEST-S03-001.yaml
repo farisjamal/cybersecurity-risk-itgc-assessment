@@ -1,0 +1,16 @@
+schema_version: "1.0"
+id: RETEST-S03-001
+finding_id: FIND-S03-001
+action_id: ACT-S03-001
+test_run_id: RUN-S03-RETEST
+evidence_ids: [EVID-S03-RETEST]
+closure_criteria:
+  - A password-only scenario session is denied for the privileged action.
+  - An MFA-verified scenario session remains permitted for the privileged action.
+executed_at: 2026-09-26T02:08:20Z
+fresh_evidence: true
+result: passed
+decision: accept_closure
+limitations: >-
+  Local deterministic fixture replay only; enterprise identity systems and
+  phishing-resistant authentication remain unassessed.

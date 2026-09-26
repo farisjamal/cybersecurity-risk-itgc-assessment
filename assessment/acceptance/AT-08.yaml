@@ -1,0 +1,13 @@
+schema_version: "1.0"
+id: AT-08
+requirement_ids: [FR-08]
+status: partial
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 test environment; live PostgreSQL restore not executed.
+evidence_ids: [EVID-POL-06, EVID-POL-07, EVID-S05-BASELINE, EVID-S05-RETEST]
+evidence_references: [tests/acceptance/test_portal_scenarios.py::test_backup_hash_failure_and_isolated_restore]
+result: Corrupt-artifact rejection, isolated fixture restoration, and an S05 retest chain are covered.
+limitations:
+  - No live PostgreSQL backup and restore evidence exists.
+  - RTO and RPO were not measured from actual exercise outage and recovery timestamps.
+recorded_at: 2026-09-26T02:34:58Z

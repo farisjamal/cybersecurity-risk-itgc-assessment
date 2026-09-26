@@ -1,0 +1,40 @@
+schema_version: "1.0"
+id: WP-OPS-03-LIMITATION
+control_id: OPS-03
+control_version: "1.0"
+risk_ids: [RISK-OPS-03]
+criteria: [POL-08, RMIT-10.57]
+procedure_version: "1.0"
+test_type: combined
+test_period: 2026-08-01/2026-08-30
+population_source: fixtures/evidence/s06/baseline_event_observation.json
+population_hash: 45d739ac20f3a0439dd46d31ac8d9a770936197cb4dde913a42f65ef54e5ff4c
+population_count: 1
+population_query: Replay the allowlisted S06 administrative-deactivation path and reconcile its event.
+selected_record_ids: [RUN-S06-BASELINE]
+selection_rationale: The single deliberate S06 condition was tested in full and preserved as the baseline.
+sample_seed: null
+exclusions: []
+expected_behavior: Required actions emit attributable audit events that are retained and reviewed.
+actual_results: >-
+  The baseline omitted the required deactivation event. After remediation, the fresh retest
+  emitted the attributable event and confirmed that it remained retrievable.
+evidence_ids: [EVID-POL-08, EVID-S06-BASELINE, EVID-S06-RETEST]
+exceptions:
+  - The preserved S06 baseline omitted the required event for an administrative deactivation.
+limitations:
+  - The test is a deterministic local fixture replay, not enterprise logging-platform evidence.
+  - Only one required administrative action was included in this workpaper population.
+  - Broader event completeness, retention, forwarding, alerting, and review remain unassessed.
+  - Project-owner substantive review remains outstanding; only an automated structural check occurred.
+design_status: partially_adequate
+operating_status: effective_in_tested_scope
+assessor_decision: >-
+  Conclude event emission effective only for the tested local action; preserve FIND-S06-001
+  and its failed baseline while retaining the broader observability limitations.
+preparer: project_assessment_automation
+review_mode: self_reviewed
+review_comments:
+  - Structural schema and limitation wording checked; no independent or owner review is claimed.
+prepared_at: 2026-09-26T02:08:40Z
+reviewed_at: 2026-09-26T02:09:00Z

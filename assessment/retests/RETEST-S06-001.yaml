@@ -1,0 +1,16 @@
+schema_version: "1.0"
+id: RETEST-S06-001
+finding_id: FIND-S06-001
+action_id: ACT-S06-001
+test_run_id: RUN-S06-RETEST
+evidence_ids: [EVID-S06-RETEST]
+closure_criteria:
+  - Reperforming the administrative deactivation emits its required event.
+  - The emitted event remains retrievable by its recorded identifier.
+executed_at: 2026-09-26T02:08:20Z
+fresh_evidence: true
+result: passed
+decision: accept_closure
+limitations: >-
+  Local deterministic fixture replay only; event completeness, retention,
+  enterprise forwarding, and independent monitoring remain unassessed.

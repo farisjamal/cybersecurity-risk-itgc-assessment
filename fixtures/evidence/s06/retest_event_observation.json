@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "S06",
+  "run_id": "RUN-S06-RETEST",
+  "baseline_run_id": "RUN-S06-BASELINE",
+  "resource_name": "cyber-assess-scenario-s06-fixture",
+  "execution_mode": "deterministic_acceptance_fixture_replay",
+  "observed_at": "2026-09-26T02:08:20Z",
+  "action": "user.deactivated",
+  "event_emitted": true,
+  "closure_criteria_met": true,
+  "claim_limit": "Local fixture replay only; event completeness beyond the tested action and enterprise monitoring remain unassessed."
+}

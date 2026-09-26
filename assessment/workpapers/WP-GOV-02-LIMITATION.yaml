@@ -1,0 +1,36 @@
+schema_version: "1.0"
+id: WP-GOV-02-LIMITATION
+control_id: GOV-02
+control_version: "1.0"
+risk_ids: [RISK-GOV-02]
+criteria: [PRD-9, POL-10]
+procedure_version: "1.0"
+test_type: inspection
+test_period: 2026-08-01/2026-08-30
+population_source: not_collected
+population_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
+population_count: 0
+population_query: No service-risk, action, ownership, review-date, or challenge population query was executed.
+selected_record_ids: []
+selection_rationale: No records were selectable because the required population was not collected.
+sample_seed: null
+exclusions: []
+expected_behavior: Service risks have reasoned ratings, accountable owners, actions, review dates, and challenge.
+actual_results: No inspection was executed and no observed result is asserted.
+evidence_ids: [EVID-POL-10]
+exceptions: []
+limitations:
+  - Required risk, action, ownership, review, and challenge evidence was not collected.
+  - The referenced authored policy establishes intended practice only and does not prove operation.
+  - The empty-content hash is a no-population sentinel, not a source population hash.
+  - No control procedure was executed, so no design or operating conclusion is supported.
+  - Project-owner substantive review remains outstanding; only an automated structural check occurred.
+design_status: not_assessed
+operating_status: not_tested
+assessor_decision: Retain no conclusion until the population is captured and the procedure is executed.
+preparer: project_assessment_automation
+review_mode: self_reviewed
+review_comments:
+  - Structural schema and limitation wording checked; no independent or owner review is claimed.
+prepared_at: 2026-09-26T01:58:37Z
+reviewed_at: 2026-09-26T01:58:37Z

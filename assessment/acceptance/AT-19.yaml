@@ -1,0 +1,14 @@
+schema_version: "1.0"
+id: AT-19
+requirement_ids: [NFR-03, NFR-05, NFR-11]
+status: missing
+revision: uncommitted-working-tree
+environment: Existing Windows working tree only; fresh Windows and Linux CI runs not both observed.
+evidence_ids: []
+evidence_references: [.github/workflows/ci.yml, docs/setup.md, pyproject.toml, uv.lock]
+result: Setup documentation, pinned dependencies, and CI configuration exist without complete fresh-run evidence.
+limitations:
+  - A fresh Windows setup was not completed.
+  - A successful Linux CI run for this revision is not recorded.
+  - Live Docker/PostgreSQL verification is blocked in the current environment.
+recorded_at: 2026-09-26T02:34:58Z

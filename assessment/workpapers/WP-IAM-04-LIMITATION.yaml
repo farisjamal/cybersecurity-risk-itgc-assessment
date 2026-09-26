@@ -1,0 +1,41 @@
+schema_version: "1.0"
+id: WP-IAM-04-LIMITATION
+control_id: IAM-04
+control_version: "1.0"
+risk_ids: [RISK-IAM-04]
+criteria: [POL-03, RMIT-10.55]
+procedure_version: "1.0"
+test_type: combined
+test_period: 2026-08-01/2026-08-30
+population_source: fixtures/evidence/s03/baseline_mfa_observation.json
+population_hash: fb824ab5b7b4e151986613f20f69cf2531fc4ff44f40c55172b1e3531568c375
+population_count: 1
+population_query: Replay the allowlisted S03 privileged-action path with a password-only session.
+selected_record_ids: [RUN-S03-BASELINE]
+selection_rationale: The single deliberate S03 condition was tested in full and preserved as the baseline.
+sample_seed: null
+exclusions: []
+expected_behavior: Privileged access rejects password-only, stale-session, invalid-code, and reused-code paths.
+actual_results: >-
+  The baseline accepted a password-only privileged action. After the server-side MFA guard
+  was restored, the fresh retest denied the weak session and permitted an MFA-verified session.
+evidence_ids: [EVID-POL-03, EVID-S03-BASELINE, EVID-S03-RETEST]
+exceptions:
+  - The preserved S03 baseline accepted a privileged action without completed MFA.
+limitations:
+  - The test is a deterministic local fixture replay, not enterprise identity-provider evidence.
+  - Only the S03 privileged-action path was included in this workpaper population.
+  - TOTP does not establish phishing-resistant authentication.
+  - Broader enrollment, recovery, session, and identity-governance controls remain unassessed.
+  - Project-owner substantive review remains outstanding; only an automated structural check occurred.
+design_status: partially_adequate
+operating_status: effective_in_tested_scope
+assessor_decision: >-
+  Conclude the remediated S03 path effective only within the tested local scope; preserve
+  FIND-S03-001 and its baseline while retaining the broader identity limitations.
+preparer: project_assessment_automation
+review_mode: self_reviewed
+review_comments:
+  - Structural schema and limitation wording checked; no independent or owner review is claimed.
+prepared_at: 2026-09-26T02:08:40Z
+reviewed_at: 2026-09-26T02:09:00Z

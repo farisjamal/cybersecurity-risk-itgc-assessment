@@ -1,0 +1,128 @@
+{
+  "schema_version": "1.0",
+  "snapshot_id": "SNAP-20260926T024908-88653414",
+  "generated_at": "2026-09-26T03:01:21.8591849Z",
+  "review_mode": "self_reviewed_with_automated_integrity_and_visual_checks",
+  "artifacts": [
+    {
+      "path": "artifact-manifest.json",
+      "sha256": "a004eae7f7f78473dbbe0bb800cfc73a44736b6202f4c19291ad7017408a3950",
+      "size": 2404,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "assessment-workbook.xlsx",
+      "sha256": "70f2a3f80aa3cb14d1362ef6bd7665ed80fbf496fec466aa11c622649f4b51c8",
+      "size": 19280,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "claims-evidence-index.json",
+      "sha256": "457034ed05495318dc4a45e6de3e36e6234ef97cdea756fbbeb20daa057af695",
+      "size": 12885,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "engagement-brief.html",
+      "sha256": "9821c39b0d7a8035b1355a2215c7eed6e23b1680b748f7cf2d1341ddb93ce8d2",
+      "size": 2535,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "engagement-brief.md",
+      "sha256": "0ce378c82d0f440da1fddcde646878b544969d5ec3c850f9489a6d00dab04c3d",
+      "size": 1512,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "engagement-brief.pdf",
+      "sha256": "46e64a5064cdf2794b61f4f58163de7868a35ea6517efc827538fa6f69455464",
+      "size": 76207,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "evidence-manifest.json",
+      "sha256": "cd22ef722403d24cd706c46a4ec55ae251c79fc0c617774e75daef5da6e9d88b",
+      "size": 22575,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "executive-presentation.pdf",
+      "sha256": "d4c8ea7e7108fb83fd0038844a9294b3678c5fcbbdb73084fb84cc7c9eeed00d",
+      "size": 77435,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "executive-report.html",
+      "sha256": "bbc3005003dcc204469775e9a51826ac4c2e2e4cf2fe5c5ec14cc8c504c9977e",
+      "size": 3326,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "executive-report.md",
+      "sha256": "10fb7d743f215f659a4a60241bdbbf3803ca79bea59d88c1e188bb77b140272e",
+      "size": 1558,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "executive-report.pdf",
+      "sha256": "0e406c053d906dd4edbe2a8832d4093327607c269e1bc3792a99000eb0b3b0d3",
+      "size": 84138,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "pdf-render-manifest.json",
+      "sha256": "de074ae9d05ef439cf993df53b067868fc7bb78e9ebd92bad779dc2ab2e45ec4",
+      "size": 1233,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "presentation.html",
+      "sha256": "58219a867ddc0d4c8fb5299df4ded82ddeeefccd1d0fcd513c225c5155f1da89",
+      "size": 4902,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "README.md",
+      "sha256": "c05740672168546dd985d05dda32dd11979a0cf94afa45918f6e82368c9670d3",
+      "size": 2395,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "reconciliation.json",
+      "sha256": "02409ad6228d07303f74edfc957592b4e41d762925fe8c0b349db1973be4c71d",
+      "size": 722,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "remediation-roadmap.csv",
+      "sha256": "7cff2ba5f3dd1cd840dfcbd78998ab632964cf4d63745932d4ee75de6585686d",
+      "size": 737,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "remediation-roadmap.json",
+      "sha256": "abe04ce4e6694994d3d47b82b1d011b48aaf8a024b88b1da701afaca56fe105b",
+      "size": 2605,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "sanitized-evidence-package.zip",
+      "sha256": "90169a3e192aac2bc80a6c6a6219557bcdb2e821d9b3f996d1acd99e503972e5",
+      "size": 74775,
+      "classification": "sanitized_portfolio_artifact"
+    },
+    {
+      "path": "snapshot.yaml",
+      "sha256": "5136d8c4b740dd8ac5f506e65c8d251ba6f370dd2e1ededd96a06ac873108fda",
+      "size": 16009,
+      "classification": "sanitized_portfolio_artifact"
+    }
+  ],
+  "limitations": [
+    "Synthetic local-lab material only.",
+    "No independent reviewer or external assurance.",
+    "Sixteen of twenty controls retain not_assessed/not_tested conclusions.",
+    "Matching hashes detect change but do not prove independent authenticity."
+  ]
+}

@@ -1,0 +1,63 @@
+schema_version: "1.0"
+assets:
+  - schema_version: "1.0"
+    id: ASSET-PORTAL
+    asset_type: local_application_service
+    owner_role: project_owner_assessor
+    business_process: Synthetic internal customer-service request handling.
+    classification: synthetic_internal
+    criticality: high
+    dependencies:
+      - Local FastAPI application runtime
+      - Local PostgreSQL service in the documented Compose design
+      - Canonical assessment and synthetic fixture files
+    components:
+      - FastAPI portal
+      - PostgreSQL data store
+      - Assessment CLI and canonical YAML records
+      - Local backup and restore workflow
+    data_categories:
+      - Synthetic identities and roles
+      - Synthetic service requests and change records
+      - Synthetic authentication, audit, alert, and recovery metadata
+    verification_status: runtime_unverified
+    limitations:
+      - The component inventory is reconciled to repository design, not an observed live Docker deployment.
+      - No real bank system, customer, payment, or production data is represented.
+data_flows:
+  - schema_version: "1.0"
+    id: FLOW-PORTAL-01
+    name: Browser request to portal
+    source: Local user browser
+    destination: ASSET-PORTAL FastAPI service
+    data_categories: [Synthetic credentials, Synthetic request data]
+    purpose: Authenticate a fictional user and perform authorized request actions.
+    protection: [Loopback-only design, CSRF token, Server-side authorization, Session cookie controls]
+    trust_boundary: Browser process to local application process.
+    verification_status: runtime_unverified
+    limitations:
+      - Code and Compose settings exist, but a live Docker network observation is not recorded.
+  - schema_version: "1.0"
+    id: FLOW-PORTAL-02
+    name: Portal persistence to database
+    source: ASSET-PORTAL FastAPI service
+    destination: Local PostgreSQL service
+    data_categories: [Synthetic business records, Session hashes, Audit and alert records]
+    purpose: Persist application state and attributable events.
+    protection: [Internal Compose network design, No documented database host port, ORM parameterization]
+    trust_boundary: Application container or process to database service.
+    verification_status: runtime_unverified
+    limitations:
+      - The database path is documented but was not observed in a live Compose run in this environment.
+  - schema_version: "1.0"
+    id: FLOW-PORTAL-03
+    name: Database backup to restricted runtime artifact
+    source: Local PostgreSQL service
+    destination: Ignored local runtime storage
+    data_categories: [Synthetic database backup, Backup integrity metadata]
+    purpose: Support the bounded local restore exercise.
+    protection: [Ignored runtime path, Content hash validation, Isolated restore target]
+    trust_boundary: Database service to host-local restricted runtime path.
+    verification_status: runtime_unverified
+    limitations:
+      - Only code-level and test-fixture behavior is present; no live PostgreSQL backup is claimed.

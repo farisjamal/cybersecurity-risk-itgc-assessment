@@ -1,0 +1,32 @@
+{
+  "control_coverage": {
+    "assessed": 4,
+    "state": "partial",
+    "total": 20,
+    "unassessed": 16,
+    "workpapers_missing": 0,
+    "workpapers_present": 20
+  },
+  "engagement_id": "ENG-001",
+  "frozen_at": "2026-09-26T02:49:08.830858Z",
+  "record_counts": {
+    "actions": 4,
+    "controls": 20,
+    "evidence": 19,
+    "findings": 4,
+    "retests": 4,
+    "workpapers": 20
+  },
+  "relationship_counts": {
+    "finding_evidence_links": 5,
+    "retest_evidence_links": 4,
+    "workpaper_evidence_links": 27
+  },
+  "schema_version": "1.0",
+  "snapshot_alignment": {
+    "baseline_ids_match": true,
+    "retest_ids_match": true,
+    "unmatched_references": 0
+  },
+  "snapshot_id": "SNAP-20260926T024908-88653414"
+}

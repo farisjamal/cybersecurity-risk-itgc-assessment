@@ -1,0 +1,16 @@
+schema_version: "1.0"
+id: RETEST-S05-001
+finding_id: FIND-S05-001
+action_id: ACT-S05-001
+test_run_id: RUN-S05-RETEST
+evidence_ids: [EVID-S05-RETEST]
+closure_criteria:
+  - The corrupt scenario backup is marked failed rather than successful.
+  - The original failed backup record remains preserved for traceability.
+executed_at: 2026-09-26T02:08:20Z
+fresh_evidence: true
+result: passed
+decision: accept_closure
+limitations: >-
+  Local deterministic fixture replay only; full restore acceptance, measured RTO,
+  measured RPO, and production backup operations remain unassessed.

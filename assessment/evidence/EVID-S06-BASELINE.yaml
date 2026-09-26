@@ -1,0 +1,15 @@
+schema_version: "1.0"
+id: EVID-S06-BASELINE
+path: fixtures/evidence/s06/baseline_event_observation.json
+sha256: 45d739ac20f3a0439dd46d31ac8d9a770936197cb4dde913a42f65ef54e5ff4c
+size: 482
+media_type: application/json
+collector: cyber_assess_acceptance_fixture
+collected_at: 2026-09-26T02:07:20Z
+source_period: 2026-09-26T02:07:20Z/2026-09-26T02:07:21Z
+run_id: RUN-S06-BASELINE
+provenance: observed_lab
+sensitivity: sanitized
+query_or_action: Replay S06 and inspect whether the administrative deactivation emits its required event.
+tool_version: "0.1.0"
+redactions: []

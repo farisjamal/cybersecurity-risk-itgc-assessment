@@ -1,0 +1,16 @@
+schema_version: "1.0"
+id: AT-04
+requirement_ids: [FR-03]
+status: partial
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 tests with in-process application and SQLite database.
+evidence_ids: [EVID-S03-BASELINE, EVID-S03-RETEST]
+evidence_references:
+  - tests/unit/test_bank_security.py::test_totp_replay_counter_is_rejected
+  - tests/unit/test_bank_security.py::test_privileged_action_requires_verified_mfa
+  - tests/integration/test_bank_portal.py::test_login_csrf_mfa_and_privileged_endpoint
+result: Password-only privileged denial, valid MFA, replay rejection, and an S03 retest are represented.
+limitations:
+  - Every invalid-code, expired-session, and revoked-session combination is not captured in one acceptance run.
+  - TOTP is not treated as phishing-resistant authentication.
+recorded_at: 2026-09-26T02:34:58Z

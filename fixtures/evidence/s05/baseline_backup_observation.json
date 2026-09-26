@@ -1,0 +1,12 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "S05",
+  "run_id": "RUN-S05-BASELINE",
+  "resource_name": "cyber-assess-scenario-s05-fixture",
+  "execution_mode": "deterministic_acceptance_fixture_replay",
+  "observed_at": "2026-09-26T02:07:20Z",
+  "reported_success": true,
+  "valid": false,
+  "control_exception_observed": true,
+  "claim_limit": "Local fixture replay only; no production backup platform, recovery environment, RTO, or RPO was assessed."
+}

@@ -1,0 +1,368 @@
+{
+  "claims": [
+    {
+      "claim": "Control CHG-01 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-CHG-01-LIMITATION",
+      "control_id": "CHG-01",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-04"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-CHG-01-LIMITATION"
+    },
+    {
+      "claim": "Control CHG-02 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-CHG-02-LIMITATION",
+      "control_id": "CHG-02",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-04"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-CHG-02-LIMITATION"
+    },
+    {
+      "claim": "Control CHG-03 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-CHG-03-LIMITATION",
+      "control_id": "CHG-03",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-04"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-CHG-03-LIMITATION"
+    },
+    {
+      "claim": "Control CHG-04 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-CHG-04-LIMITATION",
+      "control_id": "CHG-04",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-05"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-CHG-04-LIMITATION"
+    },
+    {
+      "claim": "Control DR-01 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-DR-01-LIMITATION",
+      "control_id": "DR-01",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-07"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-DR-01-LIMITATION"
+    },
+    {
+      "claim": "Control DR-02 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-DR-02-LIMITATION",
+      "control_id": "DR-02",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-07"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-DR-02-LIMITATION"
+    },
+    {
+      "claim": "Control GOV-01 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-GOV-01-LIMITATION",
+      "control_id": "GOV-01",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-01"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-GOV-01-LIMITATION"
+    },
+    {
+      "claim": "Control GOV-02 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-GOV-02-LIMITATION",
+      "control_id": "GOV-02",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-10"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-GOV-02-LIMITATION"
+    },
+    {
+      "claim": "Control GOV-03 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-GOV-03-LIMITATION",
+      "control_id": "GOV-03",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-GOV-03-LIMITATION"
+    },
+    {
+      "claim": "Control IAM-01 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-IAM-01-LIMITATION",
+      "control_id": "IAM-01",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-01"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-IAM-01-LIMITATION"
+    },
+    {
+      "claim": "Control IAM-02 was assessed as adequate for design and exceptions_identified for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-IAM-02-S01",
+      "control_id": "IAM-02",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-02",
+        "EVID-S01-BASELINE",
+        "EVID-S01-POPULATION"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-IAM-02-S01"
+    },
+    {
+      "claim": "Control IAM-03 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-IAM-03-LIMITATION",
+      "control_id": "IAM-03",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-01"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-IAM-03-LIMITATION"
+    },
+    {
+      "claim": "Control IAM-04 was assessed as partially_adequate for design and effective_in_tested_scope for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-IAM-04-LIMITATION",
+      "control_id": "IAM-04",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-03",
+        "EVID-S03-BASELINE",
+        "EVID-S03-RETEST"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-IAM-04-LIMITATION"
+    },
+    {
+      "claim": "Control IAM-05 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-IAM-05-LIMITATION",
+      "control_id": "IAM-05",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-03"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-IAM-05-LIMITATION"
+    },
+    {
+      "claim": "Control IR-01 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-IR-01-LIMITATION",
+      "control_id": "IR-01",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-09"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-IR-01-LIMITATION"
+    },
+    {
+      "claim": "Control IR-02 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-IR-02-LIMITATION",
+      "control_id": "IR-02",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-IR-02-LIMITATION"
+    },
+    {
+      "claim": "Control OPS-01 was assessed as partially_adequate for design and effective_in_tested_scope for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-OPS-01-LIMITATION",
+      "control_id": "OPS-01",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-06",
+        "EVID-S05-BASELINE",
+        "EVID-S05-RETEST"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-OPS-01-LIMITATION"
+    },
+    {
+      "claim": "Control OPS-02 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-OPS-02-LIMITATION",
+      "control_id": "OPS-02",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-06",
+        "EVID-POL-07"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-OPS-02-LIMITATION"
+    },
+    {
+      "claim": "Control OPS-03 was assessed as partially_adequate for design and effective_in_tested_scope for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-OPS-03-LIMITATION",
+      "control_id": "OPS-03",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-08",
+        "EVID-S06-BASELINE",
+        "EVID-S06-RETEST"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-OPS-03-LIMITATION"
+    },
+    {
+      "claim": "Control OPS-04 was assessed as not_assessed for design and not_tested for operation within the tested scope.",
+      "claim_id": "CLAIM-WP-OPS-04-LIMITATION",
+      "control_id": "OPS-04",
+      "review_mode": "self_reviewed",
+      "sanitized_evidence_ids": [
+        "EVID-POL-10"
+      ],
+      "withheld_evidence_count": 0,
+      "workpaper_id": "WP-OPS-04-LIMITATION"
+    }
+  ],
+  "engagement_id": "ENG-001",
+  "evidence": [
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:00:55Z",
+      "evidence_id": "EVID-POL-01",
+      "media_type": "text/markdown",
+      "provenance": "authored_policy"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-25T13:45:00Z",
+      "evidence_id": "EVID-POL-02",
+      "media_type": "text/markdown",
+      "provenance": "authored_policy"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:00:55Z",
+      "evidence_id": "EVID-POL-03",
+      "media_type": "text/markdown",
+      "provenance": "authored_policy"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:00:55Z",
+      "evidence_id": "EVID-POL-04",
+      "media_type": "text/markdown",
+      "provenance": "authored_policy"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:00:55Z",
+      "evidence_id": "EVID-POL-05",
+      "media_type": "text/markdown",
+      "provenance": "authored_policy"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:00:55Z",
+      "evidence_id": "EVID-POL-06",
+      "media_type": "text/markdown",
+      "provenance": "authored_policy"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:00:55Z",
+      "evidence_id": "EVID-POL-07",
+      "media_type": "text/markdown",
+      "provenance": "authored_policy"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:00:55Z",
+      "evidence_id": "EVID-POL-08",
+      "media_type": "text/markdown",
+      "provenance": "authored_policy"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:00:55Z",
+      "evidence_id": "EVID-POL-09",
+      "media_type": "text/markdown",
+      "provenance": "authored_policy"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:00:55Z",
+      "evidence_id": "EVID-POL-10",
+      "media_type": "text/markdown",
+      "provenance": "authored_policy"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-25T14:00:00Z",
+      "evidence_id": "EVID-S01-BASELINE",
+      "media_type": "application/json",
+      "provenance": "observed_lab"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-25T13:55:00Z",
+      "evidence_id": "EVID-S01-POPULATION",
+      "media_type": "application/json",
+      "provenance": "synthetic_record"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:07:20Z",
+      "evidence_id": "EVID-S03-BASELINE",
+      "media_type": "application/json",
+      "provenance": "observed_lab"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:08:20Z",
+      "evidence_id": "EVID-S03-RETEST",
+      "media_type": "application/json",
+      "provenance": "observed_lab"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:07:20Z",
+      "evidence_id": "EVID-S05-BASELINE",
+      "media_type": "application/json",
+      "provenance": "observed_lab"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:08:20Z",
+      "evidence_id": "EVID-S05-RETEST",
+      "media_type": "application/json",
+      "provenance": "observed_lab"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:07:20Z",
+      "evidence_id": "EVID-S06-BASELINE",
+      "media_type": "application/json",
+      "provenance": "observed_lab"
+    },
+    {
+      "classification": "sanitized",
+      "collected_at": "2026-09-26T02:08:20Z",
+      "evidence_id": "EVID-S06-RETEST",
+      "media_type": "application/json",
+      "provenance": "observed_lab"
+    }
+  ],
+  "limitations": [
+    "This is synthetic, local-lab material and is not evidence from a real institution.",
+    "The assessment is self-reviewed and is not an independent audit, certification, or assurance opinion.",
+    "20 of 20 registered controls have frozen workpapers; 4 have executed assessment conclusions in this snapshot.",
+    "Evidence payloads, filesystem paths, queries, secrets, and backup contents are intentionally excluded.",
+    "PDF artifacts, when present, are local derivatives with a separate render manifest and require visual review before distribution.",
+    "All results are frozen to snapshot SNAP-20260926T024908-88653414 at 2026-09-26T02:49:08.830858Z."
+  ],
+  "schema_version": "1.0",
+  "snapshot_id": "SNAP-20260926T024908-88653414"
+}

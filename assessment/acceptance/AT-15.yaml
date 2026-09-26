@@ -1,0 +1,15 @@
+schema_version: "1.0"
+id: AT-15
+requirement_ids: [FR-15]
+status: partial
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 deterministic reporting-input tests.
+evidence_ids: []
+evidence_references:
+  - assessment/snapshots/SNAP-20260926T012311-1F44808C.yaml
+  - tests/unit/test_reporting.py::test_deliverable_inputs_are_deterministic_reconciled_and_allowlisted
+result: Report input bundles reconcile to the frozen S01 snapshot and resolve allowed evidence references.
+limitations:
+  - The frozen snapshot predates the expanded governance records and nineteen limitation workpapers.
+  - Final workbook, roadmap, report, slides, and rendered PDF visual inspection are incomplete.
+recorded_at: 2026-09-26T02:34:58Z

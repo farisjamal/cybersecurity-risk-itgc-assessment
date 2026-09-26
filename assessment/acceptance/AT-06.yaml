@@ -1,0 +1,13 @@
+schema_version: "1.0"
+id: AT-06
+requirement_ids: [FR-06]
+status: partial
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 unit tests using an isolated SQLite database.
+evidence_ids: [EVID-POL-04, EVID-POL-05]
+evidence_references: [tests/unit/test_bank_workflows.py::test_change_self_approval_and_missing_evidence_are_rejected]
+result: Self-approval and missing normal-change evidence are rejected in the tested service path.
+limitations:
+  - Deployment, rollback, and both required emergency-change follow-up records are not assessed.
+  - Authored policies do not prove operating effectiveness.
+recorded_at: 2026-09-26T02:34:58Z

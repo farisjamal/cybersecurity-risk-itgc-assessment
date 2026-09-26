@@ -1,0 +1,16 @@
+schema_version: "1.0"
+id: AT-18
+requirement_ids: [FR-18]
+status: partial
+revision: uncommitted-working-tree
+environment: Windows local Python 3.12 negative-path unit tests.
+evidence_ids: []
+evidence_references:
+  - tests/unit/test_assessment_models.py::test_evidence_path_must_remain_inside_workspace
+  - tests/unit/test_assessment_snapshot.py::test_snapshot_detects_tampered_source
+  - tests/unit/test_assessment_doctor.py::test_doctor_accumulates_non_secret_failure_reasons
+  - tests/unit/test_reporting.py::test_existing_bundle_is_not_overwritten
+result: Unsafe paths, tampered evidence, missing runtime prerequisites, and overwrite refusal have negative tests.
+limitations:
+  - Interrupted export recovery and documented exit-code coverage are incomplete.
+recorded_at: 2026-09-26T02:34:58Z
