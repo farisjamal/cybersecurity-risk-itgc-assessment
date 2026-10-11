@@ -122,6 +122,11 @@ and release blockers in PRD Sections 19, 21, and 24; file presence is not treate
 
 ## Important context
 
+Before publishing source, read the [security publication review](docs/security-publication-review.md)
+and run `uv run python -m cyber_assess publication-check --json`. Include `.gitignore`; keep `.env`,
+credentials, backups and generated evidence/document bundles local. CI scans history, dependencies
+and rebuilt images. Residual advisories are documented; passing CI is not a security certification.
+
 This is a local educational simulation. It does not represent a real client engagement, independent audit opinion, regulatory certification, or a guaranteed employment outcome. Synthetic records and observed lab results must remain clearly distinguished.
 
 Passing the current automated suite is evidence for the implemented baseline, not evidence that all

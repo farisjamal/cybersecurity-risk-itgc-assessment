@@ -7,7 +7,6 @@ on:
 
 permissions:
   contents: read
-  pull-requests: read
 
 concurrency:
   group: ci-${{ github.ref }}
@@ -18,8 +17,8 @@ jobs:
     name: Lint, unit, schema, links
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
         with:
           version: "0.11.26"
           enable-cache: true
@@ -35,6 +34,8 @@ jobs:
         run: uv run python -m cyber_assess dependencies audit --json
       - name: Tests and acceptance paths with coverage
         run: uv run pytest -m "not slow" --cov-report=term-missing --cov-report=xml
+      - name: Inspect tracked and staged publication payload
+        run: uv run python -m cyber_assess publication-check --json
       - name: Validate canonical assessment
         run: |
           uv run python -m cyber_assess assess validate --engagement ENG-001
@@ -44,7 +45,7 @@ jobs:
         run: ./scripts/check-links.ps1
       - name: Upload coverage result
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: coverage-xml
           path: coverage.xml
@@ -54,21 +55,6 @@ jobs:
   postgres:
     name: PostgreSQL integration
     runs-on: ubuntu-24.04
-    services:
-      postgres:
-        image: postgres:17.6-alpine3.22
-        env:
-          POSTGRES_DB: bank_lab_test
-          POSTGRES_USER: bank_lab_test
-          POSTGRES_PASSWORD: ci-ephemeral-password
-          POSTGRES_INITDB_ARGS: --auth-host=scram-sha-256
-        ports:
-          - 5432:5432
-        options: >-
-          --health-cmd "pg_isready -U bank_lab_test -d bank_lab_test"
-          --health-interval 5s
-          --health-timeout 3s
-          --health-retries 12
     env:
       BANK_LAB_ENVIRONMENT: test
       BANK_LAB_DATABASE_URL: postgresql+asyncpg://bank_lab_test:ci-ephemeral-password@127.0.0.1:5432/bank_lab_test
@@ -76,12 +62,30 @@ jobs:
       BANK_LAB_COOKIE_SECURE: "false"
       CYBER_ASSESS_DATABASE_URL: postgresql+asyncpg://bank_lab_test:ci-ephemeral-password@127.0.0.1:5432/bank_lab_test
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
         with:
           version: "0.11.26"
           enable-cache: true
       - run: uv sync --frozen --all-groups
+      - name: Start maintained PostgreSQL image
+        run: |
+          docker build --pull --no-cache -f config/Dockerfile.postgres -t db-integration-ci .
+          docker run -d --name db-integration-ci \
+            -e POSTGRES_DB=bank_lab_test -e POSTGRES_USER=bank_lab_test \
+            -e POSTGRES_PASSWORD=ci-ephemeral-password \
+            -e POSTGRES_INITDB_ARGS=--auth-host=scram-sha-256 \
+            -p 127.0.0.1:5432:5432 \
+            --health-cmd 'pg_isready -U bank_lab_test -d bank_lab_test' \
+            --health-interval 5s --health-timeout 3s --health-retries 12 db-integration-ci
+          for attempt in $(seq 1 30); do
+            if [ "$(docker inspect --format '{{.State.Health.Status}}' db-integration-ci)" = healthy ]; then
+              exit 0
+            fi
+            sleep 2
+          done
+          echo 'PostgreSQL did not become healthy.' >&2
+          exit 1
       - name: Integration and scenario acceptance
         run: uv run pytest -m "integration or acceptance" --no-cov
 
@@ -94,7 +98,7 @@ jobs:
       POSTGRES_PASSWORD: compose-validation-placeholder
       BANK_LAB_SESSION_PEPPER: compose-validation-placeholder-at-least-32-bytes
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Validate effective Compose model
         run: docker compose config --quiet
       - name: Assert loopback app and unexposed database
@@ -108,8 +112,8 @@ jobs:
     name: Windows PowerShell path
     runs-on: windows-2025
     steps:
-      - uses: actions/checkout@v4
-      - uses: astral-sh/setup-uv@v6
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - uses: astral-sh/setup-uv@d0cc045d04ccac9d8b7881df0226f9e82c39688e # v6
         with:
           version: "0.11.26"
           enable-cache: true
@@ -124,13 +128,48 @@ jobs:
       - name: Portable tests and coverage
         run: uv run pytest -m "not slow"
 
+  images:
+    name: Container vulnerabilities (fixable high/critical)
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+      - name: Build patched application and database images
+        run: |
+          docker build --pull --no-cache -t lab-security-ci .
+          docker build --pull --no-cache -f config/Dockerfile.postgres -t db-security-ci .
+          mkdir -p runtime/image-audit
+          docker save -o runtime/image-audit/app.tar lab-security-ci
+          docker save -o runtime/image-audit/db.tar db-security-ci
+      - name: Block fixable high or critical image vulnerabilities
+        run: |
+          for image in app db; do
+            docker run --rm \
+              --mount "type=bind,source=$PWD/runtime/image-audit,target=/reports" \
+              aquasec/trivy@sha256:af6acf9a6b85dfe389a1941505c0ce9efef52a4719635e1a962f022a3d855daa \
+              image --input "/reports/$image.tar" --cache-dir /reports/cache \
+              --scanners vuln --severity HIGH,CRITICAL --ignore-unfixed --exit-code 1 \
+              --format json --output "/reports/$image.json"
+          done
+      - name: Upload image advisory results
+        if: always()
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
+        with:
+          name: image-advisories
+          path: runtime/image-audit/*.json
+          if-no-files-found: warn
+          retention-days: 14
+
   secrets:
     name: Secret scanning
     runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
         with:
           fetch-depth: 0
-      - uses: gitleaks/gitleaks-action@v2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      - name: Scan full history with redaction and archive traversal
+        run: >-
+          docker run --rm --network none
+          --mount "type=bind,source=$PWD,target=/repo,readonly"
+          ghcr.io/gitleaks/gitleaks@sha256:c00b6bd0aeb3071cbcb79009cb16a60dd9e0a7c60e2be9ab65d25e6bc8abbb7f
+          git /repo --log-opts=--all --redact=100 --max-archive-depth=5
+          --ignore-gitleaks-allow --no-banner

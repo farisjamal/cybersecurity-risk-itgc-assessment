@@ -1,5 +1,0 @@
-finding_id,control_ids,risk_rating,finding_status,owner_role,effort,target_date,action_id,action_status,retest_id,retest_result,closure_decision
-FIND-S01-001,IAM-02,20,closed_verified,simulated_system_administrator,small,2026-10-09,ACT-S01-001,implemented,RETEST-S01-001,passed,accept_closure
-FIND-S03-001,IAM-04,16,closed_verified,simulated_system_administrator,small,2026-10-10,ACT-S03-001,implemented,RETEST-S03-001,passed,accept_closure
-FIND-S05-001,OPS-01,20,closed_verified,simulated_system_administrator,small,2026-10-10,ACT-S05-001,implemented,RETEST-S05-001,passed,accept_closure
-FIND-S06-001,OPS-03,16,closed_verified,simulated_system_administrator,small,2026-10-10,ACT-S06-001,implemented,RETEST-S06-001,passed,accept_closure

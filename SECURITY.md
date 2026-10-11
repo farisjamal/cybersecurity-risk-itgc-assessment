@@ -20,3 +20,17 @@ evidence. No response-time commitment is implied for this independently maintain
 
 Only the current default branch is maintained. Local exception scenarios are intentionally bounded
 test fixtures; running them outside their project-scoped lab is unsupported.
+
+## Before source publication
+
+Include `.gitignore`; exclude `.env`, real credentials, local backups, captures and generated
+document/evidence bundles. Only placeholder `.env.example` settings belong in source control.
+Run `uv run python -m cyber_assess publication-check --json`, full-history Gitleaks, dependency
+audit and image checks. A tracked file is not protected by a later ignore rule.
+
+Read the [local publication review](docs/security-publication-review.md) for scope, remediation
+and residual advisories. Rebuild with `docker compose build --pull --no-cache` to refresh
+distribution patches. Scan new images before replacing services and preserve database volumes.
+
+If a real credential reaches Git history or a shared artifact, revoke/rotate it before removing
+files or rewriting history. Never post the credential in a public issue or scan log.

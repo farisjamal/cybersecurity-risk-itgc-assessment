@@ -40,7 +40,10 @@ services:
       retries: 6
 
   db:
-    image: postgres:17.6-alpine3.22
+    build:
+      context: .
+      dockerfile: config/Dockerfile.postgres
+    image: cybersecurity-itgc-postgres:17.11
     restart: unless-stopped
     environment:
       POSTGRES_DB: ${POSTGRES_DB:?Set POSTGRES_DB in .env}

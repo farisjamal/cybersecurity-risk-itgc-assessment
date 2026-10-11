@@ -1,5 +1,13 @@
-# syntax=docker/dockerfile:1.7
-FROM python:3.12.11-slim-bookworm AS builder
+# syntax=docker/dockerfile:1.7@sha256:a57df69d0ea827fb7266491f2813635de6f17269be881f696fbfdf2d83dda33e
+FROM python:3.12.14-slim-trixie@sha256:f77ac9e44ae96ef2c90b8053ea08c31f8be030f824196b0ae4db6d462c84e51f AS patched-base
+
+# Refresh distribution security fixes when this layer is rebuilt without cache.
+RUN apt-get update \
+    && apt-get upgrade --yes --no-install-recommends \
+    && rm -rf /var/lib/apt/lists/* \
+    && python -m pip install --no-cache-dir pip==26.2.1
+
+FROM patched-base AS builder
 
 ARG UV_VERSION=0.11.26
 ENV UV_COMPILE_BYTECODE=1 \
@@ -23,7 +31,7 @@ COPY PRD.md ./PRD.md
 COPY templates ./templates
 CMD ["python", "-m", "pytest", "-q", "-p", "no:cacheprovider"]
 
-FROM python:3.12.11-slim-bookworm AS runtime
+FROM patched-base AS runtime
 
 ENV PATH="/opt/venv/bin:${PATH}" \
     PYTHONDONTWRITEBYTECODE=1 \
@@ -33,7 +41,9 @@ ENV PATH="/opt/venv/bin:${PATH}" \
     APP_PORT=8000
 
 RUN groupadd --system --gid 10001 banklab \
-    && useradd --system --uid 10001 --gid banklab --home-dir /nonexistent banklab
+    && useradd --system --uid 10001 --gid banklab --home-dir /nonexistent banklab \
+    && /usr/local/bin/python -m pip uninstall --yes pip \
+    && rm -rf /usr/local/lib/python3.12/ensurepip
 WORKDIR /app
 COPY --from=builder /opt/venv /opt/venv
 COPY --chown=banklab:banklab src ./src

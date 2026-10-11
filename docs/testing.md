@@ -70,13 +70,24 @@ under `fixtures/evidence/completion` with hashes. Historical snapshots remain in
 
 ## CI gates
 
+The subsequent source-security review added seventeen payload regression cases: 137 tests pass
+on Windows Python 3.12.14 (85.43% coverage) and isolated Linux Python 3.12.14/PostgreSQL
+(85.22%). These runs do not replace the earlier recorded recovery/scenario observations or
+close the outstanding owner and substantive assessment review.
+
 | Job | Purpose |
 | --- | --- |
 | Lint, unit, schema, links | Locked install, Ruff, coverage, assessment validation, local-link integrity |
 | PostgreSQL integration | Database-backed integration and scenario acceptance with ephemeral CI credentials |
 | Compose containment | Effective model is valid, app is loopback-published, database has no host port |
 | Windows PowerShell path | PowerShell parsing, link validation, locked unit tests on Windows |
-| Secret scanning | Gitleaks scan of repository history and current content |
+| Container vulnerabilities | Rebuild patched images; block fixable High/Critical advisories |
+| Secret scanning | Digest-pinned Gitleaks scan of all reachable history with redaction |
+
+The quality gate also checks tracked working files and staged bytes with
+`uv run python -m cyber_assess publication-check --json`. Generated bundles remain local;
+see the [security publication review](security-publication-review.md) for historical archive
+inspection and residual image advisories.
 
 GitHub-hosted Windows validation does not prove Docker Desktop behavior on the owner's laptop. AT-19
 requires a recorded fresh local Windows run plus Linux CI evidence before final release.

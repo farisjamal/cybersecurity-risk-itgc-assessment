@@ -43,11 +43,8 @@ try {
     }
 
     if (Test-Path ".git") {
-        $forbidden = @(git -c "safe.directory=$root" ls-files | Where-Object {
-            $_ -match '(^|/)(\.env|runtime|outputs)/' -or $_ -match '\.(pem|key)$'
-        })
-        if ($forbidden.Count -gt 0) {
-            throw "Repository hygiene failed; forbidden tracked paths: $($forbidden -join ', ')"
+        Invoke-Gate "Tracked publication payload" {
+            uv run python -m cyber_assess publication-check --json
         }
     }
     Write-Host "`nAll requested repository gates passed." -ForegroundColor Green

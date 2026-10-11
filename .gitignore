@@ -4,6 +4,38 @@
 !.env.example
 *.pem
 *.key
+*.pfx
+*.p12
+*.jks
+*.keystore
+.aws/
+.ssh/
+.azure/
+.kube/
+.npmrc
+.pypirc
+credentials.json
+initial-credentials.json
+secrets.toml
+*.db
+*.sqlite
+*.sqlite3
+*.sql
+*.dump
+*.har
+*.pcap
+*.pcapng
+# Publish reviewed document/archive bundles separately from the source repository.
+*.zip
+*.7z
+*.rar
+*.tar
+*.gz
+*.tgz
+*.pdf
+*.xlsx
+*.docx
+*.pptx
 
 # Python
 __pycache__/

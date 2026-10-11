@@ -1,0 +1,27 @@
+FROM postgres:17.11-alpine3.24@sha256:b0f9560a2de083e2cc7382e75f808c7381a32852a7ec49117deedb300e552b24 AS maintained
+
+# Keep PostgreSQL on major 17 while refreshing Alpine distribution security fixes.
+# Replace the bundled Go helper with Alpine's small C privilege-drop helper.
+# su-exec accepts the user/group and exec arguments used by the official entrypoint.
+# Keep its expected path, and assert both privilege dropping and invalid-user failure.
+RUN apk upgrade --no-cache \
+    && apk add --no-cache su-exec \
+    && rm /usr/local/bin/gosu \
+    && cp /sbin/su-exec /usr/local/bin/gosu \
+    && gosu postgres sh -c 'test "$(id -u)" -ne 0' \
+    && ! gosu nonexistent-security-probe-user true
+
+# Publish only the maintained filesystem, excluding obsolete binaries in base layers.
+# Restore the official PostgreSQL runtime configuration explicitly.
+FROM scratch
+COPY --from=maintained / /
+ENV PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin \
+    LANG=en_US.utf8 \
+    PG_MAJOR=17 \
+    PG_VERSION=17.11 \
+    PGDATA=/var/lib/postgresql/data
+VOLUME /var/lib/postgresql/data
+EXPOSE 5432
+STOPSIGNAL SIGINT
+ENTRYPOINT ["docker-entrypoint.sh"]
+CMD ["postgres"]
