@@ -100,6 +100,10 @@ def test_s01_workpaper_remains_identical_to_the_frozen_snapshot() -> None:
 
 
 def test_complete_workpaper_set_passes_cross_record_validation() -> None:
+    for record in load_models(ROOT / "assessment" / "evidence", Evidence):
+        if record.sensitivity == "sanitized" and record.media_type == "application/json":
+            # Git checks out JSON as LF; recorded byte hashes must survive that conversion.
+            assert b"\r\n" not in (ROOT / record.path).read_bytes()
     result = validate_assessment(ROOT, "ENG-001")
 
     assert result.valid, result.errors

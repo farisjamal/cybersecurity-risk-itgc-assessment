@@ -25,6 +25,7 @@ from bank_lab.models import (
     ChangeRecord,
     ChangeStatus,
     Decision,
+    EmploymentStatus,
     LoginFailure,
     Role,
     ServiceRequest,
@@ -408,6 +409,12 @@ class AccessService:
         user = await self.db.get(User, request.user_id)
         if user is None:
             raise NotFoundError("User not found")
+        if user.employment_status != EmploymentStatus.EMPLOYED:
+            raise ConflictError("Access cannot be applied to a terminated employee")
+        if user.join_date > utcnow().date():
+            raise ConflictError("Access cannot be activated before the employment start date")
+        if user.leave_date is not None and user.leave_date <= utcnow().date():
+            raise ConflictError("Access cannot be activated after the employment end date")
         previous = user.role
         user.role = request.requested_role
         user.account_status = AccountStatus.ACTIVE

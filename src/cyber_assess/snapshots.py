@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import json
-import os
 import shutil
 import tempfile
 from dataclasses import dataclass
@@ -14,6 +13,7 @@ from cyber_assess import __version__
 from cyber_assess.errors import IntegrityError, InvalidInputError
 from cyber_assess.integrity import resolve_within, sha256_file, verify_file
 from cyber_assess.models import Evidence, ExportSnapshot, Finding, Retest, SnapshotSource
+from cyber_assess.publication import publish_directory
 from cyber_assess.validation import validate_assessment
 from cyber_assess.yamlio import dump_yaml, load_model, load_models
 
@@ -160,7 +160,8 @@ def create_sanitized_export(
         (temporary / "manifest.json").write_text(
             json.dumps(manifest, indent=2) + "\n", encoding="utf-8"
         )
-        os.replace(temporary, destination)
+        verify_snapshot(workspace, snapshot_id)
+        publish_directory(temporary, destination)
     except BaseException:
         shutil.rmtree(temporary, ignore_errors=True)
         raise

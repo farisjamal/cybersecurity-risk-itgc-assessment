@@ -1,0 +1,37 @@
+schema_version: "1.0"
+id: WP-IAM-02-S01
+control_id: IAM-02
+control_version: "1.0"
+risk_ids: [RISK-IAM-02]
+criteria: [POL-02, RMIT-10.53, RMIT-10.54]
+procedure_version: "1.0"
+test_type: combined
+test_period: 2026-08-01/2026-08-30
+population_source: fixtures/evidence/s01/leaver_population.json
+population_hash: 30e739fd559206358538085f6eef29e6f65f38f609166dbcaa2de7683b62bfc3
+population_count: 3
+population_query: Synthetic identities with leave_date on or before 2026-08-30.
+selected_record_ids: [USR-007, USR-014, USR-021]
+selection_rationale: POL-02 and the methodology require testing every leaver.
+sample_seed: 42
+exclusions: []
+expected_behavior: Every terminated identity rejects new login and has no reusable session.
+actual_results: >-
+  The fixture replay observed that USR-021 accepted a new login and its retained session;
+  the other two leaver records had inactive accounts.
+evidence_ids: [EVID-POL-02, EVID-S01-POPULATION, EVID-S01-BASELINE]
+exceptions:
+  - USR-021 retained login and active-session access after its synthetic termination date.
+limitations:
+  - The test is a local deterministic fixture replay, not enterprise directory evidence.
+  - The developer prepared and self-reviewed the workpaper.
+design_status: adequate
+operating_status: exceptions_identified
+assessor_decision: Raise FIND-S01-001 because the observed exception breaches POL-02.
+preparer: Faris
+review_mode: self_reviewed
+review_comments:
+  - Confirmed the policy alone was not used as proof of operation.
+  - Preserved the failed baseline observation after remediation.
+prepared_at: 2026-09-25T14:10:00Z
+reviewed_at: 2026-09-25T14:20:00Z

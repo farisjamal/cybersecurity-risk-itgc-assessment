@@ -14,8 +14,10 @@ from pydantic import ValidationError
 from cyber_assess.adapters import route_scenario, run_compose, seed_lab
 from cyber_assess.artifacts import create_final_artifacts
 from cyber_assess.bootstrap import initialize_engagement
+from cyber_assess.dependency_audit import audit_dependencies
 from cyber_assess.doctor import run_doctor
 from cyber_assess.errors import AssessmentError, IntegrityError, InvalidInputError
+from cyber_assess.readiness import release_readiness
 from cyber_assess.reporting import create_deliverable_inputs
 from cyber_assess.snapshots import create_sanitized_export, create_snapshot, verify_snapshot
 from cyber_assess.validation import validate_assessment, validate_findings
@@ -36,6 +38,15 @@ def build_parser() -> argparse.ArgumentParser:
 
     doctor = subcommands.add_parser("doctor", help="check local prerequisites without secrets")
     _add_json(doctor)
+
+    readiness = subcommands.add_parser(
+        "release-check", help="check recorded final release criteria"
+    )
+    readiness.add_argument("--engagement", required=True)
+    _add_json(readiness)
+    dependencies = subcommands.add_parser("dependencies")
+    dependency_commands = dependencies.add_subparsers(dest="dependency_action", required=True)
+    _add_json(dependency_commands.add_parser("audit"))
 
     init = subcommands.add_parser("init", help="initialize canonical assessment records")
     init.add_argument("--engagement", required=True)
@@ -120,6 +131,12 @@ def _workspace(args: argparse.Namespace, default_workspace: Path | None) -> Path
 
 
 def _dispatch(args: argparse.Namespace, workspace: Path) -> tuple[int, dict[str, Any]]:
+    if args.command == "release-check":
+        result = release_readiness(workspace, args.engagement)
+        return (0 if result["ready"] else EXIT_INTEGRITY_FAILURE), result
+    if args.command == "dependencies":
+        result = audit_dependencies(workspace)
+        return (0 if result["status"] == "clean" else EXIT_EXECUTION_FAILURE), result
     if args.command == "doctor":
         doctor_result = run_doctor(workspace)
         return (0 if doctor_result.ok else EXIT_MISSING_PREREQUISITE), doctor_result.as_dict()

@@ -62,13 +62,13 @@ def test_compose_actions_use_the_fixed_project_scope(
     assert result == {
         "status": "completed",
         "action": action,
-        "project": "example-bank-lab",
+        "project": "cybersecurity-itgc-lab",
     }
     assert commands[0][:6] == [
         "docker",
         "compose",
         "-p",
-        "example-bank-lab",
+        "cybersecurity-itgc-lab",
         "-f",
         "compose.yaml",
     ]
@@ -89,6 +89,31 @@ def test_app_command_requires_a_json_object(
     monkeypatch.setattr(adapters, "_run", lambda *_args, **_kwargs: "not-json")
     with pytest.raises(MissingPrerequisiteError, match="invalid JSON"):
         adapters._app_command(tmp_path, ["seed"])
+
+
+def test_scenarios_use_a_separate_compose_project_and_no_default_exec(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    commands: list[list[str]] = []
+    monkeypatch.setattr(adapters, "_docker", lambda: "docker")
+    monkeypatch.setattr(
+        adapters,
+        "_run",
+        lambda _workspace, command, **_kwargs: commands.append(command) or '{"run_id":"RUN-TEST"}',
+    )
+    resource = "cyber-assess-scenario-s01-0123456789ab"
+    adapters._scenario_command(tmp_path, ["scenario", "run"], resource, "S01")
+    assert commands[0][3] == resource
+    assert "config/compose.scenario.yaml" in commands[0]
+    assert "run" in commands[0] and "--no-deps" in commands[0]
+    assert "exec" not in commands[0]
+    assert "BANK_LAB_SCENARIO_ID=S01" in commands[0]
+    adapters._stop_scenario(tmp_path, resource)
+    assert commands[1][3] == resource
+    assert commands[1][-3:] == ["down", "--timeout", "10"]
+    assert "--volumes" not in commands[1]
+    with pytest.raises(InvalidInputError, match="project allowlist"):
+        adapters._scenario_compose(adapters.LAB_PROJECT)
 
     monkeypatch.setattr(adapters, "_run", lambda *_args, **_kwargs: "[]")
     with pytest.raises(MissingPrerequisiteError, match="non-object"):
@@ -122,11 +147,15 @@ def test_scenario_chain_requires_owned_baseline_and_remediation(
     )
     calls: list[list[str]] = []
 
-    def app_command(_workspace: Path, arguments: list[str]) -> dict[str, object]:
+    def app_command(
+        _workspace: Path, arguments: list[str], _resource: str, _scenario: str
+    ) -> dict[str, object]:
         calls.append(arguments)
         return next(responses)
 
-    monkeypatch.setattr(adapters, "_app_command", app_command)
+    monkeypatch.setattr(adapters, "_scenario_command", app_command)
+    monkeypatch.setattr(adapters, "_prepare_scenario", lambda *_args: None)
+    monkeypatch.setattr(adapters, "_stop_scenario", lambda *_args: None)
     baseline = adapters.route_scenario(tmp_path, "run", "S01")
     remediation = adapters.route_scenario(
         tmp_path, "remediate", "S01", baseline_run_id=str(baseline["run_id"])
@@ -172,7 +201,8 @@ def test_scenario_router_rejects_invalid_or_inconsistent_runs(
     with pytest.raises(InvalidInputError, match="completed remediation"):
         adapters.route_scenario(tmp_path, "retest", "S01", baseline_run_id="BASELINE")
 
-    monkeypatch.setattr(adapters, "_app_command", lambda *_args: {"run_id": "DUPLICATE"})
+    monkeypatch.setattr(adapters, "_scenario_command", lambda *_args: {"run_id": "DUPLICATE"})
+    monkeypatch.setattr(adapters, "_prepare_scenario", lambda *_args: None)
     (run_dir / "DUPLICATE.json").write_text("{}", encoding="utf-8")
     with pytest.raises(FileExistsError, match="already exists"):
         adapters.route_scenario(tmp_path, "run", "S01")

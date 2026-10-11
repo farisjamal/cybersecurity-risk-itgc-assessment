@@ -1,0 +1,381 @@
+{
+  "recorded_at": "2026-10-11T10:27:23.307410+00:00",
+  "source_population_unchanged": true,
+  "default_lab_summary": {
+    "business_digest": "88b8d42a826e6d0c78dcae4fe7a69c4dc2fda77bd4e7df309a7d61739971d227",
+    "counts": {
+      "access_reviews": 1,
+      "backup_history": 9,
+      "changes": 12,
+      "incidents": 4,
+      "service_requests": 51,
+      "users": 24
+    },
+    "seeded": false
+  },
+  "scenario_count": 6,
+  "scenario_runs": [
+    {
+      "scenario_id": "S01",
+      "baseline": {
+        "schema_version": "1.0",
+        "run_id": "aa79f798-da02-4bed-8038-abc462d3dd96",
+        "scenario_id": "S01",
+        "action": "run",
+        "baseline_run_id": null,
+        "resource_name": "cyber-assess-scenario-s01-594900072c02",
+        "recorded_at": "2026-10-11T10:25:01.368463Z",
+        "result": {
+          "observations": {
+            "access_retained": true,
+            "session_id": "471f60c8-58cf-4ed6-9d42-883f06e342be",
+            "user_id": "USR-017"
+          },
+          "run_id": "aa79f798-da02-4bed-8038-abc462d3dd96",
+          "scenario_id": "S01",
+          "status": "frozen"
+        }
+      },
+      "remediation": {
+        "schema_version": "1.0",
+        "run_id": "2d63d5a7-5253-4ed9-b0cd-660fa3a607aa",
+        "scenario_id": "S01",
+        "action": "remediate",
+        "baseline_run_id": "aa79f798-da02-4bed-8038-abc462d3dd96",
+        "resource_name": "cyber-assess-scenario-s01-594900072c02",
+        "recorded_at": "2026-10-11T10:25:06.810456Z",
+        "result": {
+          "observations": {
+            "baseline_run_id": "aa79f798-da02-4bed-8038-abc462d3dd96",
+            "sessions_revoked": 1,
+            "user_id": "USR-017"
+          },
+          "run_id": "2d63d5a7-5253-4ed9-b0cd-660fa3a607aa",
+          "scenario_id": "S01",
+          "status": "completed"
+        }
+      },
+      "retest": {
+        "schema_version": "1.0",
+        "run_id": "4a58457a-7d23-4ad9-9be8-b21f9f2c41d0",
+        "scenario_id": "S01",
+        "action": "retest",
+        "baseline_run_id": "aa79f798-da02-4bed-8038-abc462d3dd96",
+        "resource_name": "cyber-assess-scenario-s01-594900072c02",
+        "recorded_at": "2026-10-11T10:25:13.306827Z",
+        "result": {
+          "observations": {
+            "active_session_count": 0,
+            "login_allowed": false,
+            "passed": true
+          },
+          "run_id": "4a58457a-7d23-4ad9-9be8-b21f9f2c41d0",
+          "scenario_id": "S01",
+          "status": "completed"
+        }
+      }
+    },
+    {
+      "scenario_id": "S02",
+      "baseline": {
+        "schema_version": "1.0",
+        "run_id": "140e1435-7adc-4bba-9871-e62a18a17a32",
+        "scenario_id": "S02",
+        "action": "run",
+        "baseline_run_id": null,
+        "resource_name": "cyber-assess-scenario-s02-630cee694ac9",
+        "recorded_at": "2026-10-11T10:25:32.113841Z",
+        "result": {
+          "observations": {
+            "unapproved_role": "administrator",
+            "user_id": "USR-007"
+          },
+          "run_id": "140e1435-7adc-4bba-9871-e62a18a17a32",
+          "scenario_id": "S02",
+          "status": "frozen"
+        }
+      },
+      "remediation": {
+        "schema_version": "1.0",
+        "run_id": "56f13bc3-1e51-4c34-b0e2-2129d0dc238c",
+        "scenario_id": "S02",
+        "action": "remediate",
+        "baseline_run_id": "140e1435-7adc-4bba-9871-e62a18a17a32",
+        "resource_name": "cyber-assess-scenario-s02-630cee694ac9",
+        "recorded_at": "2026-10-11T10:25:36.269663Z",
+        "result": {
+          "observations": {
+            "baseline_run_id": "140e1435-7adc-4bba-9871-e62a18a17a32",
+            "role": "staff",
+            "user_id": "USR-007"
+          },
+          "run_id": "56f13bc3-1e51-4c34-b0e2-2129d0dc238c",
+          "scenario_id": "S02",
+          "status": "completed"
+        }
+      },
+      "retest": {
+        "schema_version": "1.0",
+        "run_id": "0cc2f379-36fc-4043-80ac-dc6576f0130a",
+        "scenario_id": "S02",
+        "action": "retest",
+        "baseline_run_id": "140e1435-7adc-4bba-9871-e62a18a17a32",
+        "resource_name": "cyber-assess-scenario-s02-630cee694ac9",
+        "recorded_at": "2026-10-11T10:25:41.437682Z",
+        "result": {
+          "observations": {
+            "actual_role": "staff",
+            "passed": true
+          },
+          "run_id": "0cc2f379-36fc-4043-80ac-dc6576f0130a",
+          "scenario_id": "S02",
+          "status": "completed"
+        }
+      }
+    },
+    {
+      "scenario_id": "S03",
+      "baseline": {
+        "schema_version": "1.0",
+        "run_id": "a5c15d36-1c21-4054-bc2c-7c1b0fbdc338",
+        "scenario_id": "S03",
+        "action": "run",
+        "baseline_run_id": null,
+        "resource_name": "cyber-assess-scenario-s03-8d0919230884",
+        "recorded_at": "2026-10-11T10:25:57.058714Z",
+        "result": {
+          "observations": {
+            "password_only_privileged_allowed": true,
+            "scope": "cyber-assess-scenario-s03-8d0919230884"
+          },
+          "run_id": "a5c15d36-1c21-4054-bc2c-7c1b0fbdc338",
+          "scenario_id": "S03",
+          "status": "frozen"
+        }
+      },
+      "remediation": {
+        "schema_version": "1.0",
+        "run_id": "18731278-69d6-433d-928f-961709d6a473",
+        "scenario_id": "S03",
+        "action": "remediate",
+        "baseline_run_id": "a5c15d36-1c21-4054-bc2c-7c1b0fbdc338",
+        "resource_name": "cyber-assess-scenario-s03-8d0919230884",
+        "recorded_at": "2026-10-11T10:26:00.793855Z",
+        "result": {
+          "observations": {
+            "baseline_run_id": "a5c15d36-1c21-4054-bc2c-7c1b0fbdc338",
+            "privileged_mfa_enforced": true
+          },
+          "run_id": "18731278-69d6-433d-928f-961709d6a473",
+          "scenario_id": "S03",
+          "status": "completed"
+        }
+      },
+      "retest": {
+        "schema_version": "1.0",
+        "run_id": "e0f2d9e0-ce13-40e1-9928-f29c5365e9c3",
+        "scenario_id": "S03",
+        "action": "retest",
+        "baseline_run_id": "a5c15d36-1c21-4054-bc2c-7c1b0fbdc338",
+        "resource_name": "cyber-assess-scenario-s03-8d0919230884",
+        "recorded_at": "2026-10-11T10:26:05.667199Z",
+        "result": {
+          "observations": {
+            "mfa_session_allowed": true,
+            "passed": true,
+            "password_only_denied": true
+          },
+          "run_id": "e0f2d9e0-ce13-40e1-9928-f29c5365e9c3",
+          "scenario_id": "S03",
+          "status": "completed"
+        }
+      }
+    },
+    {
+      "scenario_id": "S04",
+      "baseline": {
+        "schema_version": "1.0",
+        "run_id": "eb4ba49d-4f23-4f9d-a96c-5141f1a1bb57",
+        "scenario_id": "S04",
+        "action": "run",
+        "baseline_run_id": null,
+        "resource_name": "cyber-assess-scenario-s04-9a436da41aee",
+        "recorded_at": "2026-10-11T10:26:21.160562Z",
+        "result": {
+          "observations": {
+            "change_id": "1f89c771-03f4-4d07-93e6-ab4167991c97",
+            "self_approved": true,
+            "test_evidence": null
+          },
+          "run_id": "eb4ba49d-4f23-4f9d-a96c-5141f1a1bb57",
+          "scenario_id": "S04",
+          "status": "frozen"
+        }
+      },
+      "remediation": {
+        "schema_version": "1.0",
+        "run_id": "22ca98a9-bb57-4022-b844-54bc133002d1",
+        "scenario_id": "S04",
+        "action": "remediate",
+        "baseline_run_id": "eb4ba49d-4f23-4f9d-a96c-5141f1a1bb57",
+        "resource_name": "cyber-assess-scenario-s04-9a436da41aee",
+        "recorded_at": "2026-10-11T10:26:25.393127Z",
+        "result": {
+          "observations": {
+            "baseline_run_id": "eb4ba49d-4f23-4f9d-a96c-5141f1a1bb57",
+            "change_id": "1f89c771-03f4-4d07-93e6-ab4167991c97",
+            "separation_restored": true
+          },
+          "run_id": "22ca98a9-bb57-4022-b844-54bc133002d1",
+          "scenario_id": "S04",
+          "status": "completed"
+        }
+      },
+      "retest": {
+        "schema_version": "1.0",
+        "run_id": "1b64fb10-c93b-4165-ac67-ab0610a3e012",
+        "scenario_id": "S04",
+        "action": "retest",
+        "baseline_run_id": "eb4ba49d-4f23-4f9d-a96c-5141f1a1bb57",
+        "resource_name": "cyber-assess-scenario-s04-9a436da41aee",
+        "recorded_at": "2026-10-11T10:26:29.995937Z",
+        "result": {
+          "observations": {
+            "passed": true,
+            "separate_approver": true,
+            "test_evidence_present": true
+          },
+          "run_id": "1b64fb10-c93b-4165-ac67-ab0610a3e012",
+          "scenario_id": "S04",
+          "status": "completed"
+        }
+      }
+    },
+    {
+      "scenario_id": "S05",
+      "baseline": {
+        "schema_version": "1.0",
+        "run_id": "79c0abf8-07e0-44c2-8b9d-363873b8f7d4",
+        "scenario_id": "S05",
+        "action": "run",
+        "baseline_run_id": null,
+        "resource_name": "cyber-assess-scenario-s05-e28e7e1a60c2",
+        "recorded_at": "2026-10-11T10:26:45.378043Z",
+        "result": {
+          "observations": {
+            "backup_id": "52462e81-28fe-4d6e-888e-7ff98741923d",
+            "reported_success": true,
+            "valid": false
+          },
+          "run_id": "79c0abf8-07e0-44c2-8b9d-363873b8f7d4",
+          "scenario_id": "S05",
+          "status": "frozen"
+        }
+      },
+      "remediation": {
+        "schema_version": "1.0",
+        "run_id": "9f4eca17-bc36-43c3-9eef-28c1de207f15",
+        "scenario_id": "S05",
+        "action": "remediate",
+        "baseline_run_id": "79c0abf8-07e0-44c2-8b9d-363873b8f7d4",
+        "resource_name": "cyber-assess-scenario-s05-e28e7e1a60c2",
+        "recorded_at": "2026-10-11T10:26:49.252339Z",
+        "result": {
+          "observations": {
+            "baseline_run_id": "79c0abf8-07e0-44c2-8b9d-363873b8f7d4",
+            "failed_backup_preserved": "52462e81-28fe-4d6e-888e-7ff98741923d",
+            "validation_enforced": true
+          },
+          "run_id": "9f4eca17-bc36-43c3-9eef-28c1de207f15",
+          "scenario_id": "S05",
+          "status": "completed"
+        }
+      },
+      "retest": {
+        "schema_version": "1.0",
+        "run_id": "4238f87f-1589-40de-90aa-74a3dfd7a110",
+        "scenario_id": "S05",
+        "action": "retest",
+        "baseline_run_id": "79c0abf8-07e0-44c2-8b9d-363873b8f7d4",
+        "resource_name": "cyber-assess-scenario-s05-e28e7e1a60c2",
+        "recorded_at": "2026-10-11T10:26:54.125510Z",
+        "result": {
+          "observations": {
+            "corrupt_backup_rejected": true,
+            "failed_original_preserved": true,
+            "passed": true
+          },
+          "run_id": "4238f87f-1589-40de-90aa-74a3dfd7a110",
+          "scenario_id": "S05",
+          "status": "completed"
+        }
+      }
+    },
+    {
+      "scenario_id": "S06",
+      "baseline": {
+        "schema_version": "1.0",
+        "run_id": "27f59f5a-be61-4a63-aa45-705e0a229b94",
+        "scenario_id": "S06",
+        "action": "run",
+        "baseline_run_id": null,
+        "resource_name": "cyber-assess-scenario-s06-10645c8f2e69",
+        "recorded_at": "2026-10-11T10:27:09.502171Z",
+        "result": {
+          "observations": {
+            "action": "user.deactivated",
+            "event_emitted": false,
+            "user_id": "USR-007"
+          },
+          "run_id": "27f59f5a-be61-4a63-aa45-705e0a229b94",
+          "scenario_id": "S06",
+          "status": "frozen"
+        }
+      },
+      "remediation": {
+        "schema_version": "1.0",
+        "run_id": "aba67192-75fa-42f1-bc52-5aa87f6279b6",
+        "scenario_id": "S06",
+        "action": "remediate",
+        "baseline_run_id": "27f59f5a-be61-4a63-aa45-705e0a229b94",
+        "resource_name": "cyber-assess-scenario-s06-10645c8f2e69",
+        "recorded_at": "2026-10-11T10:27:13.319862Z",
+        "result": {
+          "observations": {
+            "baseline_run_id": "27f59f5a-be61-4a63-aa45-705e0a229b94",
+            "event_emitted": true,
+            "event_id": "f45ed880-fac2-49a9-bbc6-e7fce6cde1fc",
+            "user_id": "USR-007"
+          },
+          "run_id": "aba67192-75fa-42f1-bc52-5aa87f6279b6",
+          "scenario_id": "S06",
+          "status": "completed"
+        }
+      },
+      "retest": {
+        "schema_version": "1.0",
+        "run_id": "d1c7c1fd-697d-4984-9680-8614e62e65d5",
+        "scenario_id": "S06",
+        "action": "retest",
+        "baseline_run_id": "27f59f5a-be61-4a63-aa45-705e0a229b94",
+        "resource_name": "cyber-assess-scenario-s06-10645c8f2e69",
+        "recorded_at": "2026-10-11T10:27:18.599108Z",
+        "result": {
+          "observations": {
+            "event_emitted": true,
+            "event_id": "f45ed880-fac2-49a9-bbc6-e7fce6cde1fc",
+            "passed": true
+          },
+          "run_id": "d1c7c1fd-697d-4984-9680-8614e62e65d5",
+          "scenario_id": "S06",
+          "status": "completed"
+        }
+      }
+    }
+  ],
+  "limitations": [
+    "Scenario baselines are deliberately injected synthetic exceptions.",
+    "Containers and networks are stopped after retest; scoped volumes remain for review.",
+    "Reproduction tests do not establish enterprise control effectiveness."
+  ]
+}

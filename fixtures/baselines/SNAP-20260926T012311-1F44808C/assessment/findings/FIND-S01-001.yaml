@@ -1,0 +1,28 @@
+schema_version: "1.0"
+id: FIND-S01-001
+title: Terminated synthetic identity retained portal access
+service_ids: [example-bank-portal]
+control_ids: [IAM-02]
+criteria_reference: POL-02
+condition: >-
+  The S01 baseline fixture replay observed that terminated identity USR-021 could
+  authenticate and reuse an existing session after its synthetic leave date.
+evidence_ids: [EVID-POL-02, EVID-S01-BASELINE]
+cause: The scenario injection retained both the account active state and session validity.
+cause_status: confirmed
+consequence: Unauthorized access to synthetic service-request records remained possible.
+likelihood: 5
+impact: 4
+rating: 20
+rating_rationale: Directly reproducible access with a significant confidentiality exposure in scope.
+recommendation: Deactivate the account and revoke all active sessions atomically.
+alternatives_tradeoff: Shorter session expiry narrows exposure but does not prevent new login.
+owner_role: simulated_system_administrator
+effort: small
+target_date: 2026-10-09
+status: closed_verified
+limitations: >-
+  Closure is limited to local deterministic fixture replay. No enterprise directory,
+  production service or complete regulatory requirement was assessed.
+created_at: 2026-09-25T14:10:00Z
+closed_at: 2026-09-25T15:20:00Z

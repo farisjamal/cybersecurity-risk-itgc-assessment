@@ -2,11 +2,12 @@
 
 Independent portfolio project for a **simulated Malaysian financial institution**.
 
-**Status:** Gate 2 implementation candidate. The secure lab, assessment engine, all six bounded
-scenario paths, twenty workpapers, governance registers, and four required remediation/retest chains
-are implemented. This is **not** the final PRD v1 release: sixteen workpapers remain limitation-only,
-external framework locators remain unverified, local Docker reproduction is outstanding, and the
-acceptance register records one passed, seventeen partial, and two missing tests.
+**Status, 11 October 2026:** This is the main twenty-control project selected by the owner.
+The local Docker/PostgreSQL lab, isolated recovery and all six scenario retests have now been
+executed. Selected framework references are verified. This is **not** the final PRD v1 release:
+sixteen control conclusions remain incomplete, substantive owner review is open and the acceptance
+register records four passed and sixteen partial criteria. Start with the
+[control-by-control review packet](docs/assessment-review.md).
 
 ## Start here
 
@@ -27,7 +28,38 @@ The current implementation combines:
 - Snapshot-driven sanitized exports, a 14-sheet XLSX workbook, engagement brief, executive report,
   remediation roadmap, and seven-slide presentation with English speaker notes.
 
-## Verified implementation baseline
+## Current verification
+
+On 11 October 2026, Windows tests passed 120 cases with 85.67% branch-aware coverage. Ruff lint,
+formatting and strict mypy passed. A separate Linux/PostgreSQL verification target is available:
+
+```powershell
+docker compose -p cyber-assess-verification -f compose.yaml -f config/compose.verification.yaml build app
+docker compose -p cyber-assess-verification -f compose.yaml -f config/compose.verification.yaml run --rm app
+```
+
+Sanitized current observations are registered under `fixtures/evidence/completion`:
+
+- An isolated PostgreSQL restore reconciled seven business tables and 51 requests through read-only
+  application acceptance; the source was preserved.
+- S01 through S06 passed fresh retests in separate Compose projects; the main lab population stayed
+  unchanged. Scenario containers and networks were stopped; their volumes were retained.
+- The advisory audit checked 40 locked Python packages and returned zero known vulnerabilities at
+  the recorded collection time. Failed feeds cannot produce a clean result.
+
+The suite also checks 10,000 audit events and a 200-evidence export. Capacity-only synthetic records
+do not become assessment evidence. Local Linux execution does not replace hosted CI or fresh-machine
+Windows reproduction. Measured logical recovery does not establish full disaster recovery.
+
+```powershell
+uv run python -m cyber_assess dependencies audit --json
+uv run python -m cyber_assess release-check --engagement ENG-001 --json
+```
+
+Structural validation and release readiness are separate. `release-check` currently exits 4 because
+required assessment, review and delivery work remains.
+
+## Historical implementation baseline
 
 As of 26 September 2026:
 
@@ -42,9 +74,8 @@ As of 26 September 2026:
 - The ignored local artifact bundle includes visually inspected A4 engagement/report PDFs and a
   seven-page 16:9 presentation PDF rendered with Microsoft Edge; their hashes and renderer version
   are recorded separately from the deterministic source-artifact manifest.
-- A live Docker image build and local PostgreSQL health check remain unverified because the Docker
-  Desktop engine was unavailable during this run. The prior PR revision passed Linux/PostgreSQL,
-  Windows, containment, and secret-scanning CI; the current revision requires a fresh CI run.
+- Docker was unavailable during that historical run. Current local observations above supersede
+  that runtime limitation; the current revision still requires a fresh hosted CI run.
 
 ## Local verification
 

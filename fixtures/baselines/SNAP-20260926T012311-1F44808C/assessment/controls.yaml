@@ -1,0 +1,222 @@
+schema_version: "1.0"
+controls:
+  - schema_version: "1.0"
+    id: GOV-01
+    version: "1.0"
+    domain: governance
+    objective: Business scope, assets, owners and policies are defined and reconciled.
+    risk_ids: [RISK-GOV-01]
+    owner_role: project_owner_assessor
+    frequency: assessment_start
+    procedure: Reconcile deployed components to the asset inventory and versioned policies.
+    criteria_references: [PRD-9, POL-01]
+    nist_categories: [GV.OC, GV.RR, ID.AM]
+  - schema_version: "1.0"
+    id: GOV-02
+    version: "1.0"
+    domain: governance
+    objective: Service risks have reasoned ratings, owners, actions and review dates.
+    risk_ids: [RISK-GOV-02]
+    owner_role: project_owner_assessor
+    frequency: quarterly
+    procedure: Inspect risks, rating rationales, action owners, review dates and challenges.
+    criteria_references: [PRD-9, POL-10]
+    nist_categories: [GV.RM, ID.RA]
+  - schema_version: "1.0"
+    id: GOV-03
+    version: "1.0"
+    domain: governance
+    objective: Fictional supplier risks and responsibilities are documented.
+    risk_ids: [RISK-GOV-03]
+    owner_role: simulated_supplier_owner
+    frequency: annual
+    procedure: Review both fictional supplier packs for due diligence, ownership and gaps.
+    criteria_references: [PRD-9, RMIT-10.47]
+    nist_categories: [GV.SC]
+  - schema_version: "1.0"
+    id: IAM-01
+    version: "1.0"
+    domain: access
+    objective: Joiner access is approved, owned and limited to the role matrix.
+    risk_ids: [RISK-IAM-01]
+    owner_role: simulated_system_administrator
+    frequency: per_event
+    procedure: Test all joiners against approved roles, activation dates and account state.
+    criteria_references: [POL-01, RMIT-10.53]
+    nist_categories: [PR.AA]
+  - schema_version: "1.0"
+    id: IAM-02
+    version: "1.0"
+    domain: access
+    objective: Leaver access and active sessions are removed within the policy target.
+    risk_ids: [RISK-IAM-02]
+    owner_role: simulated_system_administrator
+    frequency: per_event
+    procedure: Test every leaver for account state, new login denial and session revocation.
+    criteria_references: [POL-02, RMIT-10.53, RMIT-10.54]
+    nist_categories: [PR.AA]
+  - schema_version: "1.0"
+    id: IAM-03
+    version: "1.0"
+    domain: access
+    objective: Roles and object-level authorization enforce least privilege.
+    risk_ids: [RISK-IAM-03]
+    owner_role: simulated_system_administrator
+    frequency: continuous
+    procedure: Reconcile privileged accounts and attempt prohibited and cross-owner actions.
+    criteria_references: [POL-01, RMIT-10.56]
+    nist_categories: [PR.AA]
+  - schema_version: "1.0"
+    id: IAM-04
+    version: "1.0"
+    domain: access
+    objective: Privileged actions require completed MFA and valid sessions.
+    risk_ids: [RISK-IAM-04]
+    owner_role: simulated_system_administrator
+    frequency: per_session
+    procedure: Test password-only, stale, reused-code and valid MFA paths.
+    criteria_references: [POL-03, RMIT-10.55]
+    nist_categories: [PR.AA]
+  - schema_version: "1.0"
+    id: IAM-05
+    version: "1.0"
+    domain: access
+    objective: Periodic access review covers the complete account population.
+    risk_ids: [RISK-IAM-05]
+    owner_role: simulated_change_approver
+    frequency: quarterly
+    procedure: Reconcile every account to review decisions and resulting actions.
+    criteria_references: [POL-03, RMIT-10.56]
+    nist_categories: [PR.AA]
+  - schema_version: "1.0"
+    id: CHG-01
+    version: "1.0"
+    domain: change
+    objective: Normal changes are independently approved before deployment.
+    risk_ids: [RISK-CHG-01]
+    owner_role: simulated_change_approver
+    frequency: per_event
+    procedure: Inspect every requester, approver, decision time and deployment record.
+    criteria_references: [POL-04, RMIT-10.11]
+    nist_categories: [PR.AA, PR.PS]
+  - schema_version: "1.0"
+    id: CHG-02
+    version: "1.0"
+    domain: change
+    objective: Deployed changes have version-specific test evidence.
+    risk_ids: [RISK-CHG-02]
+    owner_role: simulated_change_approver
+    frequency: per_event
+    procedure: Trace deployed versions to tests and acceptance decisions.
+    criteria_references: [POL-04, RMIT-10.8]
+    nist_categories: [PR.PS]
+  - schema_version: "1.0"
+    id: CHG-03
+    version: "1.0"
+    domain: change
+    objective: Releases have observed deployment and rollback evidence.
+    risk_ids: [RISK-CHG-03]
+    owner_role: simulated_system_administrator
+    frequency: per_release
+    procedure: Compare running versions and perform a controlled rollback smoke test.
+    criteria_references: [POL-04, RMIT-10.11]
+    nist_categories: [PR.PS, PR.IR]
+  - schema_version: "1.0"
+    id: CHG-04
+    version: "1.0"
+    domain: change
+    objective: Emergency changes receive reasoned and timely retrospective review.
+    risk_ids: [RISK-CHG-04]
+    owner_role: simulated_change_approver
+    frequency: per_event
+    procedure: Inspect both emergency changes and follow-up within two business days.
+    criteria_references: [POL-05]
+    nist_categories: [PR.PS]
+  - schema_version: "1.0"
+    id: OPS-01
+    version: "1.0"
+    domain: operations
+    objective: Backup outcomes reflect content validation and exceptions.
+    risk_ids: [RISK-OPS-01]
+    owner_role: simulated_system_administrator
+    frequency: per_batch
+    procedure: Reconcile fixture jobs and validate an actual backup and corrupt artifact.
+    criteria_references: [POL-06, RMIT-10.44]
+    nist_categories: [PR.DS]
+  - schema_version: "1.0"
+    id: OPS-02
+    version: "1.0"
+    domain: operations
+    objective: Verified backups restore in isolation with matching business records.
+    risk_ids: [RISK-OPS-02]
+    owner_role: simulated_system_administrator
+    frequency: per_exercise
+    procedure: Restore in isolation, compare records and test application behavior.
+    criteria_references: [POL-06, POL-07, RMIT-10.44]
+    nist_categories: [PR.DS, RC.RP]
+  - schema_version: "1.0"
+    id: OPS-03
+    version: "1.0"
+    domain: operations
+    objective: Required actions create attributable and reviewable audit events.
+    risk_ids: [RISK-OPS-03]
+    owner_role: simulated_system_administrator
+    frequency: continuous
+    procedure: Reconcile required actions to events and inspect review records.
+    criteria_references: [POL-08, RMIT-10.57]
+    nist_categories: [PR.PS, DE.CM]
+  - schema_version: "1.0"
+    id: OPS-04
+    version: "1.0"
+    domain: operations
+    objective: Dependency risks have scoped, current evidence and treatment decisions.
+    risk_ids: [RISK-OPS-04]
+    owner_role: project_owner_assessor
+    frequency: per_release
+    procedure: Inventory packages, record scan freshness and trace selected treatments.
+    criteria_references: [POL-10]
+    nist_categories: [ID.RA, PR.PS]
+  - schema_version: "1.0"
+    id: IR-01
+    version: "1.0"
+    domain: incident
+    objective: Defined login and role-change conditions create attributable alerts.
+    risk_ids: [RISK-IR-01]
+    owner_role: simulated_system_administrator
+    frequency: continuous
+    procedure: Trigger alerts and verify thresholds, deduplication and triage records.
+    criteria_references: [POL-09, RMIT-10.57]
+    nist_categories: [DE.CM, DE.AE]
+  - schema_version: "1.0"
+    id: IR-02
+    version: "1.0"
+    domain: incident
+    objective: Suspicious access is investigated, contained and reviewed.
+    risk_ids: [RISK-IR-02]
+    owner_role: simulated_system_administrator
+    frequency: per_incident
+    procedure: Execute the tabletop and inspect decisions, evidence and lessons.
+    criteria_references: [PRD-14.3]
+    nist_categories: [RS.MA, RS.AN]
+  - schema_version: "1.0"
+    id: DR-01
+    version: "1.0"
+    domain: recovery
+    objective: Recovery dependencies, sequence, targets and activation criteria are documented.
+    risk_ids: [RISK-DR-01]
+    owner_role: simulated_system_administrator
+    frequency: annual
+    procedure: Inspect recovery dependencies, credentials access, sequence and targets.
+    criteria_references: [POL-07]
+    nist_categories: [PR.IR, RC.RP]
+  - schema_version: "1.0"
+    id: DR-02
+    version: "1.0"
+    domain: recovery
+    objective: Recovery is exercised, measured and improved from observed results.
+    risk_ids: [RISK-DR-02]
+    owner_role: simulated_system_administrator
+    frequency: per_exercise
+    procedure: Run recovery, record RTO and RPO, and update the plan.
+    criteria_references: [POL-07]
+    nist_categories: [RC.RP, ID.IM]

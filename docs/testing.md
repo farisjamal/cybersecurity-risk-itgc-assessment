@@ -49,6 +49,25 @@ and the Microsoft Edge version. Inspect every rendered PDF before distribution.
 Tests are successful only when their asserted behavior is correct. Detecting an intentionally failing
 scenario is a successful test while the associated control conclusion remains failed.
 
+## Recorded local run, 11 October 2026
+
+- Windows Python 3.12.14: 120 tests passed, 85.67% branch-aware coverage.
+- Isolated Docker Linux Python 3.12.11/PostgreSQL: 120 tests passed, 85.45% coverage.
+- Ruff lint/format, strict mypy, assessment/finding validation and local Markdown links pass.
+- The live advisory audit returned zero known vulnerabilities for 40 locked Python packages.
+- Local Docker reproduction and logical recovery are observed; fresh-machine Windows setup and
+  hosted CI for the final revision are still outstanding.
+- Snapshot `SNAP-20261011T105042-6CFB8FC2` verifies 105 files and reconciles 20 controls,
+  20 workpapers, 22 evidence records and four finding/action/retest chains with zero unmatched
+  references. Four conclusions are recorded; sixteen remain incomplete.
+- Current brief/report PDFs each contain two A4 pages; the presentation contains seven landscape
+  pages. Every rendered page was visually inspected with no clipped content. These remain review
+  artifacts and do not close the outstanding substantive assessment or owner review.
+
+The [review packet](assessment-review.md) identifies the procedure and judgment gaps per control.
+Raw JUnit output remains under ignored `runtime`; sanitized operational observations are registered
+under `fixtures/evidence/completion` with hashes. Historical snapshots remain intact.
+
 ## CI gates
 
 | Job | Purpose |

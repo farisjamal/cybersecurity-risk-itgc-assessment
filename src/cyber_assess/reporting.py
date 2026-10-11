@@ -9,7 +9,6 @@ from __future__ import annotations
 
 import hashlib
 import json
-import os
 import shutil
 import tempfile
 from dataclasses import dataclass
@@ -29,6 +28,7 @@ from cyber_assess.models import (
     Retest,
     Workpaper,
 )
+from cyber_assess.publication import publish_directory
 from cyber_assess.snapshots import load_snapshot, verify_snapshot
 from cyber_assess.yamlio import load_model, load_yaml
 
@@ -566,7 +566,7 @@ def create_deliverable_inputs(
         # A second verification narrows the check/read/publish race: no result is
         # published if a frozen source changed while inputs were being rendered.
         verify_snapshot(workspace, snapshot_id)
-        os.replace(temporary, destination)
+        publish_directory(temporary, destination)
     except BaseException:
         shutil.rmtree(temporary, ignore_errors=True)
         raise

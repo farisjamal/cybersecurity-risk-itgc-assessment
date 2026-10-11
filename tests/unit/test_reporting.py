@@ -18,7 +18,7 @@ SNAPSHOT_ID = "SNAP-20260926T012311-1F44808C"
 
 
 def _workspace() -> Path:
-    return Path(__file__).resolve().parents[2]
+    return Path(__file__).resolve().parents[2] / "fixtures" / "baselines" / SNAPSHOT_ID
 
 
 def _copy_frozen_workspace(destination: Path) -> Path:
@@ -131,6 +131,9 @@ def test_final_artifacts_are_deterministic_formatted_and_honest(tmp_path: Path) 
     second = create_final_artifacts(_workspace(), SNAPSHOT_ID, output_root=tmp_path / "second")
 
     assert _bundle_bytes(first) == _bundle_bytes(second)
+    with zipfile.ZipFile(first / "assessment-workbook.xlsx") as archive:
+        core = archive.read("docProps/core.xml")
+        assert b"2026-09-26T01:23:11Z</dcterms:modified>" in core
     assert set(_bundle_bytes(first)) == {
         "artifact-manifest.json",
         "assessment-workbook.xlsx",

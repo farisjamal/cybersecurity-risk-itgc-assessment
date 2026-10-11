@@ -3,9 +3,11 @@
 This file is a publication gate, not a marketing draft. A claim becomes usable only after its evidence
 links resolve in a frozen snapshot and the cited acceptance results pass on the final revision.
 
-Current evidence anchor: snapshot `SNAP-20260926T024908-88653414`. It reconciles all twenty
-workpapers, but only four controls have executed conclusions. The canonical acceptance register has
-one passed, seventeen partial, and two missing tests, so every candidate claim remains pending.
+Historical evidence anchor: snapshot `SNAP-20260926T024908-88653414`. Current 11 October 2026
+observations are registered under `fixtures/evidence/completion` and summarized in the
+[review packet](assessment-review.md). Only four controls have recorded conclusions; sixteen remain
+incomplete. The acceptance register has four passed and sixteen partial criteria. Candidate final
+assessment claims remain pending until the final revision, snapshot and substantive review agree.
 
 | Claim ID | Candidate wording | Required evidence | Current state |
 | --- | --- | --- | --- |

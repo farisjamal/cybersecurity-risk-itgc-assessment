@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "run_id": "0cc2f379-36fc-4043-80ac-dc6576f0130a",
+  "scenario_id": "S02",
+  "action": "retest",
+  "baseline_run_id": "140e1435-7adc-4bba-9871-e62a18a17a32",
+  "resource_name": "cyber-assess-scenario-s02-630cee694ac9",
+  "recorded_at": "2026-10-11T10:25:41.437682Z",
+  "result": {
+    "observations": {
+      "actual_role": "staff",
+      "passed": true
+    },
+    "run_id": "0cc2f379-36fc-4043-80ac-dc6576f0130a",
+    "scenario_id": "S02",
+    "status": "completed"
+  }
+}

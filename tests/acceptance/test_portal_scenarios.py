@@ -3,10 +3,12 @@ from pathlib import Path
 from unittest.mock import patch
 
 import pytest
+from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
 from bank_lab.backups import BackupError, create_backup, restore_test
 from bank_lab.database import Base
+from bank_lab.models import User
 from bank_lab.scenarios import remediate_scenario, retest_scenario, run_scenario
 from bank_lab.seed import seed_database
 
@@ -67,3 +69,18 @@ async def test_backup_hash_failure_and_isolated_restore(
     assert restored.valid is True
     assert restored.counts["users"] == 24
     assert restored.counts["service_requests"] == 50
+
+
+@pytest.mark.acceptance
+@pytest.mark.asyncio
+async def test_restore_refuses_populated_source_without_deleting_business_data(
+    seeded_db: tuple[AsyncSession, async_sessionmaker[AsyncSession]], tmp_path: Path
+) -> None:
+    source, _factory = seeded_db
+    backup = await create_backup(source, tmp_path / "backups", "RUN-RESTORE-SAFETY")
+    before = list((await source.execute(select(User.id).order_by(User.id))).scalars())
+    with pytest.raises(BackupError, match="empty isolated"):
+        await restore_test(source, backup.path, backup.sha256)
+    after = list((await source.execute(select(User.id).order_by(User.id))).scalars())
+    assert before == after
+    assert len(after) == 24

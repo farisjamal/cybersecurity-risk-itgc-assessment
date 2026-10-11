@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "run_id": "56f13bc3-1e51-4c34-b0e2-2129d0dc238c",
+  "scenario_id": "S02",
+  "action": "remediate",
+  "baseline_run_id": "140e1435-7adc-4bba-9871-e62a18a17a32",
+  "resource_name": "cyber-assess-scenario-s02-630cee694ac9",
+  "recorded_at": "2026-10-11T10:25:36.269663Z",
+  "result": {
+    "observations": {
+      "baseline_run_id": "140e1435-7adc-4bba-9871-e62a18a17a32",
+      "role": "staff",
+      "user_id": "USR-007"
+    },
+    "run_id": "56f13bc3-1e51-4c34-b0e2-2129d0dc238c",
+    "scenario_id": "S02",
+    "status": "completed"
+  }
+}

@@ -1,0 +1,510 @@
+{
+  "schema_version": "1.0",
+  "run_id": "RUN-RUNTIME-86A48334DB17",
+  "started_at": "2026-10-11T10:23:31.812082+00:00",
+  "accepted_at": "2026-10-11T10:23:32.819530+00:00",
+  "database_backend": "postgresql",
+  "restore_database": "cyber_assess_restore_86a48334db17",
+  "restored_counts": {
+    "users": 24,
+    "service_requests": 51,
+    "service_request_history": 51,
+    "access_requests": 6,
+    "access_reviews": 1,
+    "change_records": 12,
+    "incidents": 4
+  },
+  "backup_sha256": "5e758d1d9149c73d5d73d9834cd4e7e8f7b6267ec477c0c27efe1b69bd88709c",
+  "source_unchanged_during_restore": true,
+  "application_acceptance": {
+    "status": 200,
+    "reconciled_requests": 51
+  },
+  "recovery": {
+    "scope": "logical restore and read-only API acceptance; no infrastructure outage",
+    "outage_at": "2026-10-11T10:23:32.459648+00:00",
+    "latest_recoverable_committed_record_at": "2026-10-11T10:23:31.865701+00:00",
+    "rto_seconds": 0.359882,
+    "rpo_seconds": 0.593947,
+    "rto_target_seconds": 1800,
+    "rpo_target_seconds": 86400
+  },
+  "users": [
+    {
+      "id": "USR-001",
+      "role": "administrator",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2025-02-02",
+      "leave_date": null
+    },
+    {
+      "id": "USR-002",
+      "role": "administrator",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2024-03-03",
+      "leave_date": null
+    },
+    {
+      "id": "USR-003",
+      "role": "change_approver",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2025-04-04",
+      "leave_date": null
+    },
+    {
+      "id": "USR-004",
+      "role": "change_approver",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2024-05-05",
+      "leave_date": null
+    },
+    {
+      "id": "USR-005",
+      "role": "change_approver",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2025-06-06",
+      "leave_date": null
+    },
+    {
+      "id": "USR-006",
+      "role": "change_approver",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2024-01-07",
+      "leave_date": null
+    },
+    {
+      "id": "USR-007",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2025-02-08",
+      "leave_date": null
+    },
+    {
+      "id": "USR-008",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2024-03-09",
+      "leave_date": null
+    },
+    {
+      "id": "USR-009",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2025-04-10",
+      "leave_date": null
+    },
+    {
+      "id": "USR-010",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2024-05-11",
+      "leave_date": null
+    },
+    {
+      "id": "USR-011",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2025-06-12",
+      "leave_date": null
+    },
+    {
+      "id": "USR-012",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2024-01-13",
+      "leave_date": null
+    },
+    {
+      "id": "USR-013",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2025-02-14",
+      "leave_date": null
+    },
+    {
+      "id": "USR-014",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2024-03-15",
+      "leave_date": null
+    },
+    {
+      "id": "USR-015",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2025-04-16",
+      "leave_date": null
+    },
+    {
+      "id": "USR-016",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2024-05-17",
+      "leave_date": null
+    },
+    {
+      "id": "USR-017",
+      "role": "staff",
+      "account_status": "disabled",
+      "employment_status": "terminated",
+      "join_date": "2025-06-18",
+      "leave_date": "2026-08-17"
+    },
+    {
+      "id": "USR-018",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2024-01-19",
+      "leave_date": null
+    },
+    {
+      "id": "USR-019",
+      "role": "read_only",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2025-02-20",
+      "leave_date": null
+    },
+    {
+      "id": "USR-020",
+      "role": "read_only",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2024-03-01",
+      "leave_date": null
+    },
+    {
+      "id": "USR-021",
+      "role": "read_only",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2025-04-02",
+      "leave_date": null
+    },
+    {
+      "id": "USR-022",
+      "role": "read_only",
+      "account_status": "disabled",
+      "employment_status": "terminated",
+      "join_date": "2024-05-03",
+      "leave_date": "2026-08-12"
+    },
+    {
+      "id": "USR-023",
+      "role": "read_only",
+      "account_status": "disabled",
+      "employment_status": "terminated",
+      "join_date": "2025-06-04",
+      "leave_date": "2026-08-13"
+    },
+    {
+      "id": "USR-024",
+      "role": "read_only",
+      "account_status": "active",
+      "employment_status": "employed",
+      "join_date": "2024-01-05",
+      "leave_date": null
+    }
+  ],
+  "changes": [
+    {
+      "id": "CHG-001",
+      "type": "normal",
+      "requester_id": "USR-008",
+      "approver_id": "USR-004",
+      "decision": "approved",
+      "status": "deployed",
+      "version": "lab-v1.0.1",
+      "test_evidence": "TEST-001",
+      "rollback_plan": "Return to lab-v1.0.0",
+      "retrospective_review": null
+    },
+    {
+      "id": "CHG-002",
+      "type": "normal",
+      "requester_id": "USR-009",
+      "approver_id": "USR-005",
+      "decision": "approved",
+      "status": "deployed",
+      "version": "lab-v1.0.2",
+      "test_evidence": "TEST-002",
+      "rollback_plan": "Return to lab-v1.0.1",
+      "retrospective_review": null
+    },
+    {
+      "id": "CHG-003",
+      "type": "normal",
+      "requester_id": "USR-010",
+      "approver_id": "USR-006",
+      "decision": "approved",
+      "status": "deployed",
+      "version": "lab-v1.0.3",
+      "test_evidence": "TEST-003",
+      "rollback_plan": "Return to lab-v1.0.2",
+      "retrospective_review": null
+    },
+    {
+      "id": "CHG-004",
+      "type": "normal",
+      "requester_id": "USR-011",
+      "approver_id": "USR-003",
+      "decision": "approved",
+      "status": "deployed",
+      "version": "lab-v1.0.4",
+      "test_evidence": "TEST-004",
+      "rollback_plan": "Return to lab-v1.0.3",
+      "retrospective_review": null
+    },
+    {
+      "id": "CHG-005",
+      "type": "normal",
+      "requester_id": "USR-012",
+      "approver_id": "USR-004",
+      "decision": "approved",
+      "status": "deployed",
+      "version": "lab-v1.0.5",
+      "test_evidence": "TEST-005",
+      "rollback_plan": "Return to lab-v1.0.4",
+      "retrospective_review": null
+    },
+    {
+      "id": "CHG-006",
+      "type": "normal",
+      "requester_id": "USR-013",
+      "approver_id": "USR-005",
+      "decision": "approved",
+      "status": "deployed",
+      "version": "lab-v1.0.6",
+      "test_evidence": "TEST-006",
+      "rollback_plan": "Return to lab-v1.0.5",
+      "retrospective_review": null
+    },
+    {
+      "id": "CHG-007",
+      "type": "normal",
+      "requester_id": "USR-014",
+      "approver_id": "USR-006",
+      "decision": "approved",
+      "status": "deployed",
+      "version": "lab-v1.0.7",
+      "test_evidence": "TEST-007",
+      "rollback_plan": "Return to lab-v1.0.6",
+      "retrospective_review": null
+    },
+    {
+      "id": "CHG-008",
+      "type": "normal",
+      "requester_id": "USR-015",
+      "approver_id": "USR-003",
+      "decision": "approved",
+      "status": "deployed",
+      "version": "lab-v1.0.8",
+      "test_evidence": "TEST-008",
+      "rollback_plan": "Return to lab-v1.0.7",
+      "retrospective_review": null
+    },
+    {
+      "id": "CHG-009",
+      "type": "normal",
+      "requester_id": "USR-016",
+      "approver_id": "USR-004",
+      "decision": "approved",
+      "status": "deployed",
+      "version": "lab-v1.0.9",
+      "test_evidence": "TEST-009",
+      "rollback_plan": "Return to lab-v1.0.8",
+      "retrospective_review": null
+    },
+    {
+      "id": "CHG-010",
+      "type": "normal",
+      "requester_id": "USR-007",
+      "approver_id": "USR-005",
+      "decision": "approved",
+      "status": "deployed",
+      "version": "lab-v1.0.10",
+      "test_evidence": "TEST-010",
+      "rollback_plan": "Return to lab-v1.0.9",
+      "retrospective_review": null
+    },
+    {
+      "id": "CHG-011",
+      "type": "emergency",
+      "requester_id": "USR-008",
+      "approver_id": "USR-006",
+      "decision": "approved",
+      "status": "deployed",
+      "version": "lab-v1.0.11",
+      "test_evidence": null,
+      "rollback_plan": "Return to lab-v1.0.10",
+      "retrospective_review": "Synthetic retrospective completed."
+    },
+    {
+      "id": "CHG-012",
+      "type": "emergency",
+      "requester_id": "USR-009",
+      "approver_id": "USR-003",
+      "decision": "approved",
+      "status": "deployed",
+      "version": "lab-v1.0.12",
+      "test_evidence": null,
+      "rollback_plan": "Return to lab-v1.0.11",
+      "retrospective_review": "Synthetic retrospective completed."
+    }
+  ],
+  "access_reviews": [
+    {
+      "id": "ARV-001",
+      "population_snapshot": {
+        "count": 24,
+        "user_ids": [
+          "USR-001",
+          "USR-002",
+          "USR-003",
+          "USR-004",
+          "USR-005",
+          "USR-006",
+          "USR-007",
+          "USR-008",
+          "USR-009",
+          "USR-010",
+          "USR-011",
+          "USR-012",
+          "USR-013",
+          "USR-014",
+          "USR-015",
+          "USR-016",
+          "USR-017",
+          "USR-018",
+          "USR-019",
+          "USR-020",
+          "USR-021",
+          "USR-022",
+          "USR-023",
+          "USR-024"
+        ]
+      },
+      "decisions": [
+        {
+          "user_id": "USR-001",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-002",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-003",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-004",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-005",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-006",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-007",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-008",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-009",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-010",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-011",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-012",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-013",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-014",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-015",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-016",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-017",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-018",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-019",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-020",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-021",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-022",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-023",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-024",
+          "decision": "retain"
+        }
+      ]
+    }
+  ],
+  "limitations": [
+    "Users, changes and historical reviews were generated fixtures, not observed business history.",
+    "Recovery timing covers this single logical restore on this machine, not full disaster recovery.",
+    "The verifier added one clearly labelled synthetic checkpoint before backup.",
+    "Raw backups and credentials remain restricted in the app runtime volume."
+  ]
+}

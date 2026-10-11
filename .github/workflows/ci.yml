@@ -32,7 +32,7 @@ jobs:
       - name: Strict type checking
         run: uv run python -m mypy src
       - name: Locked dependency audit
-        run: uv run python -m pip_audit --requirement requirements.lock --disable-pip --progress-spinner off
+        run: uv run python -m cyber_assess dependencies audit --json
       - name: Tests and acceptance paths with coverage
         run: uv run pytest -m "not slow" --cov-report=term-missing --cov-report=xml
       - name: Validate canonical assessment

@@ -7,13 +7,14 @@ import hashlib
 import hmac
 import json
 from dataclasses import dataclass
-from datetime import date, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any, cast
 
-from sqlalchemy import delete, select
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 
+from bank_lab.database import Base
 from bank_lab.models import (
     AccessRequest,
     AccessReview,
@@ -163,6 +164,21 @@ def _decode_row(model: type[Any], row: dict[str, Any]) -> dict[str, Any]:
     return result
 
 
+def _comparable_row(model: type[Any], row: dict[str, Any]) -> dict[str, Any]:
+    """Compare logical values across SQLite and PostgreSQL timezone representations."""
+    decoded = _decode_row(model, row)
+    return {
+        key: (
+            value.replace(tzinfo=UTC).isoformat()
+            if isinstance(value, datetime) and value.tzinfo is None
+            else value.astimezone(UTC).isoformat()
+            if isinstance(value, datetime)
+            else value
+        )
+        for key, value in decoded.items()
+    }
+
+
 async def restore_test(
     target_db: AsyncSession,
     backup_path: Path,
@@ -172,15 +188,30 @@ async def restore_test(
 
     started = utcnow()
     payload = load_and_validate_backup(backup_path, expected_sha256)
-    for model in reversed(BACKUP_MODELS):
-        await target_db.execute(delete(model))
+    # Refuse to erase data even if a caller accidentally supplies the source DB.
+    for table in Base.metadata.sorted_tables:
+        count = (await target_db.execute(select(func.count()).select_from(table))).scalar_one()
+        if count:
+            raise BackupError("restore target must be an empty isolated database")
     counts: dict[str, int] = {}
     try:
         for model in BACKUP_MODELS:
             rows = payload["tables"][model.__tablename__]
             target_db.add_all([model(**_decode_row(model, row)) for row in rows])
             await target_db.flush()
-            counts[model.__tablename__] = len(rows)
+            restored = list(
+                (
+                    await target_db.execute(
+                        select(model).order_by(model.id).execution_options(populate_existing=True)
+                    )
+                ).scalars()
+            )
+            counts[model.__tablename__] = len(restored)
+            expected_rows = sorted(rows, key=lambda row: row["id"])
+            actual_values = [_comparable_row(model, _row(model, item)) for item in restored]
+            expected_values = [_comparable_row(model, item) for item in expected_rows]
+            if actual_values != expected_values:
+                raise BackupError("restored business records do not reconcile to the backup")
         await target_db.commit()
     except Exception as exc:
         await target_db.rollback()

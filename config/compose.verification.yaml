@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      target: verification
+    image: cybersecurity-itgc-lab-verification:local
+    entrypoint: [python, -m, pytest]
+    command: [-q, -p, "no:cacheprovider", "--basetemp=/tmp/pytest", "--junitxml=/results/linux-tests.xml"]
+    ports: !reset []
+    read_only: false
+    restart: "no"
+    volumes:
+      - ./runtime/verification-results:/results
+    environment:
+      BANK_LAB_ENVIRONMENT: test

@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "run_id": "e0f2d9e0-ce13-40e1-9928-f29c5365e9c3",
+  "scenario_id": "S03",
+  "action": "retest",
+  "baseline_run_id": "a5c15d36-1c21-4054-bc2c-7c1b0fbdc338",
+  "resource_name": "cyber-assess-scenario-s03-8d0919230884",
+  "recorded_at": "2026-10-11T10:26:05.667199Z",
+  "result": {
+    "observations": {
+      "mfa_session_allowed": true,
+      "passed": true,
+      "password_only_denied": true
+    },
+    "run_id": "e0f2d9e0-ce13-40e1-9928-f29c5365e9c3",
+    "scenario_id": "S03",
+    "status": "completed"
+  }
+}

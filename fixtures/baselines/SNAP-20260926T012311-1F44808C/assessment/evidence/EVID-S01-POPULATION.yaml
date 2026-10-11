@@ -1,0 +1,15 @@
+schema_version: "1.0"
+id: EVID-S01-POPULATION
+path: fixtures/evidence/s01/leaver_population.json
+sha256: 30e739fd559206358538085f6eef29e6f65f38f609166dbcaa2de7683b62bfc3
+size: 498
+media_type: application/json
+collector: cyber_assess_fixture_generator
+collected_at: 2026-09-25T13:55:00Z
+source_period: 2026-08-01/2026-08-30
+run_id: RUN-S01-BASELINE
+provenance: synthetic_record
+sensitivity: sanitized
+query_or_action: Select every synthetic identity terminated by the assessment-period end.
+tool_version: "0.1.0"
+redactions: []

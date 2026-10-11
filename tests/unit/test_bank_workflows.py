@@ -1,4 +1,5 @@
 from collections.abc import AsyncIterator
+from datetime import UTC, datetime, timedelta
 from unittest.mock import patch
 
 import pytest
@@ -12,13 +13,14 @@ from bank_lab.models import (
     Alert,
     ChangeRecord,
     Decision,
+    EmploymentStatus,
     Role,
     Session,
     User,
 )
 from bank_lab.scenarios import ScenarioError, remediate_scenario, retest_scenario, run_scenario
 from bank_lab.seed import seed_database
-from bank_lab.services import AccessService, ChangeService, ForbiddenError
+from bank_lab.services import AccessService, ChangeService, ConflictError, ForbiddenError
 
 
 @pytest.fixture
@@ -77,6 +79,62 @@ async def test_deactivation_revokes_every_active_session(db: AsyncSession) -> No
     )
     assert target.account_status == AccountStatus.DISABLED
     assert sessions and all(record.revoked_at is not None for record in sessions)
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize("state", ["terminated", "not_started", "employment_ended"])
+async def test_approved_access_cannot_activate_an_ineligible_employee(
+    db: AsyncSession, state: str
+) -> None:
+    with patch("bank_lab.seed.hash_password", side_effect=lambda value: f"test:{value}"):
+        await seed_database(db, password_factory=lambda: "Fixture-Pass-42!")
+    admin = await db.get(User, "USR-001")
+    approver = await db.get(User, "USR-003")
+    target = await db.get(User, "USR-007")
+    assert admin and approver and target
+    target.account_status = AccountStatus.PENDING
+    service = AccessService(db, Settings(session_pepper="pepper"))
+    request = await service.submit(admin, target, Role.ADMINISTRATOR, "Joiner request")
+    await service.decide(request.id, approver, Decision.APPROVED)
+    if state == "terminated":
+        target.employment_status = EmploymentStatus.TERMINATED
+    elif state == "not_started":
+        target.join_date = datetime.now(UTC).date() + timedelta(days=1)
+    else:
+        target.leave_date = datetime.now(UTC).date()
+    await db.commit()
+
+    with pytest.raises(ConflictError, match="Access cannot"):
+        await service.apply(request.id, admin)
+
+    assert target.account_status == AccountStatus.PENDING
+    assert target.role == Role.STAFF
+    assert request.applied_at is None
+    changed = list(
+        (await db.execute(select(Alert).where(Alert.subject_key == target.id))).scalars()
+    )
+    assert changed == []
+
+
+@pytest.mark.asyncio
+async def test_pending_joiner_requires_approval_before_activation(db: AsyncSession) -> None:
+    with patch("bank_lab.seed.hash_password", side_effect=lambda value: f"test:{value}"):
+        await seed_database(db, password_factory=lambda: "Fixture-Pass-42!")
+    admin = await db.get(User, "USR-001")
+    approver = await db.get(User, "USR-003")
+    target = await db.get(User, "USR-007")
+    assert admin and approver and target
+    target.account_status = AccountStatus.PENDING
+    await db.commit()
+    service = AccessService(db, Settings(session_pepper="pepper"))
+    request = await service.submit(admin, target, Role.STAFF, "Approved fictional joiner")
+    with pytest.raises(ConflictError, match="Approved unapplied"):
+        await service.apply(request.id, admin)
+    assert target.account_status == AccountStatus.PENDING
+    await service.decide(request.id, approver, Decision.APPROVED)
+    activated = await service.apply(request.id, admin)
+    assert activated.account_status == AccountStatus.ACTIVE
+    assert request.applied_at is not None
 
 
 @pytest.mark.asyncio

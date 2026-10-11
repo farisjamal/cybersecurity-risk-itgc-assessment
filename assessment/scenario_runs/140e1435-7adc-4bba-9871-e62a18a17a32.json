@@ -1,0 +1,18 @@
+{
+  "schema_version": "1.0",
+  "run_id": "140e1435-7adc-4bba-9871-e62a18a17a32",
+  "scenario_id": "S02",
+  "action": "run",
+  "baseline_run_id": null,
+  "resource_name": "cyber-assess-scenario-s02-630cee694ac9",
+  "recorded_at": "2026-10-11T10:25:32.113841Z",
+  "result": {
+    "observations": {
+      "unapproved_role": "administrator",
+      "user_id": "USR-007"
+    },
+    "run_id": "140e1435-7adc-4bba-9871-e62a18a17a32",
+    "scenario_id": "S02",
+    "status": "frozen"
+  }
+}

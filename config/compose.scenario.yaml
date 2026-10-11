@@ -1,0 +1,10 @@
+# Only used with an allowlisted, unique scenario project name.
+services:
+  app:
+    image: cybersecurity-itgc-lab-app:latest
+    ports: !reset []
+    restart: "no"
+    environment:
+      BANK_LAB_ENVIRONMENT: scenario
+  db:
+    restart: "no"

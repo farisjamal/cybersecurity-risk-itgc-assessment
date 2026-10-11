@@ -5,11 +5,13 @@ from __future__ import annotations
 import argparse
 import asyncio
 import json
+import os
 from collections.abc import Sequence
+from pathlib import Path
 
 from bank_lab.config import Settings
 from bank_lab.database import build_engine, build_session_factory
-from bank_lab.scenarios import remediate_scenario, retest_scenario, run_scenario
+from bank_lab.scenarios import ScenarioError, remediate_scenario, retest_scenario, run_scenario
 from bank_lab.seed import seed_database
 
 
@@ -19,12 +21,23 @@ async def _seed(settings: Settings, seed: int) -> int:
     try:
         async with factory() as session:
             result = await seed_database(session, seed)
+        credentials_path = Path("runtime/initial-credentials.json")
+        if result.created:
+            credentials_path.parent.mkdir(parents=True, exist_ok=True)
+            descriptor = os.open(credentials_path, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
+            with os.fdopen(descriptor, "w", encoding="utf-8") as stream:
+                json.dump(
+                    {"passwords": result.initial_passwords, "totp_secrets": result.totp_secrets},
+                    stream,
+                    indent=2,
+                )
         print(
             json.dumps(
                 {
                     "seeded": result.created,
                     "counts": result.counts,
                     "business_digest": result.business_digest,
+                    "credentials_file": str(credentials_path),
                 },
                 sort_keys=True,
             )
@@ -35,6 +48,8 @@ async def _seed(settings: Settings, seed: int) -> int:
 
 
 async def _scenario(settings: Settings, args: argparse.Namespace) -> int:
+    if settings.environment != "scenario" or settings.scenario_id != args.id:
+        raise ScenarioError("scenario execution requires an isolated scenario environment")
     engine = build_engine(settings)
     factory = build_session_factory(engine)
     try:

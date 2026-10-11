@@ -10,7 +10,7 @@ from httpx import ASGITransport, AsyncClient
 from bank_lab.app import create_app
 from bank_lab.config import Settings
 from bank_lab.database import Base
-from bank_lab.models import User
+from bank_lab.models import AuditEvent, User
 from bank_lab.security import hash_password
 from bank_lab.seed import seed_database
 
@@ -170,3 +170,40 @@ async def test_deactivation_invalidates_existing_cookie_and_new_login(
             "/auth/login", json={"email": "user07@example.test", "password": PASSWORD}
         )
     ).status_code == 401
+
+
+@pytest.mark.integration
+@pytest.mark.acceptance
+@pytest.mark.asyncio
+async def test_ten_thousand_audit_events_remain_attributable_and_are_not_truncated(
+    portal: tuple[AsyncClient, object],
+) -> None:
+    client, app = portal
+    async with app.state.session_factory() as session:
+        session.add_all(
+            [
+                AuditEvent(
+                    id=f"CAPACITY-{number:05d}",
+                    run_id="RUN-CAPACITY",
+                    actor_id="USR-001",
+                    action="capacity.observed",
+                    object_type="synthetic_record",
+                    object_id=str(number),
+                    result="success",
+                    correlation_id=f"CORR-{number:05d}",
+                )
+                for number in range(10000)
+            ]
+        )
+        await session.commit()
+    await login(client, "user01@example.test")
+    verified = await client.post(
+        "/auth/mfa", json={"code": pyotp.TOTP(TOTP_SECRET).now()}, headers=csrf_header(client)
+    )
+    assert verified.status_code == 200
+    response = await client.get("/events", params={"run_id": "RUN-CAPACITY"})
+    assert response.status_code == 200
+    events = response.json()
+    assert len(events) == 10000
+    assert len({event["correlation_id"] for event in events}) == 10000
+    assert {event["actor_id"] for event in events} == {"USR-001"}

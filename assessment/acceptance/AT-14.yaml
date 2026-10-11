@@ -1,23 +1,29 @@
-schema_version: "1.0"
+schema_version: '1.0'
 id: AT-14
-requirement_ids: [FR-14]
-status: partial
+requirement_ids:
+- FR-14
+status: passed
 revision: uncommitted-working-tree
-environment: Windows local Python 3.12 scenario tests using isolated database state.
+environment: Windows 11 with Docker Desktop Linux containers and PostgreSQL 16; observed
+  11 October 2026.
 evidence_ids:
-  - EVID-S01-BASELINE
-  - EVID-S01-RETEST
-  - EVID-S03-BASELINE
-  - EVID-S03-RETEST
-  - EVID-S05-BASELINE
-  - EVID-S05-RETEST
-  - EVID-S06-BASELINE
-  - EVID-S06-RETEST
+- EVID-S01-BASELINE
+- EVID-S01-RETEST
+- EVID-S03-BASELINE
+- EVID-S03-RETEST
+- EVID-S05-BASELINE
+- EVID-S05-RETEST
+- EVID-S06-BASELINE
+- EVID-S06-RETEST
+- EVID-SCENARIOS-20261011
 evidence_references:
-  - tests/acceptance/test_portal_scenarios.py::test_all_six_scenarios_are_bounded_and_preserve_retest_lineage
-  - tests/unit/test_assessment_adapters.py::test_scenario_router_rejects_invalid_or_inconsistent_runs
-result: Six scenario routes and bounded resource naming are covered by automated tests.
+- tests/acceptance/test_portal_scenarios.py::test_all_six_scenarios_are_bounded_and_preserve_retest_lineage
+- tests/unit/test_assessment_adapters.py::test_scenario_router_rejects_invalid_or_inconsistent_runs
+- docs/assessment-review.md
+result: Six separate Compose projects completed baseline, remediation and fresh retest.
+  Default lab business digest and counts were unchanged; scoped containers/networks
+  were stopped.
 limitations:
-  - Canonical remediation chains exist for four required scenarios, but S02 and S04 lack canonical investigation records.
-  - Live scoped-resource cleanup was not observed.
-recorded_at: 2026-09-26T02:34:58Z
+- Scenario exceptions are injected synthetic conditions; volumes are retained for
+  investigation rather than deleted.
+recorded_at: '2026-10-11T10:41:16.791857+00:00'

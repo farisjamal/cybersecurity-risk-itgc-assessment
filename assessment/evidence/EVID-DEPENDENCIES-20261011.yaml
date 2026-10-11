@@ -1,0 +1,17 @@
+schema_version: '1.0'
+id: EVID-DEPENDENCIES-20261011
+path: fixtures/evidence/completion/dependencies-20261011.json
+sha256: 74aaa862360c8a6ca622416f493a8a0add8efd3c512fb05c985245df58305d36
+size: 323
+media_type: application/json
+collector: local_verification
+collected_at: '2026-10-11T10:33:19.372936+00:00'
+source_period: '2026-10-11T10:33:19.372936+00:00'
+run_id: RUN-DEPENDENCIES-20261011
+provenance: observed_lab
+sensitivity: sanitized
+parent_evidence_id: null
+query_or_action: Audit hash-locked requirements against the live advisory feed; record
+  unavailable feeds separately.
+tool_version: 0.1.0
+redactions: []

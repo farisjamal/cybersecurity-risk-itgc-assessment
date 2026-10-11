@@ -55,6 +55,18 @@ uv run python -m cyber_assess lab seed --seed 42
 Open `http://127.0.0.1:8000`. The database is intentionally not available on a host port. The app's
 `/health` endpoint is a minimal liveness signal and must not expose database or secret details.
 
+On the first successful seed, generated account passwords and TOTP secrets are saved to
+`/app/runtime/initial-credentials.json` inside the private app runtime volume. Repeated seeding does
+not overwrite that file. To retrieve it for your own local login, copy it to ignored runtime storage:
+
+```powershell
+New-Item -ItemType Directory -Force runtime | Out-Null
+docker compose -p cybersecurity-itgc-lab cp app:/app/runtime/initial-credentials.json runtime/initial-credentials.json
+```
+
+View that local file privately. Do not include it in screenshots, terminal transcripts or exports.
+The application uses generated credentials; personal passwords are unnecessary for this lab.
+
 `init` refuses to overwrite an existing engagement. `lab stop` preserves data:
 
 ```powershell

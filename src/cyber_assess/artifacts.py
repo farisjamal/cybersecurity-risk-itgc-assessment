@@ -6,7 +6,7 @@ import csv
 import hashlib
 import html
 import io
-import os
+import re
 import shutil
 import tempfile
 import zipfile
@@ -19,6 +19,7 @@ from openpyxl.styles import Alignment, Font, PatternFill  # type: ignore[import-
 from openpyxl.worksheet.worksheet import Worksheet  # type: ignore[import-untyped]
 
 from cyber_assess.models import ExportSnapshot
+from cyber_assess.publication import publish_directory
 from cyber_assess.reporting import (
     _FrozenRecords,
     _iso,
@@ -244,7 +245,7 @@ def _cover(sheet: Worksheet, snapshot: ExportSnapshot, records: _FrozenRecords) 
         sheet.cell(index, 2, value).alignment = Alignment(wrap_text=True, vertical="top")
 
 
-def _normalize_xlsx(source: Path, destination: Path) -> None:
+def _normalize_xlsx(source: Path, destination: Path, modified_at: str) -> None:
     """Rewrite OOXML members in stable order with fixed ZIP metadata."""
     with (
         zipfile.ZipFile(source, "r") as input_zip,
@@ -256,7 +257,15 @@ def _normalize_xlsx(source: Path, destination: Path) -> None:
             info = zipfile.ZipInfo(name, _ZIP_TIME)
             info.compress_type = zipfile.ZIP_DEFLATED
             info.external_attr = 0o600 << 16
-            output_zip.writestr(info, input_zip.read(name))
+            content = input_zip.read(name)
+            if name == "docProps/core.xml":
+                # openpyxl replaces modified during save, even when explicitly set.
+                content = re.sub(
+                    rb"(<dcterms:modified[^>]*>)[^<]*(</dcterms:modified>)",
+                    lambda match: match[1] + modified_at.encode("ascii") + match[2],
+                    content,
+                )
+            output_zip.writestr(info, content)
 
 
 def _build_workbook(
@@ -474,7 +483,7 @@ def _build_workbook(
 
     raw_path = path.with_suffix(".raw.xlsx")
     workbook.save(raw_path)
-    _normalize_xlsx(raw_path, path)
+    _normalize_xlsx(raw_path, path, snapshot.created_at.strftime("%Y-%m-%dT%H:%M:%SZ"))
     raw_path.unlink(missing_ok=True)
 
 
@@ -704,7 +713,7 @@ def create_final_artifacts(
             _json_text(_manifest(snapshot, temporary)),
         )
         verify_snapshot(workspace, snapshot_id)
-        os.replace(temporary, destination)
+        publish_directory(temporary, destination)
     except BaseException:
         shutil.rmtree(temporary, ignore_errors=True)
         raise

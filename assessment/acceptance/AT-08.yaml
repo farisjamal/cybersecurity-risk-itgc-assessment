@@ -1,13 +1,23 @@
-schema_version: "1.0"
+schema_version: '1.0'
 id: AT-08
-requirement_ids: [FR-08]
-status: partial
+requirement_ids:
+- FR-08
+status: passed
 revision: uncommitted-working-tree
-environment: Windows local Python 3.12 test environment; live PostgreSQL restore not executed.
-evidence_ids: [EVID-POL-06, EVID-POL-07, EVID-S05-BASELINE, EVID-S05-RETEST]
-evidence_references: [tests/acceptance/test_portal_scenarios.py::test_backup_hash_failure_and_isolated_restore]
-result: Corrupt-artifact rejection, isolated fixture restoration, and an S05 retest chain are covered.
+environment: Windows 11 with Docker Desktop Linux containers and PostgreSQL 16; observed
+  11 October 2026.
+evidence_ids:
+- EVID-POL-06
+- EVID-POL-07
+- EVID-S05-BASELINE
+- EVID-S05-RETEST
+- EVID-RUNTIME-20261011
+evidence_references:
+- tests/acceptance/test_portal_scenarios.py::test_backup_hash_failure_and_isolated_restore
+- docs/assessment-review.md
+result: PostgreSQL logical restore reconciled all seven business tables and 51 requests
+  through read-only API acceptance. Corrupt backups and populated targets are rejected
+  by acceptance tests.
 limitations:
-  - No live PostgreSQL backup and restore evidence exists.
-  - RTO and RPO were not measured from actual exercise outage and recovery timestamps.
-recorded_at: 2026-09-26T02:34:58Z
+- One local logical restore; no infrastructure outage or enterprise recovery claim.
+recorded_at: '2026-10-11T10:41:16.791857+00:00'

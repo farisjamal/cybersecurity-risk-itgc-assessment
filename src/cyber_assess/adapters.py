@@ -15,6 +15,7 @@ from cyber_assess.errors import InvalidInputError, MissingPrerequisiteError
 
 SCENARIO_IDS = frozenset({"S01", "S02", "S03", "S04", "S05", "S06"})
 RESOURCE_PATTERN = re.compile(r"^cyber-assess-scenario-[a-z0-9-]{8,64}$")
+LAB_PROJECT = "cybersecurity-itgc-lab"
 
 
 def _docker() -> str:
@@ -50,13 +51,13 @@ def run_compose(workspace: Path, action: str) -> dict[str, object]:
         _docker(),
         "compose",
         "-p",
-        "example-bank-lab",
+        LAB_PROJECT,
         "-f",
         "compose.yaml",
     ]
     command += ["up", "-d"] if action == "up" else ["stop"]
     _run(workspace, command)
-    return {"status": "completed", "action": action, "project": "example-bank-lab"}
+    return {"status": "completed", "action": action, "project": LAB_PROJECT}
 
 
 def _app_command(workspace: Path, arguments: list[str]) -> dict[str, Any]:
@@ -64,7 +65,7 @@ def _app_command(workspace: Path, arguments: list[str]) -> dict[str, Any]:
         _docker(),
         "compose",
         "-p",
-        "example-bank-lab",
+        LAB_PROJECT,
         "-f",
         "compose.yaml",
         "exec",
@@ -83,6 +84,63 @@ def _app_command(workspace: Path, arguments: list[str]) -> dict[str, Any]:
     if not isinstance(payload, dict):
         raise MissingPrerequisiteError("bank_lab returned a non-object result")
     return cast(dict[str, Any], payload)
+
+
+def _scenario_compose(resource_name: str) -> list[str]:
+    if not re.fullmatch(r"cyber-assess-scenario-s0[1-6]-[a-z0-9]{12}", resource_name):
+        raise InvalidInputError("scenario project failed the fixed project allowlist")
+    return [
+        _docker(),
+        "compose",
+        "-p",
+        resource_name,
+        "-f",
+        "compose.yaml",
+        "-f",
+        "config/compose.scenario.yaml",
+    ]
+
+
+def _scenario_command(
+    workspace: Path, arguments: list[str], resource_name: str, scenario_id: str
+) -> dict[str, Any]:
+    command = [
+        *_scenario_compose(resource_name),
+        "run",
+        "--rm",
+        "--no-deps",
+        "-T",
+        "-e",
+        f"BANK_LAB_SCENARIO_ID={scenario_id}",
+        "app",
+        "python",
+        "-m",
+        "bank_lab",
+        *arguments,
+    ]
+    output = _run(workspace, command)
+    try:
+        payload = json.loads(output)
+    except json.JSONDecodeError as exc:
+        raise MissingPrerequisiteError("scenario returned invalid JSON") from exc
+    if not isinstance(payload, dict):
+        raise MissingPrerequisiteError("scenario returned a non-object result")
+    return cast(dict[str, Any], payload)
+
+
+def _prepare_scenario(workspace: Path, resource_name: str, scenario_id: str) -> None:
+    command = _scenario_compose(resource_name)
+    try:
+        _run(workspace, [*command, "up", "-d", "--wait", "db"])
+        _scenario_command(workspace, ["seed", "--seed", "42"], resource_name, scenario_id)
+    except BaseException:
+        _run(workspace, [*command, "down", "--timeout", "10"])
+        raise
+
+
+def _stop_scenario(workspace: Path, resource_name: str) -> None:
+    # Preserve project-scoped volumes as evidence. Never delete unrelated state.
+    _run(workspace, [*_scenario_compose(resource_name), "down", "--timeout", "10"])
 
 
 def seed_lab(workspace: Path, seed: int) -> dict[str, object]:
@@ -107,7 +165,9 @@ def _write_run(workspace: Path, payload: dict[str, Any]) -> dict[str, Any]:
     path.parent.mkdir(parents=True, exist_ok=True)
     if path.exists():
         raise FileExistsError(f"scenario run already exists: {payload['run_id']}")
-    path.write_text(json.dumps(payload, indent=2, default=str) + "\n", encoding="utf-8")
+    path.write_text(
+        json.dumps(payload, indent=2, default=str) + "\n", encoding="utf-8", newline="\n"
+    )
     return payload
 
 
@@ -181,7 +241,15 @@ def route_scenario(
     if not RESOURCE_PATTERN.fullmatch(resource_name):
         raise InvalidInputError("scenario resource failed the fixed project allowlist")
 
-    result = _app_command(workspace, arguments)
+    if action == "run":
+        _prepare_scenario(workspace, resource_name, scenario_id)
+    try:
+        result = _scenario_command(workspace, arguments, resource_name, scenario_id)
+    except BaseException:
+        _stop_scenario(workspace, resource_name)
+        raise
+    if action == "retest":
+        _stop_scenario(workspace, resource_name)
     run_id = str(result.get("run_id") or f"RUN-{scenario_id}-{uuid4().hex[:12].upper()}")
     payload = {
         "schema_version": "1.0",

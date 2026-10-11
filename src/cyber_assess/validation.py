@@ -174,6 +174,8 @@ def _validate_governance_records(
         evidence_ids = set(evidence_by_id)
         blocker_ids = {item.id for item in blockers.blockers}
         source_ids = {item.id for item in mappings.sources}
+        if missing := set(engagement.criteria_source_ids).difference(source_ids):
+            errors.append(f"engagement references missing criteria sources: {sorted(missing)}")
 
         for label, ids in (
             ("asset", [item.id for item in assets.assets]),

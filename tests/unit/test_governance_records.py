@@ -62,8 +62,9 @@ def test_asset_and_risk_register_cover_the_engagement_and_control_catalogue() ->
     assert assessed["RISK-IAM-02"].rating == 20
 
 
-def test_mapping_register_covers_every_nist_category_but_remains_unverified() -> None:
+def test_mapping_register_uses_verified_current_primary_sources() -> None:
     register = load_model(ROOT / "assessment" / "mappings.yaml", MappingRegister)
+    sources = {source.id: source for source in register.sources}
     nist_mappings = {
         mapping.control_ids[0]: mapping
         for mapping in register.mappings
@@ -74,9 +75,15 @@ def test_mapping_register_covers_every_nist_category_but_remains_unverified() ->
     for control in _controls():
         mapping = nist_mappings[control.id]
         assert mapping.reference_locator == control.nist_categories
-        assert mapping.verification_status == "unverified_reference"
-    assert all(source.verification_status == "unverified_reference" for source in register.sources)
-    assert any(mapping.source_id == "SRC-BNM-RMIT-2025" for mapping in register.mappings)
+        assert mapping.verification_status == "verified_reference"
+    assert sources["SRC-NIST-CSF-2"].local_sha256 == (
+        "3c31f46fee98cac0c4323453e5109291a213b4de7fef8c058af9bf67f717433c"
+    )
+    assert sources["SRC-BNM-RMIT-2026"].local_sha256 == (
+        "d7b8e6753a78514e90fbfe0cef6bd40ff8bccbfc60e17c7575db4cec1fba6cd6"
+    )
+    assert all(source.verification_status == "verified_reference" for source in register.sources)
+    assert any(mapping.source_id == "SRC-BNM-RMIT-2026" for mapping in register.mappings)
 
 
 def test_acceptance_register_records_gaps_instead_of_unsupported_passes() -> None:
@@ -84,10 +91,14 @@ def test_acceptance_register_records_gaps_instead_of_unsupported_passes() -> Non
     by_id = {result.id: result for result in results}
 
     assert set(by_id) == {f"AT-{number:02d}" for number in range(1, 21)}
-    assert {result.status for result in results} == {"passed", "partial", "missing"}
-    assert {result.id for result in results if result.status == "passed"} == {"AT-13"}
-    assert by_id["AT-10"].status == "missing"
-    assert by_id["AT-19"].status == "missing"
+    assert {result.status for result in results} == {"passed", "partial"}
+    assert {result.id for result in results if result.status == "passed"} == {
+        "AT-08",
+        "AT-10",
+        "AT-13",
+        "AT-14",
+    }
+    assert by_id["AT-19"].status == "partial"
     assert all(result.limitations for result in results if result.status != "passed")
     assert set(by_id["AT-13"].evidence_ids) == {
         "EVID-S01-BASELINE",
@@ -108,13 +119,20 @@ def test_governance_workflow_records_keep_open_gaps_attributable() -> None:
     blockers = load_model(governance / "blockers.yaml", BlockerRegister)
 
     assert {request.status for request in requests.requests} == {
-        "requested",
         "received",
         "incomplete",
         "blocked",
     }
     assert any(milestone.status == "blocked" for milestone in milestones.milestones)
-    assert all(blocker.status == "open" for blocker in blockers.blockers)
+    assert {blocker.id for blocker in blockers.blockers if blocker.status == "resolved"} == {
+        "BLK-RUNTIME-001",
+        "BLK-MAPPING-001",
+    }
+    assert {blocker.id for blocker in blockers.blockers if blocker.status == "open"} == {
+        "BLK-ASSESS-001",
+        "BLK-DELIVERY-001",
+        "BLK-REVIEW-001",
+    }
     assert all(blocker.resolution_criteria for blocker in blockers.blockers)
 
 

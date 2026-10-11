@@ -12,6 +12,17 @@ COPY pyproject.toml uv.lock README.md ./
 COPY src ./src
 RUN uv sync --frozen --no-dev --no-editable
 
+FROM builder AS verification
+ENV PATH="/opt/venv/bin:${PATH}"
+RUN uv sync --frozen --all-groups --no-editable
+COPY tests ./tests
+COPY fixtures ./fixtures
+COPY assessment ./assessment
+COPY config ./config
+COPY PRD.md ./PRD.md
+COPY templates ./templates
+CMD ["python", "-m", "pytest", "-q", "-p", "no:cacheprovider"]
+
 FROM python:3.12.11-slim-bookworm AS runtime
 
 ENV PATH="/opt/venv/bin:${PATH}" \
@@ -29,7 +40,9 @@ COPY --chown=banklab:banklab src ./src
 COPY --chown=banklab:banklab migrations ./migrations
 COPY --chown=banklab:banklab templates ./templates
 COPY --chown=banklab:banklab alembic.ini ./alembic.ini
+COPY --chown=banklab:banklab scripts/verify-runtime.py ./scripts/verify-runtime.py
 COPY --chown=banklab:banklab --chmod=0555 scripts/container-entrypoint.sh /usr/local/bin/container-entrypoint
+RUN mkdir -p /app/runtime && chown banklab:banklab /app/runtime
 
 USER 10001:10001
 EXPOSE 8000

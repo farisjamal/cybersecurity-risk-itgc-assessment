@@ -1,0 +1,19 @@
+{
+  "schema_version": "1.0",
+  "run_id": "27f59f5a-be61-4a63-aa45-705e0a229b94",
+  "scenario_id": "S06",
+  "action": "run",
+  "baseline_run_id": null,
+  "resource_name": "cyber-assess-scenario-s06-10645c8f2e69",
+  "recorded_at": "2026-10-11T10:27:09.502171Z",
+  "result": {
+    "observations": {
+      "action": "user.deactivated",
+      "event_emitted": false,
+      "user_id": "USR-007"
+    },
+    "run_id": "27f59f5a-be61-4a63-aa45-705e0a229b94",
+    "scenario_id": "S06",
+    "status": "frozen"
+  }
+}

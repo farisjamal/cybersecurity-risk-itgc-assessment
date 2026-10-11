@@ -1,0 +1,17 @@
+schema_version: '1.0'
+id: EVID-RUNTIME-20261011
+path: fixtures/evidence/completion/runtime-20261011.json
+sha256: d421aa19f823ab5ca6667d8315dacb066e289546cd04d9587d801c446f604665
+size: 12892
+media_type: application/json
+collector: local_verification
+collected_at: '2026-10-11T10:23:32.819530+00:00'
+source_period: '2026-10-11T10:23:32.819530+00:00'
+run_id: RUN-RUNTIME-20261011
+provenance: observed_lab
+sensitivity: sanitized
+parent_evidence_id: null
+query_or_action: PostgreSQL logical backup/restore to an empty isolated database;
+  reconcile tables and read-only API acceptance.
+tool_version: 0.1.0
+redactions: []

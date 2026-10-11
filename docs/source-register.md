@@ -17,6 +17,17 @@ before publishing a mapping or regulatory observation.
 | R7 | [Docker Compose application model](https://docs.docker.com/compose/intro/compose-application-model/) | Service/network/volume architecture | Checked per PRD; exact image/runtime behavior verified locally |
 | R8 | User-supplied Associate — Digital Trust and Cybersecurity job description | Portfolio capability alignment | Private supplied input; vacancy status not verified and text is not redistributed |
 
+## Active mapping sources as of 11 October 2026
+
+The canonical [mapping register](../assessment/mappings.yaml) supersedes the historical BNM pointers
+above. It uses NIST CSF 2.0 (26 February 2024) and the
+[BNM RMiT policy dated 25 September 2026](https://www.bnm.gov.my/documents/20124/938039/pd-rmit-sep26.pdf).
+Source IDs are `SRC-NIST-CSF-2` and `SRC-BNM-RMIT-2026`. The retained local reference files match the
+SHA-256 values recorded in that register; source PDFs are not redistributed. Selected category and
+paragraph locators are verified references, while coverage remains limited to each stated aspect.
+This does not establish regulatory compliance. Verified reference status does not close an untested
+control or substitute for assessor judgment.
+
 ## Mapping record minimum
 
 Each mapping records source ID, framework/version, document date, URL, retrieval date, paragraph or

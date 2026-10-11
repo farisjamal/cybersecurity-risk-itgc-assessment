@@ -3,13 +3,16 @@
 from __future__ import annotations
 
 import re
+import tempfile
 from dataclasses import dataclass
 from datetime import timedelta
+from pathlib import Path
 
 from sqlalchemy import select
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from bank_lab.audit import emit_event
+from bank_lab.backups import BackupError, load_and_validate_backup
 from bank_lab.models import (
     AccountStatus,
     AuditEvent,
@@ -25,6 +28,7 @@ from bank_lab.models import (
     User,
     utcnow,
 )
+from bank_lab.services import ForbiddenError, require_privileged_mfa
 
 
 class ScenarioError(Exception):
@@ -310,8 +314,23 @@ async def retest_scenario(
         passed = bool(user and user.role == Role.STAFF)
         evidence = {"actual_role": user.role if user else None}
     elif definition.id == "S03":
-        passed = remediation.observations.get("privileged_mfa_enforced") is True
-        evidence = {"password_only_denied": passed, "mfa_session_allowed": passed}
+        administrator = await db.get(User, "USR-001")
+        if administrator is None:
+            raise ScenarioError("S03 requires the administrator fixture")
+        probe = Session(user_id=administrator.id, mfa_verified=False)
+        denied = False
+        try:
+            require_privileged_mfa(probe, administrator)
+        except ForbiddenError:
+            denied = True
+        probe.mfa_verified = True
+        allowed = True
+        try:
+            require_privileged_mfa(probe, administrator)
+        except ForbiddenError:
+            allowed = False
+        passed = denied and allowed
+        evidence = {"password_only_denied": denied, "mfa_session_allowed": allowed}
     elif definition.id == "S04":
         change = await db.get(ChangeRecord, str(baseline.observations["change_id"]))
         passed = bool(change and change.approver_id != change.requester_id and change.test_evidence)
@@ -321,8 +340,16 @@ async def retest_scenario(
         }
     elif definition.id == "S05":
         backup = await db.get(BackupRun, str(baseline.observations["backup_id"]))
-        passed = bool(backup and backup.status == RunStatus.FAILED)
-        evidence = {"corrupt_backup_rejected": passed, "failed_original_preserved": bool(backup)}
+        rejected = False
+        with tempfile.TemporaryDirectory(prefix="cyber-assess-s05-") as directory:
+            corrupt = Path(directory) / "corrupt.json"
+            corrupt.write_bytes(b"intentionally corrupt scenario backup")
+            try:
+                load_and_validate_backup(corrupt, "0" * 64)
+            except BackupError:
+                rejected = True
+        passed = bool(rejected and backup and backup.status == RunStatus.FAILED)
+        evidence = {"corrupt_backup_rejected": rejected, "failed_original_preserved": bool(backup)}
     else:
         event_id = remediation.observations.get("event_id")
         passed = bool(event_id and await db.get(AuditEvent, event_id))

@@ -1,0 +1,17 @@
+schema_version: '1.0'
+id: EVID-SCENARIOS-20261011
+path: fixtures/evidence/completion/scenarios-20261011.json
+sha256: 8bad9723314772aeae9461b79e225f9f4f6c16003eeba93a5f48846f73c89e7e
+size: 13134
+media_type: application/json
+collector: local_verification
+collected_at: '2026-10-11T10:27:23.307410+00:00'
+source_period: '2026-10-11T10:27:23.307410+00:00'
+run_id: RUN-SCENARIOS-20261011
+provenance: observed_lab
+sensitivity: sanitized
+parent_evidence_id: null
+query_or_action: Run S01 through S06 in separate Compose projects, remediate, retest
+  and stop scoped containers/networks; compare main lab digests.
+tool_version: 0.1.0
+redactions: []

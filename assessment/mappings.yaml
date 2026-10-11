@@ -4,25 +4,25 @@ sources:
     id: SRC-NIST-CSF-2
     framework: NIST Cybersecurity Framework
     version: "2.0"
-    document_date: null
+    document_date: 2024-02-26
     url: https://nvlpubs.nist.gov/nistpubs/CSWP/NIST.CSWP.29.pdf
-    retrieval_date: 2026-09-24
-    verification_status: unverified_reference
-    local_sha256: null
+    retrieval_date: 2026-09-26
+    verification_status: verified_reference
+    local_sha256: 3c31f46fee98cac0c4323453e5109291a213b4de7fef8c058af9bf67f717433c
     limitations:
-      - The PRD records a historical source check; every used category requires a fresh mapping-level recheck.
-      - No permitted local reference copy and hash are retained in this repository.
+      - Category identifiers were rechecked against Appendix A of official NIST CSWP 29 on 2026-09-26.
+      - The official PDF was hashed in ignored runtime storage; the PDF itself is not redistributed.
   - schema_version: "1.0"
-    id: SRC-BNM-RMIT-2025
+    id: SRC-BNM-RMIT-2026
     framework: Bank Negara Malaysia Risk Management in Technology policy document
-    version: "2025-11-28"
-    document_date: 2025-11-28
-    url: https://www.bnm.gov.my/documents/20124/938039/pd-rmit-nov25.pdf
-    retrieval_date: 2026-09-24
-    verification_status: unverified_reference
-    local_sha256: null
+    version: "2026-09-25"
+    document_date: 2026-09-25
+    url: https://www.bnm.gov.my/documents/20124/938039/pd-rmit-sep26.pdf
+    retrieval_date: 2026-09-26
+    verification_status: verified_reference
+    local_sha256: d7b8e6753a78514e90fbfe0cef6bd40ff8bccbfc60e17c7575db4cec1fba6cd6
     limitations:
-      - Initial paragraph and page pointers came from the PRD and require mapping-level revalidation.
+      - Selected paragraph and displayed-page locators were rechecked against the official 113-page PDF on 2026-09-26.
       - Coverage is limited to selected aspects and does not establish regulatory compliance.
 mappings:
   - &nist_mapping
@@ -39,11 +39,11 @@ mappings:
     target_practice: Execute the documented control procedure and retain observed operational evidence.
     gap: Operating evidence is unavailable except where specifically cited.
     priority: medium
-    action: Revalidate source categories and execute the control workpaper before publication.
+    action: Preserve the verified category locator and execute the control workpaper before publication.
     coverage_conclusion: not_assessed
-    verification_status: unverified_reference
+    verification_status: verified_reference
     limitations:
-      - Category locators are inherited from PRD v1.0 and were not rechecked in this implementation run.
+      - Category locators were rechecked at category level against official NIST CSWP 29 Appendix A.
       - A project mapping is not a certification, framework tier, or complete outcome assessment.
   - <<: *nist_mapping
     id: MAP-NIST-GOV-02
@@ -210,7 +210,7 @@ mappings:
   - &rmit_mapping
     schema_version: "1.0"
     id: MAP-RMIT-10-8
-    source_id: SRC-BNM-RMIT-2025
+    source_id: SRC-BNM-RMIT-2026
     reference_locator: ["10.8"]
     displayed_page: "15"
     summary: Selected system-testing aspect identified in the PRD source review.
@@ -221,11 +221,11 @@ mappings:
     target_practice: Execute the project control and separately assess the selected mapped aspect.
     gap: Mapping applicability and operating coverage are not assessed.
     priority: medium
-    action: Revalidate the locator and execute the control procedure before publishing the observation.
+    action: Preserve the verified locator and execute the control procedure before publishing the observation.
     coverage_conclusion: not_assessed
-    verification_status: unverified_reference
+    verification_status: verified_reference
     limitations:
-      - The locator is inherited from PRD v1.0 and was not rechecked in this implementation run.
+      - The locator was rechecked against the official 25 September 2026 policy document.
       - The mapping covers a selected aspect only and cannot support a compliance conclusion.
   - <<: *rmit_mapping
     id: MAP-RMIT-10-11
@@ -240,7 +240,7 @@ mappings:
   - <<: *rmit_mapping
     id: MAP-RMIT-10-44
     reference_locator: ["10.44"]
-    displayed_page: "22"
+    displayed_page: "23"
     summary: Selected backup and restoration aspect identified in the PRD source review.
     rationale: OPS-01 and OPS-02 assess backup validation and isolated restoration.
     control_ids: [OPS-01, OPS-02]
@@ -251,7 +251,7 @@ mappings:
   - <<: *rmit_mapping
     id: MAP-RMIT-10-47
     reference_locator: ["10.47"]
-    displayed_page: 22-23
+    displayed_page: "23"
     summary: Selected supplier due-diligence aspect identified in the PRD source review.
     rationale: GOV-03 assesses fictional supplier criticality, responsibilities, and gaps.
     control_ids: [GOV-03]
@@ -261,7 +261,7 @@ mappings:
   - <<: *rmit_mapping
     id: MAP-RMIT-10-53-54
     reference_locator: ["10.53", "10.54"]
-    displayed_page: "25"
+    displayed_page: "26"
     summary: Selected access-policy and principle aspects identified in the PRD source review.
     rationale: IAM-01 and IAM-02 assess joiner approval and leaver deactivation.
     control_ids: [IAM-01, IAM-02]
@@ -274,7 +274,7 @@ mappings:
   - <<: *rmit_mapping
     id: MAP-RMIT-10-55
     reference_locator: ["10.55"]
-    displayed_page: "25"
+    displayed_page: "26"
     summary: Selected strong-authentication aspect identified in the PRD source review.
     rationale: IAM-04 assesses privileged MFA and session enforcement.
     control_ids: [IAM-04]
@@ -285,7 +285,7 @@ mappings:
   - <<: *rmit_mapping
     id: MAP-RMIT-10-56
     reference_locator: ["10.56"]
-    displayed_page: "25"
+    displayed_page: "26"
     summary: Selected access-matrix aspect identified in the PRD source review.
     rationale: IAM-03 and IAM-05 assess least privilege and complete access review.
     control_ids: [IAM-03, IAM-05]
@@ -295,7 +295,7 @@ mappings:
   - <<: *rmit_mapping
     id: MAP-RMIT-10-57
     reference_locator: ["10.57"]
-    displayed_page: "26"
+    displayed_page: "27"
     summary: Selected access-monitoring and logging aspect identified in the PRD source review.
     rationale: OPS-03 and IR-01 assess event coverage, alerts, attribution, and review.
     control_ids: [OPS-03, IR-01]

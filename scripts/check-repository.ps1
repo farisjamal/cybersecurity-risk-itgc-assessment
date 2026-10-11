@@ -22,7 +22,7 @@ try {
     Invoke-Gate "Ruff format" { uv run ruff format --check . }
     Invoke-Gate "Strict type checking" { uv run python -m mypy src }
     Invoke-Gate "Locked dependency audit" {
-        uv run python -m pip_audit --requirement requirements.lock --disable-pip --progress-spinner off
+        uv run python -m cyber_assess dependencies audit --json
     }
     Invoke-Gate "Tests and coverage" {
         uv run pytest -p no:cacheprovider --basetemp "runtime/pytest-coverage-$PID" -m "not slow"

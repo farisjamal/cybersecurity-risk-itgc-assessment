@@ -1,0 +1,14 @@
+{
+  "schema_version": "1.0",
+  "scenario_id": "S01",
+  "run_id": "RUN-S01-BASELINE",
+  "resource_name": "cyber-assess-scenario-s01fixture",
+  "execution_mode": "deterministic_acceptance_fixture_replay",
+  "observed_at": "2026-09-25T14:00:00Z",
+  "user_id": "USR-021",
+  "employment_status": "terminated",
+  "new_login_result": "allowed",
+  "existing_session_result": "allowed",
+  "control_exception_observed": true,
+  "claim_limit": "Local fixture replay only; not production evidence or independent assurance."
+}

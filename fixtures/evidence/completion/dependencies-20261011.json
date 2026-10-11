@@ -1,0 +1,10 @@
+{
+  "recorded_at": "2026-10-11T10:33:19.372936+00:00",
+  "requirements_sha256": "9ff8b988374a1ce2ea725eec3ed4a8ae0d3808f6414537044a9551ec9526c8f5",
+  "status": "clean",
+  "dependency_count": 40,
+  "vulnerability_count": 0,
+  "limitations": [
+    "Point-in-time advisory coverage for the locked Python packages only."
+  ]
+}
