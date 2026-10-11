@@ -10,7 +10,7 @@ from cyber_assess.adapters import route_scenario, seed_lab
 
 
 def main() -> None:
-    workspace = Path(__file__).resolve().parents[1]
+    workspace = Path(__file__).resolve().parents[2]
     before = seed_lab(workspace, 42)["summary"]
     results = []
     for number in range(1, 7):

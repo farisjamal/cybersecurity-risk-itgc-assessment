@@ -56,6 +56,9 @@ scenario and verification overrides remove the UI bridge and all published ports
 
 ## Module responsibilities
 
+The [repository layout](repository-layout.md) maps these boundaries to folders and documents
+domain-service ownership, packaged templates and the current script/build entry points.
+
 | Module | Responsibility |
 | --- | --- |
 | `bank_lab` | Web routes, authentication, authorization, workflows, sessions, events, alerts, and health |
@@ -71,3 +74,4 @@ scenario and verification overrides remove the UI bridge and all published ports
 - [ADR-0001: architecture baseline](decisions/0001-architecture-baseline.md)
 - [ADR-0002: evidence boundary](decisions/0002-evidence-boundary.md)
 - [ADR-0003: local containment](decisions/0003-local-containment.md)
+- [ADR-0004: repository ownership](decisions/0004-repository-ownership.md)

@@ -104,7 +104,7 @@ def test_scenarios_use_a_separate_compose_project_and_no_default_exec(
     resource = "cyber-assess-scenario-s01-0123456789ab"
     adapters._scenario_command(tmp_path, ["scenario", "run"], resource, "S01")
     assert commands[0][3] == resource
-    assert "config/compose.scenario.yaml" in commands[0]
+    assert "infra/docker/compose.scenario.yaml" in commands[0]
     assert "run" in commands[0] and "--no-deps" in commands[0]
     assert "exec" not in commands[0]
     assert "BANK_LAB_SCENARIO_ID=S01" in commands[0]

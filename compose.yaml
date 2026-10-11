@@ -4,7 +4,7 @@ services:
   app:
     build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: infra/docker/Dockerfile
     init: true
     restart: unless-stopped
     environment:
@@ -43,7 +43,7 @@ services:
   db:
     build:
       context: .
-      dockerfile: config/Dockerfile.postgres
+      dockerfile: infra/docker/Dockerfile.postgres
     image: cybersecurity-itgc-postgres:17.11
     restart: unless-stopped
     environment:

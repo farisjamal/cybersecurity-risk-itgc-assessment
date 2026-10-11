@@ -5,7 +5,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$root = Split-Path -Parent $PSScriptRoot
+$root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $env:UV_CACHE_DIR = Join-Path $root ".uv-cache"
 
 function Invoke-Gate {

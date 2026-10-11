@@ -7,7 +7,7 @@
 
 ## Verification
 
-- [ ] `./scripts/check-repository.ps1` passes, or exceptions are explained below.
+- [ ] `./scripts/quality/check-repository.ps1` passes, or exceptions are explained below.
 - [ ] Relevant negative and failure-path tests are included.
 - [ ] Assessment/schema and local-link validation pass.
 - [ ] No secret, raw evidence, backup, real personal data, or generated output is committed.

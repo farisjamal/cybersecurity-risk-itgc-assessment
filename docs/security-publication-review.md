@@ -52,7 +52,7 @@ CI rescans rebuilt images against the then-current database, so future results c
 
 Local immutable image configuration IDs:
 
-- Application: `sha256:9f2ea4fb8400b1717871385695ca69fa33bda92a75fb6e6c6d1ecd96acff1478`.
+- Application after the folder refactor: `sha256:1249dcc50b1092f8fd1dad885da97c66606d00800a5ede5564807292c8fdb8fc`.
 - Database: `sha256:84aaca73551206b33a77ef67d712a6154da025b627608ab606e23dd64bc4812e`.
 
 The application runtime excludes pip and ensurepip; installation tools remain in build/test
@@ -60,8 +60,10 @@ stages. Updating pip alone still shipped vulnerable vendored tooling, so unused 
 removed from the runtime. The 44 remaining High records have no fix listed in this scan and are
 not treated as resolved or accepted for public runtime deployment.
 
-Windows Python 3.12.14 passed 137 tests with 85.43% branch-aware coverage. Isolated Linux
-Python 3.12.14/PostgreSQL passed 137 tests with 85.22% coverage. Ruff, formatting, strict mypy,
+After the folder refactor, Windows Python 3.12.14 passed 138 tests with 85.65% branch-aware
+coverage. Isolated Linux Python 3.12.14/PostgreSQL passed 138 tests with 85.57% coverage.
+The rebuilt app image was rescanned against the same advisory database with unchanged counts
+and no fixable advisories. Ruff, formatting, strict mypy,
 assessment/finding validation, local links and the 40-package locked Python advisory audit pass.
 Hosted CI for this revision and fresh-machine Windows reproduction remain outstanding.
 
@@ -98,7 +100,7 @@ review does not change those conclusions or the frozen assessment snapshot.
 
 ```powershell
 uv run python -m cyber_assess publication-check --json
-./scripts/check-repository.ps1
+./scripts/quality/check-repository.ps1
 docker compose build --pull --no-cache
 ```
 

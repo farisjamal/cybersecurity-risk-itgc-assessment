@@ -9,7 +9,7 @@ Owner changes follow this workflow:
 1. Open an issue referencing PRD requirement and acceptance-test identifiers.
 2. Create a focused branch from the current default branch.
 3. Implement the smallest complete change with tests and documentation.
-4. Run `./scripts/check-repository.ps1` and the relevant integration checks.
+4. Run `./scripts/quality/check-repository.ps1` and the relevant integration checks.
 5. Open a pull request using the repository template and complete a self-review.
 6. Merge only after required checks pass; release and publication are separate decisions.
 

@@ -149,7 +149,7 @@ async def test_change_deploy_rollback_and_emergency_follow_up_are_attributable(
 
     friday = datetime(2026, 9, 25, 12, 0, tzinfo=UTC)
     monday = datetime(2026, 9, 28, 12, 0, tzinfo=UTC)
-    with patch("bank_lab.services.utcnow", return_value=friday):
+    with patch("bank_lab.services.changes.utcnow", return_value=friday):
         emergency = await service.submit(
             administrator,
             change_type="emergency",
@@ -161,7 +161,7 @@ async def test_change_deploy_rollback_and_emergency_follow_up_are_attributable(
         )
     assert emergency.retrospective_due_at == datetime(2026, 9, 29, 12, 0, tzinfo=UTC)
 
-    with patch("bank_lab.services.utcnow", return_value=monday):
+    with patch("bank_lab.services.changes.utcnow", return_value=monday):
         reviewed = await service.record_emergency_review(
             emergency.id,
             approver,

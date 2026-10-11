@@ -18,6 +18,28 @@ PASSWORD = "Synthetic-Portal-Password-42!"
 TOTP_SECRET = "JBSWY3DPEHPK3PXP"
 
 
+@pytest.mark.integration
+@pytest.mark.asyncio
+async def test_packaged_templates_render_outside_the_repository(
+    tmp_path: Path, monkeypatch: pytest.MonkeyPatch
+) -> None:
+    monkeypatch.chdir(tmp_path)
+    settings = Settings(
+        _env_file=None,
+        environment="test",
+        database_url=f"sqlite+aiosqlite:///{tmp_path / 'templates.db'}",
+    )
+    app = create_app(settings)
+    async with (
+        app.router.lifespan_context(app),
+        AsyncClient(transport=ASGITransport(app=app), base_url="http://test") as client,
+    ):
+        for route in ("/", "/auth/login"):
+            response = await client.get(route)
+            assert response.status_code == 200
+            assert "text/html" in response.headers["content-type"]
+
+
 @pytest.fixture
 async def portal(tmp_path: Path) -> AsyncIterator[tuple[AsyncClient, object]]:
     database_url = os.environ.get("BANK_LAB_DATABASE_URL") or (
@@ -26,7 +48,6 @@ async def portal(tmp_path: Path) -> AsyncIterator[tuple[AsyncClient, object]]:
     settings = Settings(
         database_url=database_url,
         session_pepper="integration-session-pepper",
-        templates_dir=Path("templates"),
         auto_create_schema=False,
     )
     app = create_app(settings)

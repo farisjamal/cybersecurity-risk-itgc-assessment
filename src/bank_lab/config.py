@@ -29,7 +29,9 @@ class Settings(BaseSettings):
     login_window_minutes: int = 5
     login_block_minutes: int = 5
     auto_create_schema: bool = False
-    templates_dir: Path = Path("templates")
+    templates_dir: Path = Field(
+        default_factory=lambda: Path(__file__).resolve().parent / "templates"
+    )
     run_id: str = "BASELINE"
     scenario_id: str | None = None
 

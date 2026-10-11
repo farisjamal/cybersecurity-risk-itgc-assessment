@@ -7,8 +7,12 @@ nav:
   - Home: index.md
   - Setup: setup.md
   - Architecture: architecture.md
+  - Repository layout: repository-layout.md
   - Methodology: methodology.md
   - Testing: testing.md
+  - Recovery runbook: recovery-runbook.md
+  - Assessment review: assessment-review.md
+  - Publication security review: security-publication-review.md
   - Demonstration: demo.md
   - Limitations: limitations.md
   - Source register: source-register.md
@@ -17,3 +21,9 @@ nav:
       - Architecture baseline: decisions/0001-architecture-baseline.md
       - Evidence boundary: decisions/0002-evidence-boundary.md
       - Local containment: decisions/0003-local-containment.md
+      - Repository ownership: decisions/0004-repository-ownership.md
+  - Quality harness:
+      - Overview: quality/harness/README.md
+      - Specification: quality/harness/SPEC.md
+      - Evaluation rubric: quality/harness/EVALUATION_RUBRIC.md
+      - Historical iteration 001: quality/harness/ITERATION-001.md

@@ -15,6 +15,10 @@ Read the [Product Requirements Document](PRD.md) before changing the system. It 
 implementation baseline for scope, architecture, assessment methodology, evidence handling,
 deliverables, and acceptance criteria.
 
+Use the [repository layout](docs/repository-layout.md) to locate domain services, infrastructure,
+scripts, packaged templates and assessment records. Docker assets live under `infra/docker/`;
+the root `compose.yaml` remains the main lab entry point.
+
 The current implementation combines:
 
 - A local service portal with testable identity, access, change, logging, and recovery controls.
@@ -30,12 +34,13 @@ The current implementation combines:
 
 ## Current verification
 
-On 11 October 2026, Windows tests passed 120 cases with 85.67% branch-aware coverage. Ruff lint,
-formatting and strict mypy passed. A separate Linux/PostgreSQL verification target is available:
+After the folder/domain refactor on 11 October 2026, 138 tests passed on Windows (85.65% coverage)
+and Linux/PostgreSQL (85.57%). Ruff, formatting and strict mypy passed; current and historical
+snapshot hashes still verify. The Linux/PostgreSQL verification target runs with:
 
 ```powershell
-docker compose -p cyber-assess-verification -f compose.yaml -f config/compose.verification.yaml build app
-docker compose -p cyber-assess-verification -f compose.yaml -f config/compose.verification.yaml run --rm app
+docker compose -p cyber-assess-verification -f compose.yaml -f infra/docker/compose.verification.yaml build app
+docker compose -p cyber-assess-verification -f compose.yaml -f infra/docker/compose.verification.yaml run --rm app
 ```
 
 Sanitized current observations are registered under `fixtures/evidence/completion`:
@@ -83,14 +88,14 @@ Install the locked environment and run the source/integration gate:
 
 ```powershell
 uv sync --frozen --all-groups
-./scripts/check-repository.ps1 -SkipCompose
+./scripts/quality/check-repository.ps1 -SkipCompose
 ```
 
 For the full local container gate, copy `.env.example` to ignored `.env`, replace every
 `CHANGE_ME` value, start Docker Desktop, and run:
 
 ```powershell
-./scripts/check-repository.ps1
+./scripts/quality/check-repository.ps1
 ```
 
 See [setup](docs/setup.md), [testing and release gates](docs/testing.md), and the
@@ -104,7 +109,7 @@ uv run python -m cyber_assess verify --snapshot SNAPSHOT_ID --json
 uv run python -m cyber_assess export --snapshot SNAPSHOT_ID --json
 uv run python -m cyber_assess report-inputs --snapshot SNAPSHOT_ID --json
 uv run python -m cyber_assess artifacts --snapshot SNAPSHOT_ID --json
-./scripts/render-pdfs.ps1 -SnapshotId SNAPSHOT_ID
+./scripts/reporting/render-pdfs.ps1 -SnapshotId SNAPSHOT_ID
 ```
 
 ## Build sequence

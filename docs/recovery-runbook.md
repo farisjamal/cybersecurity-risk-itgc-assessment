@@ -23,7 +23,7 @@ outage was recovered. Policies POL-06 and POL-07 define the exercise's 30-minute
    ignored restricted runtime storage. The owner reviews findings, lessons and any follow-up action.
    Explicitly identify retained restore databases and scenario volumes before later scoped cleanup.
 
-The automated verifier in [verify-runtime.py](../scripts/verify-runtime.py) implements the logical
+The automated verifier in [verify-runtime.py](../scripts/lab/verify-runtime.py) implements the logical
 exercise and adds one labelled synthetic checkpoint to the source. Each invocation adds a checkpoint
 and retains a restore database; repeated runs are therefore deliberate state changes.
 

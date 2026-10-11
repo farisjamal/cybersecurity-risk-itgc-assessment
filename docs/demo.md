@@ -8,7 +8,7 @@ ID and the evidence generated in that run. Never reuse the illustrative IDs belo
 ## Prepare
 
 ```powershell
-./scripts/demo.ps1 -Scenario S01 -Seed 42 -KeepRunning
+./scripts/lab/demo.ps1 -Scenario S01 -Seed 42 -KeepRunning
 ```
 
 The wrapper runs both environment and application diagnostics, starts the contained lab, seeds the

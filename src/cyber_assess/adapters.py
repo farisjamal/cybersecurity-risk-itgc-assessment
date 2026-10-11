@@ -97,7 +97,7 @@ def _scenario_compose(resource_name: str) -> list[str]:
         "-f",
         "compose.yaml",
         "-f",
-        "config/compose.scenario.yaml",
+        "infra/docker/compose.scenario.yaml",
     ]
 
 

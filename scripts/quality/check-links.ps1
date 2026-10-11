@@ -2,7 +2,7 @@
 param()
 
 $ErrorActionPreference = "Stop"
-$root = Split-Path -Parent $PSScriptRoot
+$root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 Push-Location $root
 try {
     $markdownFiles = if (Test-Path ".git") {

@@ -6,7 +6,7 @@ param(
 )
 
 $ErrorActionPreference = 'Stop'
-$workspace = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '..')).Path
+$workspace = (Resolve-Path -LiteralPath (Join-Path $PSScriptRoot '../..')).Path
 $outputRoot = (Resolve-Path -LiteralPath (Join-Path $workspace 'outputs\artifacts')).Path
 $bundle = (Resolve-Path -LiteralPath (Join-Path $outputRoot $SnapshotId)).Path
 if (-not $bundle.StartsWith($outputRoot + '\', [System.StringComparison]::OrdinalIgnoreCase)) {

@@ -9,6 +9,8 @@ The [PRD](../PRD.md) is the delivery baseline. Use these guides in order:
 
 1. [Setup](setup.md) — prepare a locked Python environment and contained Docker lab.
 2. [Architecture](architecture.md) — understand trust boundaries and data flow.
+   Use the [repository layout](repository-layout.md) to locate implementation, infrastructure,
+   scripts, canonical assessment data and local generated outputs.
 3. [Methodology](methodology.md) — understand the twenty-control assessment and evidence rules.
 4. [Testing](testing.md) — run local and CI quality gates.
 5. [Demonstration](demo.md) — reproduce a representative finding-to-retest chain.

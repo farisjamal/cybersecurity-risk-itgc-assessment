@@ -37,7 +37,7 @@ future non-loopback deployment requires TLS and a separate design review.
 ## Diagnose prerequisites
 
 ```powershell
-./scripts/doctor.ps1
+./scripts/lab/doctor.ps1
 uv run python -m cyber_assess doctor
 ```
 
@@ -80,7 +80,7 @@ Any future reset command must display exact project-scoped targets and require a
 
 ```powershell
 docker compose --env-file .env config --quiet
-./scripts/check-repository.ps1
+./scripts/quality/check-repository.ps1
 ```
 
 Expected command exit codes are `0` success, `1` execution failure, `2` invalid input/schema, `3`

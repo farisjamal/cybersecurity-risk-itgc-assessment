@@ -42,7 +42,7 @@ jobs:
           uv run python -m cyber_assess findings validate --engagement ENG-001
       - name: Validate local Markdown links
         shell: pwsh
-        run: ./scripts/check-links.ps1
+        run: ./scripts/quality/check-links.ps1
       - name: Upload coverage result
         if: always()
         uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
@@ -70,7 +70,7 @@ jobs:
       - run: uv sync --frozen --all-groups
       - name: Start maintained PostgreSQL image
         run: |
-          docker build --pull --no-cache -f config/Dockerfile.postgres -t db-integration-ci .
+          docker build --pull --no-cache -f infra/docker/Dockerfile.postgres -t db-integration-ci .
           docker run -d --name db-integration-ci \
             -e POSTGRES_DB=bank_lab_test -e POSTGRES_USER=bank_lab_test \
             -e POSTGRES_PASSWORD=ci-ephemeral-password \
@@ -122,10 +122,10 @@ jobs:
       - name: Validate PowerShell and local links
         shell: pwsh
         run: |
-          $null = [scriptblock]::Create((Get-Content -Raw ./scripts/doctor.ps1))
-          $null = [scriptblock]::Create((Get-Content -Raw ./scripts/demo.ps1))
-          $null = [scriptblock]::Create((Get-Content -Raw ./scripts/check-repository.ps1))
-          ./scripts/check-links.ps1
+          $null = [scriptblock]::Create((Get-Content -Raw ./scripts/lab/doctor.ps1))
+          $null = [scriptblock]::Create((Get-Content -Raw ./scripts/lab/demo.ps1))
+          $null = [scriptblock]::Create((Get-Content -Raw ./scripts/quality/check-repository.ps1))
+          ./scripts/quality/check-links.ps1
       - name: Portable tests and coverage
         run: uv run pytest -m "not slow"
 
@@ -136,8 +136,8 @@ jobs:
       - uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
       - name: Build patched application and database images
         run: |
-          docker build --pull --no-cache -t lab-security-ci .
-          docker build --pull --no-cache -f config/Dockerfile.postgres -t db-security-ci .
+          docker build --pull --no-cache -f infra/docker/Dockerfile -t lab-security-ci .
+          docker build --pull --no-cache -f infra/docker/Dockerfile.postgres -t db-security-ci .
           mkdir -p runtime/image-audit
           docker save -o runtime/image-audit/app.tar lab-security-ci
           docker save -o runtime/image-audit/db.tar db-security-ci

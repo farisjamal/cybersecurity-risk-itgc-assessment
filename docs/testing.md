@@ -5,13 +5,13 @@
 With `.env` populated and Docker running:
 
 ```powershell
-./scripts/check-repository.ps1
+./scripts/quality/check-repository.ps1
 ```
 
 For a fast source-only pass:
 
 ```powershell
-./scripts/check-repository.ps1 -SkipIntegration -SkipCompose
+./scripts/quality/check-repository.ps1 -SkipIntegration -SkipCompose
 ```
 
 The full gate synchronizes the locked environment, runs Ruff lint/format checks, enforces test
@@ -27,7 +27,7 @@ uv run pytest -m "not slow"
 uv run pytest -m "integration or acceptance"
 uv run python -m cyber_assess assess validate --engagement ENG-001
 uv run python -m cyber_assess findings validate --engagement ENG-001
-./scripts/check-links.ps1
+./scripts/quality/check-links.ps1
 docker compose --env-file .env config --quiet
 ```
 
@@ -39,7 +39,7 @@ uv run python -m cyber_assess verify --snapshot SNAPSHOT_ID --json
 uv run python -m cyber_assess export --snapshot SNAPSHOT_ID --json
 uv run python -m cyber_assess report-inputs --snapshot SNAPSHOT_ID --json
 uv run python -m cyber_assess artifacts --snapshot SNAPSHOT_ID --json
-./scripts/render-pdfs.ps1 -SnapshotId SNAPSHOT_ID
+./scripts/reporting/render-pdfs.ps1 -SnapshotId SNAPSHOT_ID
 ```
 
 The deterministic artifact manifest covers the XLSX, Markdown, HTML, CSV, JSON, and reconciliation
@@ -68,9 +68,23 @@ The [review packet](assessment-review.md) identifies the procedure and judgment 
 Raw JUnit output remains under ignored `runtime`; sanitized operational observations are registered
 under `fixtures/evidence/completion` with hashes. Historical snapshots remain intact.
 
+## Structural refactor verification, 11 October 2026
+
+- Baseline: 137 tests passed before structural changes.
+- Updated suite: 138 tests passed on Windows (85.65% branch-aware coverage) and isolated
+  Linux/PostgreSQL (85.57%). The extra case renders packaged templates outside the repository.
+- All seventeen extracted domain-service definitions preserve their original ASTs. Established
+  service imports remain available through `bank_lab.services`.
+- Built wheel contains all three portal templates and no runtime, assessment, portfolio or
+  credential directories. PowerShell scripts parse after relocation.
+- Current snapshot verifies 105 files; the original frozen baseline verifies fourteen files.
+  Canonical assessment/evidence, PRD and dependency lock bytes are unchanged.
+- Docker/Compose, CI and current documentation use the paths in the
+  [repository ownership guide](repository-layout.md).
+
 ## CI gates
 
-The subsequent source-security review added seventeen payload regression cases: 137 tests pass
+The earlier source-security review added seventeen payload regression cases: 137 tests passed
 on Windows Python 3.12.14 (85.43% coverage) and isolated Linux Python 3.12.14/PostgreSQL
 (85.22%). These runs do not replace the earlier recorded recovery/scenario observations or
 close the outstanding owner and substantive assessment review.

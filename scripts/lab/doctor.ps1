@@ -4,7 +4,7 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
-$root = Split-Path -Parent $PSScriptRoot
+$root = Split-Path -Parent (Split-Path -Parent $PSScriptRoot)
 $env:UV_CACHE_DIR = Join-Path $root ".uv-cache"
 $checks = [System.Collections.Generic.List[object]]::new()
 
