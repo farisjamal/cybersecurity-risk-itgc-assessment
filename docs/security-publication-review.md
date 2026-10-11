@@ -70,6 +70,11 @@ explicitly. Build assertions verify privilege dropping and rejection of an unkno
 Tests cover both fresh isolated initialization and an existing major-17 test volume.
 The application remains non-root, read-only, capability-restricted and loopback-published.
 The Compose database has no published host port and uses an internal network.
+Host smoke testing also found that Docker Engine 29.2.0 retained the requested loopback binding
+but did not publish it for an internal-only app. A separate UI bridge restores host access.
+Only the default app joins it; database, scenario and verification services remain internal.
+The UI bridge permits app egress and must not be described as an outbound-denial control.
+See [Docker port publishing](https://docs.docker.com/engine/network/port-publishing/).
 
 ## Application review and practical limits
 

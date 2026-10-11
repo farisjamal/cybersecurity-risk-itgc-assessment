@@ -6,6 +6,7 @@ services:
     entrypoint: [python, -m, pytest]
     command: [-q, -p, "no:cacheprovider", "--basetemp=/tmp/pytest", "--junitxml=/results/linux-tests.xml"]
     ports: !reset []
+    networks: !override [lab-internal]
     read_only: false
     restart: "no"
     volumes:

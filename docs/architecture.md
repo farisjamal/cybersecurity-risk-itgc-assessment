@@ -47,9 +47,12 @@ named runtime volume and constrained `/tmp`. PostgreSQL persists in a Docker nam
 than a OneDrive-synchronized directory. Runtime secrets are injected from ignored `.env`; they are
 not copied into image layers.
 
-The Compose network is `internal`. Docker can still publish the explicit loopback application port
-to the host, while containers on the network do not receive external routing. PostgreSQL remains
-reachable only by service name from that network.
+PostgreSQL joins only the `internal` database network. The default application also joins a bridge
+network for host port publishing, still bound explicitly to `127.0.0.1:8000`. Docker Engine 29.2.0
+did not publish that port when the application joined internal networks only, despite retaining the
+requested binding in its configuration. Verify host reachability as well as the Compose model.
+The UI bridge permits application egress; this is not an outbound-denial boundary. Isolated
+scenario and verification overrides remove the UI bridge and all published ports.
 
 ## Module responsibilities
 

@@ -22,6 +22,7 @@ services:
         condition: service_healthy
     networks:
       - lab-internal
+      - lab-ui
     volumes:
       - app-runtime:/app/runtime
     read_only: true
@@ -67,6 +68,10 @@ services:
 networks:
   lab-internal:
     internal: true
+  # Docker cannot publish a host port for a container on internal networks only.
+  # The database never joins this network. App ingress still binds 127.0.0.1 only.
+  lab-ui:
+    driver: bridge
 
 volumes:
   postgres-data:

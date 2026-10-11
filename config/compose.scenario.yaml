@@ -3,6 +3,7 @@ services:
   app:
     image: cybersecurity-itgc-lab-app:latest
     ports: !reset []
+    networks: !override [lab-internal]
     restart: "no"
     environment:
       BANK_LAB_ENVIRONMENT: scenario

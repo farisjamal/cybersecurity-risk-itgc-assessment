@@ -107,6 +107,7 @@ jobs:
           $model = docker compose config --format json | ConvertFrom-Json
           if ($model.services.app.ports[0].host_ip -ne '127.0.0.1') { throw 'App port is not loopback-only.' }
           if ($null -ne $model.services.db.ports) { throw 'Database must not publish a host port.' }
+          if ($model.services.db.networks.PSObject.Properties.Name -contains 'lab-ui') { throw 'Database must not join the UI bridge.' }
 
   windows:
     name: Windows PowerShell path

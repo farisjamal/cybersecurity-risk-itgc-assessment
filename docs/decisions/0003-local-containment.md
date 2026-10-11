@@ -11,6 +11,11 @@ does not need public reachability, and publishing PostgreSQL would create needle
 
 ## Decision
 
+Clarification verified on 11 October 2026: the database uses only an internal network. The default
+application additionally needs a UI bridge for Docker to publish its explicit loopback port.
+That bridge permits application egress; no application outbound-denial guarantee is made.
+Scenario and verification overrides retain internal-only networking and no host ports.
+
 Publish the application only at `127.0.0.1:8000`. Do not publish a database port. Use an internal
 Compose network, named volumes, runtime-injected secrets, a non-root application user, read-only root
 filesystem, dropped capabilities, and `no-new-privileges`. Exception behavior requires an explicit,
