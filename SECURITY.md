@@ -9,8 +9,8 @@ personal, financial, authentication, or client data.
 ## Reporting a vulnerability
 
 Do not open a public issue containing exploit details, credentials, evidence archives, or personal
-data. Contact the repository owner privately through the security-reporting channel shown on the
-GitHub repository. Include the affected revision, reproduction conditions, impact, and a minimal
+data. Use [GitHub private vulnerability reporting](https://github.com/farisjamal/cybersecurity-risk-itgc-assessment/security/advisories/new)
+to contact the repository owner. Include the affected revision, reproduction conditions, impact, and a minimal
 proof of concept that does not target third-party systems.
 
 The owner will acknowledge a valid report, assess its scope, and document remediation and retest

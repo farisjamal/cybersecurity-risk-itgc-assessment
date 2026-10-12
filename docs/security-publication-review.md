@@ -24,8 +24,10 @@ work in progress; it is not a final PRD v1 release or authorization to expose th
 The refreshed Trivy database was updated at `2026-10-12T09:47:21.509023105Z`.
 The unfiltered image counts remain unresolved vendor advisory records, not a zero-vulnerability
 claim or proof that all listed vulnerabilities are exploitable. Raw reports stay ignored under
-`runtime/publication-20261012/`. The exact committed history and staged payload must pass a final
-scan before pushing. Check the repository's live Actions page for hosted CI on the published revision.
+`runtime/publication-20261012/`. The final publication commit `a033caa` passed Gitleaks across all nine reachable commits and
+the independent candidate scan. Its 294 published files match the reviewed local tree; no forbidden
+publication paths were present. All six [hosted CI jobs](https://github.com/farisjamal/cybersecurity-risk-itgc-assessment/actions/runs/38251894350) passed on 12 October 2026, including Windows, PostgreSQL, full-history secrets and fixable
+High/Critical image gates. Later revisions must repeat those gates.
 
 ### Current application findings
 
@@ -108,7 +110,8 @@ coverage. Isolated Linux Python 3.12.14/PostgreSQL passed 138 tests with 85.57% 
 The rebuilt app image was rescanned against the same advisory database with unchanged counts
 and no fixable advisories. Ruff, formatting, strict mypy,
 assessment/finding validation, local links and the 40-package locked Python advisory audit pass.
-Hosted CI for this revision and fresh-machine Windows reproduction remain outstanding.
+Hosted CI for the published baseline is linked in the current refresh above. A separate manual
+fresh-machine Windows reproduction remains outstanding.
 
 The PostgreSQL entrypoint, data directory, volume, stop signal and port configuration are preserved
 explicitly. Build assertions verify privilege dropping and rejection of an unknown user.
@@ -138,6 +141,15 @@ Source publication requires the exact reviewed payload, a fresh secret scan and 
 visibility; hosted CI checks the published revision and must pass before treating it as a verified baseline. Final PRD v1 release remains blocked by sixteen incomplete
 control conclusions/procedures, owner review and remaining acceptance requirements. This security
 review does not change those conclusions or the frozen assessment snapshot.
+
+## GitHub protections and disclosure
+
+The public repository enables provider secret scanning and push protection, vulnerability alerts
+and private vulnerability reporting. These add safeguards and do not cover every possible secret
+or replace the local payload/history checks. Review current settings before changing visibility
+or publishing new material. Only the owner's `main` branch was pushed; local app capture refs and
+old local branch names were not published. Commit author metadata uses the owner's GitHub noreply
+address and contains no co-author trailers.
 
 ## Repeatable checks
 

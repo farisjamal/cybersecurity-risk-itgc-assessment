@@ -2,6 +2,11 @@
 
 Independent portfolio project for a **simulated Malaysian financial institution**.
 
+[![CI](https://github.com/farisjamal/cybersecurity-risk-itgc-assessment/actions/workflows/ci.yml/badge.svg)](https://github.com/farisjamal/cybersecurity-risk-itgc-assessment/actions/workflows/ci.yml)
+
+Public source: [GitHub repository](https://github.com/farisjamal/cybersecurity-risk-itgc-assessment). Baseline `a033caa` passed all six
+[hosted CI jobs](https://github.com/farisjamal/cybersecurity-risk-itgc-assessment/actions/runs/38251894350) on 12 October 2026. The badge shows the latest workflow status.
+
 **Status, 12 October 2026:** This is the main twenty-control project selected by the owner.
 The local Docker/PostgreSQL lab, isolated recovery and all six scenario retests have now been
 executed. Selected framework references are verified. This is **not** the final PRD v1 release:
@@ -87,7 +92,7 @@ As of 26 September 2026:
   seven-page 16:9 presentation PDF rendered with Microsoft Edge; their hashes and renderer version
   are recorded separately from the deterministic source-artifact manifest.
 - Docker was unavailable during that historical run. Current local observations above supersede
-  that runtime limitation; the current revision still requires a fresh hosted CI run.
+  that runtime limitation. Current hosted verification is linked above.
 
 ## Local verification
 
