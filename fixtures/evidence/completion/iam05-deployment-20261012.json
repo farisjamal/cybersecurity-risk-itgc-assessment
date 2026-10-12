@@ -1,0 +1,55 @@
+{
+  "control_id": "IAM-05",
+  "collected_at": "2026-10-12T12:04:32.156037+00:00",
+  "live_postgresql_smoke": {
+    "collected_at": "2026-10-12T12:02:47.593487+00:00",
+    "source_sha256": "4d94c7203de62374c02a2515128e7dd9034febeebcfea6709d078a97c21e16d1",
+    "accounts": 24,
+    "cases": [
+      {
+        "case": "duplicate",
+        "result": "rejected_before_write"
+      },
+      {
+        "case": "conflicting_duplicate",
+        "result": "rejected_before_write"
+      },
+      {
+        "case": "missing_decision",
+        "result": "rejected_before_write"
+      },
+      {
+        "case": "blank_decision",
+        "result": "rejected_before_write"
+      },
+      {
+        "case": "non_string_decision",
+        "result": "rejected_before_write"
+      }
+    ],
+    "reviews_before": 1,
+    "reviews_after": 1,
+    "events_before": 0,
+    "events_after": 0,
+    "transaction": "PostgreSQL READ ONLY; no review/event written.",
+    "scope": "Direct service invocation inside running main app; no HTTP review endpoint or human review asserted."
+  },
+  "suite_results": {
+    "windows": {
+      "passed": 166,
+      "coverage_percent": 86.12,
+      "scope": "New IAM-05 tests use disposable SQLite; separate Linux integration tests use PostgreSQL."
+    },
+    "linux_postgresql": {
+      "passed": 166,
+      "coverage_percent": 86.15,
+      "scope": "New IAM-05 tests use disposable SQLite; separate Linux integration tests use PostgreSQL."
+    }
+  },
+  "limitations": [
+    "Main-lab smoke is direct service invocation in PostgreSQL READ ONLY, not an HTTP endpoint or new human review.",
+    "No new review, account decision or completion event is created by this check.",
+    "Owner substantive review and follow-up evidence remain open.",
+    "No new image vulnerability scan, final snapshot or GitHub publication is implied."
+  ]
+}

@@ -7,6 +7,9 @@ and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ### Added
 
+- Current IAM-01/03/05 test evidence and an attributable owner access-decision packet.
+- Public-source security review refresh with explicit PAM and assessment limitations.
+
 - Reproducible Python 3.12 project and dependency lock.
 - Local FastAPI/PostgreSQL lab foundation with secure-by-default configuration.
 - File-based assessment engine, evidence integrity checks, and S01 traceability baseline.
@@ -20,6 +23,9 @@ and [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 - Moved review harness documentation under `docs/quality` and added a repository ownership guide.
 
 ### Security
+
+- Restricted read-only service requests to identities that own or are assigned the request.
+- Rejected duplicate and invalid access-review decisions before persisting completion.
 
 - Loopback-only host exposure and no PostgreSQL host port.
 - Opaque server-side sessions, Argon2 password hashing, role checks, CSRF controls,

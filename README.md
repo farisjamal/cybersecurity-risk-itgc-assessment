@@ -2,7 +2,7 @@
 
 Independent portfolio project for a **simulated Malaysian financial institution**.
 
-**Status, 11 October 2026:** This is the main twenty-control project selected by the owner.
+**Status, 12 October 2026:** This is the main twenty-control project selected by the owner.
 The local Docker/PostgreSQL lab, isolated recovery and all six scenario retests have now been
 executed. Selected framework references are verified. This is **not** the final PRD v1 release:
 sixteen control conclusions remain incomplete, substantive owner review is open and the acceptance
@@ -19,12 +19,18 @@ Use the [repository layout](docs/repository-layout.md) to locate domain services
 scripts, packaged templates and assessment records. Docker assets live under `infra/docker/`;
 the root `compose.yaml` remains the main lab entry point.
 
+Owner access decisions are recorded in the [IAM-05 packet](docs/iam05-access-review.md):
+15 scoped approvals, six privileged approvals conditional on RBAC/PAM, and three terminated
+accounts denied access and retained disabled. **PAM is not yet implemented or demonstrated.**
+This source repository is an educational work in progress; publication does not close that condition.
+
 The current implementation combines:
 
 - A local service portal with testable identity, access, change, logging, and recovery controls.
 - A 20-control catalogue and one frozen workpaper per control. IAM-02/S01, IAM-04/S03,
   OPS-01/S05, and OPS-03/S06 have executed conclusions; the other sixteen retain explicit
-  `not_assessed`/`not_tested` limitations.
+  incomplete conclusions. IAM-01/03/05 now have bounded current tests and retain
+  `not_assessed`/`insufficient_evidence`; thirteen other controls remain unexecuted.
 - Six reproducible exception paths and preserved baseline/action/retest chains for S01, S03, S05,
   and S06.
 - Structured assets, risks, mappings, evidence requests, blockers, milestones, review decisions,
@@ -34,8 +40,9 @@ The current implementation combines:
 
 ## Current verification
 
-After the folder/domain refactor on 11 October 2026, 138 tests passed on Windows (85.65% coverage)
-and Linux/PostgreSQL (85.57%). Ruff, formatting and strict mypy passed; current and historical
+After the IAM-01/03/05 corrections on 12 October 2026, 166 tests passed on Windows (86.12% coverage)
+and Linux/PostgreSQL (86.15%). New authorization/review cases use disposable SQLite; separate
+read-only smoke checks verify the main PostgreSQL deployment boundary. Ruff, formatting and strict mypy passed; current and historical
 snapshot hashes still verify. The Linux/PostgreSQL verification target runs with:
 
 ```powershell

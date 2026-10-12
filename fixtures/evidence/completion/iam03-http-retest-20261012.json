@@ -1,0 +1,110 @@
+{
+  "control_id": "IAM-03",
+  "collected_at": "2026-10-12T11:41:39.029565+00:00",
+  "passed": 20,
+  "cases": [
+    {
+      "name": "test_privileged_account_endpoint_boundaries[1]",
+      "passed": true
+    },
+    {
+      "name": "test_privileged_account_endpoint_boundaries[2]",
+      "passed": true
+    },
+    {
+      "name": "test_privileged_account_endpoint_boundaries[3]",
+      "passed": true
+    },
+    {
+      "name": "test_privileged_account_endpoint_boundaries[4]",
+      "passed": true
+    },
+    {
+      "name": "test_privileged_account_endpoint_boundaries[5]",
+      "passed": true
+    },
+    {
+      "name": "test_privileged_account_endpoint_boundaries[6]",
+      "passed": true
+    },
+    {
+      "name": "test_privileged_account_endpoint_boundaries[7]",
+      "passed": true
+    },
+    {
+      "name": "test_privileged_account_endpoint_boundaries[19]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[owner-1]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[owner-3]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[owner-7]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[owner-19]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[assigned-1]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[assigned-3]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[assigned-7]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[assigned-19]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[unrelated-1]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[unrelated-3]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[unrelated-7]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[unrelated-19]",
+      "passed": true
+    }
+  ],
+  "owner_decision": "Owner selected own/assigned requests only for read_only in the current conversation on 2026-10-12. No broader matrix approval is inferred.",
+  "correction": "Read-only listing and direct detail access now enforce ownership/assignment; all mutations remain prohibited. Unrelated requests return 404.",
+  "baseline_evidence_id": "EVID-IAM03-HTTP-20261012",
+  "baseline_note": "The initial twenty tests matched then-observed rules, including global read-only reads. Their success did not establish owner-approved least privilege. Original baseline bytes retained.",
+  "source_hashes": [
+    {
+      "path": "tests/integration/test_iam03_authorization.py",
+      "sha256": "cc9a89f73ef46c308d0d0984cf3e1e8ed5bea7146af38d8a6f1e83ae4e7ac444"
+    },
+    {
+      "path": "src/bank_lab/services/requests.py",
+      "sha256": "54bc5a60e357636336be637c71d618814d60d0edcb2c3a6735cfbb2e1a03876a"
+    },
+    {
+      "path": "tests/unit/test_bank_security.py",
+      "sha256": "938132e60b5b0670761279965921f7da2aad6d924934a68ebe3c66ebbd55df38"
+    }
+  ],
+  "limitations": [
+    "HTTP ASGI tests on disposable SQLite only; main-lab deployment and PostgreSQL execution are separately verified, not implied by this record.",
+    "Owner approval of the remaining role matrix and six privileged assignments is still unverified.",
+    "Selected routes/verbs and representative non-privileged identities only; no historical operation claim."
+  ]
+}

@@ -1,0 +1,18 @@
+schema_version: '1.0'
+id: EVID-IAM03-HTTP-20261012
+path: fixtures/evidence/completion/iam03-http-20261012.json
+sha256: 459a84fbcee7b73f6ca00ae7fe96ff7867897097830062ad312166b75013a543
+size: 3336
+media_type: application/json
+collector: project_assessment_automation
+collected_at: '2026-10-12T11:37:41.840987+00:00'
+source_period: Current observation on 2026-10-12; no historical operation claim.
+run_id: RUN-IAM03-20261012
+provenance: observed_lab
+sensitivity: sanitized
+query_or_action: Execute twenty current HTTP authorization cases in freshly seeded disposable SQLite databases.
+tool_version: 0.1.0; pytest 8.4.2
+redactions:
+- Allowlisted non-secret output only; raw JUnit metadata retained in ignored runtime.
+- Source hash metadata normalized to explicit path/sha256 pairs for publication; original values and observations
+  preserved.

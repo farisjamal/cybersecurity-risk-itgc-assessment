@@ -1,0 +1,19 @@
+schema_version: '1.0'
+id: EVID-IAM01-WALKTHROUGH-20261012
+path: fixtures/evidence/completion/iam01-walkthrough-20261012.json
+sha256: 3a475f6b411eb35d92db4cb477dfad2d6d28ec04866b6deb26ddbfee4c1abe56
+size: 1804
+media_type: application/json
+collector: project_assessment_automation
+collected_at: '2026-10-12T11:18:20.227722+00:00'
+source_period: 2026-10-12T11:18:17.595170+00:00/2026-10-12T11:18:20.227722+00:00
+run_id: RUN-IAM01-20261012T111820
+provenance: observed_lab
+sensitivity: sanitized
+query_or_action: Reperform four existing approval-before-activation and employee eligibility service tests
+  in temporary SQLite databases.
+tool_version: pytest 8.4.2
+redactions:
+- Raw logs and JUnit environment metadata remain in ignored runtime storage.
+- Source hash metadata normalized to explicit path/sha256 pairs for publication; original values and observations
+  preserved.

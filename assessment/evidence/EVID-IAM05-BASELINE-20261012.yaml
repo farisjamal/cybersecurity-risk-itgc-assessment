@@ -1,0 +1,19 @@
+schema_version: '1.0'
+id: EVID-IAM05-BASELINE-20261012
+path: fixtures/evidence/completion/iam05-validation-baseline-20261012.json
+sha256: 10563cf7883f3bf9a63fa7572f1e8537ac011f4cbd0be2a6ffe6173d5b32158d
+size: 1466
+media_type: application/json
+collector: project_assessment_automation
+collected_at: '2026-10-12T11:56:21.703610+00:00'
+source_period: Current inspection on 2026-10-12; historical review dates are generated fixtures.
+run_id: RUN-IAM05-20261012
+provenance: observed_lab
+sensitivity: sanitized
+query_or_action: Five negative cases failed because invalid review decisions were accepted; preserve pre-correction
+  service source hash.
+tool_version: 0.1.0; pytest 8.4.2
+redactions:
+- Allowlisted non-secret fields only; raw logs and JUnit environment metadata remain ignored.
+- Source hash metadata normalized to explicit path/sha256 pairs for publication; original values and observations
+  preserved.

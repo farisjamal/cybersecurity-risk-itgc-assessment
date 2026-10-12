@@ -1,0 +1,27 @@
+{
+  "control_id": "IAM-01",
+  "collected_at": "2026-10-12T11:27:13.619789+00:00",
+  "test": "test_access_self_approval_is_rejected_without_activating_account",
+  "result": "passed",
+  "observations": [
+    "Requester has the required change_approver role, so rejection exercises separation of duties rather than a missing-role check.",
+    "Self-approval raises ForbiddenError; persisted request remains pending without approver, decision timestamp or application timestamp.",
+    "Target remains pending; no successful access_request.decided event is emitted for the rejected attempt.",
+    "Administrator cannot apply the still-pending request.",
+    "Separate approver can approve the same request; subsequent administrator application activates the target."
+  ],
+  "source_hashes": [
+    {
+      "path": "tests/unit/test_bank_workflows.py",
+      "sha256": "d99db9607c5603a175168955c591dd5cb67f6f4fa61942a46da63bbec78c4b91"
+    },
+    {
+      "path": "src/bank_lab/services/access.py",
+      "sha256": "b09651c3f13d212a9a786aeac0737db7ecbeb4b01d8a9108a00249a89bb9ef74"
+    }
+  ],
+  "limitations": [
+    "Temporary synthetic SQLite database; service-level test only. HTTP authorization and MFA are not exercised.",
+    "Historical joiner approvals, first activation timestamps and approved role-matrix reconciliation remain unverified."
+  ]
+}

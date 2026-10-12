@@ -1,0 +1,18 @@
+schema_version: '1.0'
+id: EVID-OWNER-ACCESS-20261012
+path: fixtures/evidence/completion/owner-access-decisions-20261012.json
+sha256: e9d71f35720708861d6e0320aea7aad5b570d1b8df869e9ea09c74cc2e24642b
+size: 8640
+media_type: application/json
+collector: project_assessment_automation
+collected_at: '2026-10-12T12:37:03.878297+00:00'
+source_period: Owner instruction on 12 October 2026; current population only.
+run_id: RUN-OWNER-ACCESS-20261012
+provenance: authored_policy
+sensitivity: sanitized
+parent_evidence_id: EVID-IAM05-POPULATION-20261012
+query_or_action: Transcribe the owner's explicit access dispositions and preserve the unfulfilled PAM
+  condition without changing historical review records.
+tool_version: Owner chat instruction; Python transcription
+redactions:
+- Only synthetic account IDs and decisions are included; no credentials or private chat transcript.

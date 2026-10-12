@@ -39,11 +39,11 @@ are retained until an attributable assessor decision replaces their incomplete c
 | GOV-01 | Versioned policies, asset register, live portal/PostgreSQL stack and recovery observation | Reconcile every inventory component and trust boundary to observed deployment; record owner approval |
 | GOV-02 | Twenty risk records; four previously rated bounded findings | Owner assesses the sixteen remaining risks with rationale, treatment owners and review dates; do not generate ratings automatically |
 | GOV-03 | Supplier-control objective and selected source mapping | Prepare and inspect both explicitly fictional supplier packs, including responsibilities, due diligence gaps and treatment |
-| IAM-01 | Full 24-account observed fixture population; approved joiner and ineligible-employee regression checks | Reconcile each eligible joiner to role matrix, approval and activation date; test walkthroughs separately from historical operation |
+| IAM-01 | Full 24-account observed fixture population; [four current service tests](../fixtures/evidence/completion/iam01-walkthrough-20261012.json) passed for approval-before-activation and employee eligibility; [self-approval regression](../fixtures/evidence/completion/iam01-self-approval-20261012.json) also passed with an independent-approval positive control | Historical joiner approval coverage, initial activation dates and approved role-matrix reconciliation remain unverified; current service tests do not establish August operation |
 | IAM-02 | Frozen S01 baseline, action and retest; current isolated S01 reproduction | Retain bounded result; review every leaver and session in the defined population before widening the claim |
-| IAM-03 | Current S02 isolated reproduction and authorization tests | Enumerate all privileged accounts and record every prohibited role and cross-owner attempt against the matrix |
+| IAM-03 | Six privileged assignments enumerated read-only from 24 accounts; twenty isolated HTTP authorization cases passed after correcting read-only scope selected by owner; baseline retained; [access rules and scope](iam03-access-review.md) documented | Six privileged assignments now have owner approval conditional on RBAC/PAM; PAM-001 and the remaining role matrix remain unverified; selected paths do not cover every endpoint or historical operation |
 | IAM-04 | Preserved S03 chain; current retest checks actual password-only denial and verified MFA authorization | Substantively review the stated scope; TOTP is not phishing resistant |
-| IAM-05 | Observed 24-account population and one generated review; review workflow tests | Reconcile review decisions to all accounts and document omissions; generated review dates are not historical execution evidence |
+| IAM-05 | All 24 accounts reconciled exactly to ARV-001; reviewer attribution absent; five malformed-decision baseline cases failed, six tests passed after validation correction; [owner decision packet](iam05-access-review.md) prepared | Current owner decisions are recorded for all 24 accounts; verify the six privileged PAM conditions and trace necessary follow-up; generated retain decisions and dates are not historical operation |
 | CHG-01 | Twelve observed generated changes and independent-approval workflow tests | Inspect every normal change for independent approval before deployment and record exclusions |
 | CHG-02 | Generated test-reference fields and software regression suite | Resolve each deployed change's version-specific test artifact; a reference string alone is insufficient |
 | CHG-03 | Current image build and change workflow | Perform and retain an actual deployment/rollback exercise with revision, acceptance and rollback checks |
@@ -78,4 +78,5 @@ uv run python -m cyber_assess release-check --engagement ENG-001 --json
 ```
 
 Exit code 4 means release remains blocked, even when assessment schemas validate successfully.
-No GitHub publication, repository recreation or production deployment is implied by local completion.
+Public GitHub source publication was explicitly authorized on 12 October 2026. That authorization
+does not close assessment blockers or approve internet-facing runtime deployment.

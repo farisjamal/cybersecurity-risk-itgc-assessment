@@ -83,7 +83,9 @@ def test_privileged_action_requires_verified_mfa() -> None:
     [
         (Role.ADMINISTRATOR, False, False, True, True),
         (Role.CHANGE_APPROVER, False, False, True, False),
-        (Role.READ_ONLY, False, False, True, False),
+        (Role.READ_ONLY, False, False, False, False),
+        (Role.READ_ONLY, True, False, True, False),
+        (Role.READ_ONLY, False, True, True, False),
         (Role.STAFF, True, False, True, True),
         (Role.STAFF, False, True, True, True),
         (Role.STAFF, False, False, False, False),

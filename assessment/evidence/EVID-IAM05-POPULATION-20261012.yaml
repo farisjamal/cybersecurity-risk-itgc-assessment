@@ -1,0 +1,19 @@
+schema_version: '1.0'
+id: EVID-IAM05-POPULATION-20261012
+path: fixtures/evidence/completion/iam05-population-20261012.json
+sha256: 797f0379ca6ac186dfaf97a01777e499c6e788981128aa671a394dc26c821663
+size: 7018
+media_type: application/json
+collector: project_assessment_automation
+collected_at: '2026-10-12T11:53:54.879841+00:00'
+source_period: Current inspection on 2026-10-12; historical review dates are generated
+  fixtures.
+run_id: RUN-IAM05-20261012
+provenance: observed_lab
+sensitivity: sanitized
+query_or_action: Read-only account/review/event enumeration and exact-ID reconciliation;
+  fixture dates remain synthetic.
+tool_version: 0.1.0; pytest 8.4.2
+redactions:
+- Allowlisted non-secret fields only; raw logs and JUnit environment metadata remain
+  ignored.

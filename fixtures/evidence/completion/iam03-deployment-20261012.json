@@ -1,0 +1,42 @@
+{
+  "control_id": "IAM-03",
+  "collected_at": "2026-10-12T11:48:20.088175+00:00",
+  "before": {
+    "collected_at": "2026-10-12T11:45:27.414019+00:00",
+    "users": 24,
+    "requests": 51,
+    "account_digest": "e348ec8a3b077322d9c31621a0268df0874efb98159f0235926be3dbd75bd289",
+    "request_digest": "d454cbf234f0e3fcd436fb5d913b44d70d7d6fd3b554602f23672023bb057a8b"
+  },
+  "after": {
+    "collected_at": "2026-10-12T11:46:32.716644+00:00",
+    "users": 24,
+    "requests": 51,
+    "account_digest": "e348ec8a3b077322d9c31621a0268df0874efb98159f0235926be3dbd75bd289",
+    "request_digest": "d454cbf234f0e3fcd436fb5d913b44d70d7d6fd3b554602f23672023bb057a8b",
+    "source_sha256": "54bc5a60e357636336be637c71d618814d60d0edcb2c3a6735cfbb2e1a03876a",
+    "visible_requests": 1,
+    "expected_visible_requests": 1,
+    "unrelated_detail_status": 404,
+    "business_rows_unchanged": true,
+    "scope": "Read-only login/list/detail on current main PostgreSQL lab; no business mutation."
+  },
+  "suite_results": {
+    "windows": {
+      "passed": 161,
+      "coverage_percent": 86.09,
+      "scope": "Full regression suite. New IAM-03 HTTP cases always use isolated SQLite; existing integration boundary uses PostgreSQL in Linux run."
+    },
+    "linux_postgresql": {
+      "passed": 161,
+      "coverage_percent": 86.12,
+      "scope": "Full regression suite. New IAM-03 HTTP cases always use isolated SQLite; existing integration boundary uses PostgreSQL in Linux run."
+    }
+  },
+  "limitations": [
+    "Main-lab HTTP smoke covers one synthetic read_only identity on PostgreSQL. It does not execute the full twenty-case matrix against the main lab.",
+    "Authentication emits session/audit records; unchanged digests cover selected account and service-request business fields only.",
+    "Business approval of six privileged assignments and remaining role-matrix rules is still unverified.",
+    "No new vulnerability scan or GitHub publication is implied."
+  ]
+}

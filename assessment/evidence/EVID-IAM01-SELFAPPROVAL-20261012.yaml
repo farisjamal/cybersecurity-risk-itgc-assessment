@@ -1,0 +1,19 @@
+schema_version: '1.0'
+id: EVID-IAM01-SELFAPPROVAL-20261012
+path: fixtures/evidence/completion/iam01-self-approval-20261012.json
+sha256: 5c4657ccaa9e74f4402b85e1fa169851fff6a48b88d5e63f7a90f2bbd1a9cec9
+size: 1346
+media_type: application/json
+collector: project_assessment_automation
+collected_at: '2026-10-12T11:27:13.619789+00:00'
+source_period: Current service-level regression, 2026-10-12; no historical operation claim.
+run_id: RUN-IAM01-SELFAPPROVAL-20261012
+provenance: observed_lab
+sensitivity: sanitized
+query_or_action: Run test_access_self_approval_is_rejected_without_activating_account using pytest; inspect
+  denial persistence and independent-approval positive control.
+tool_version: pytest 8.4.2
+redactions:
+- Raw JUnit environment metadata retained only in ignored runtime storage.
+- Source hash metadata normalized to explicit path/sha256 pairs for publication; original values and observations
+  preserved.

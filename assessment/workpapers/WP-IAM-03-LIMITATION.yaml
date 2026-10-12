@@ -1,36 +1,80 @@
-schema_version: "1.0"
+schema_version: '1.0'
 id: WP-IAM-03-LIMITATION
 control_id: IAM-03
-control_version: "1.0"
-risk_ids: [RISK-IAM-03]
-criteria: [POL-01, RMIT-10.56]
-procedure_version: "1.0"
+control_version: '1.0'
+risk_ids:
+- RISK-IAM-03
+criteria:
+- POL-01
+- RMIT-10.56
+procedure_version: '1.0'
 test_type: combined
-test_period: 2026-08-01/2026-08-30
-population_source: not_collected
-population_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-population_count: 0
-population_query: No privileged-account or role-assignment population query was executed.
-selected_record_ids: []
-selection_rationale: No records were selectable because privileged accounts and role assignments were not collected.
+test_period: 2026-10-12/2026-10-12
+population_source: fixtures/evidence/completion/iam03-population-20261012.json
+population_hash: 3e91a685c70c123b084a7618525cda68abd4695bbb2886c4753722bc238fe7b1
+population_count: 24
+population_query: Read-only SELECT id, role, account_status, employment_status, manager_id FROM users
+  ORDER BY id. Six privileged assignments enumerated; no business approval is inferred.
+selected_record_ids:
+- USR-001
+- USR-002
+- USR-003
+- USR-004
+- USR-005
+- USR-006
+- USR-007
+- USR-019
+selection_rationale: Enumerate all six privileged assignments; exercise matching fixture identities for
+  selected HTTP boundaries, plus representative staff/read-only identities. Request ownership cases cover
+  four representative roles across owner, assignee and unrelated relationships.
 sample_seed: null
 exclusions: []
 expected_behavior: Privileged access matches the role matrix and prohibited cross-owner actions are denied.
-actual_results: No reconciliation or authorization test was executed and no observed result is asserted.
-evidence_ids: [EVID-POL-01]
-exceptions: []
+actual_results: 'Twenty current isolated HTTP cases passed. Privileged routes deny pre-MFA sessions; all
+  six privileged fixture identities pass MFA and access event listing. Only administrators list accounts.
+  Non-administrator deactivation is denied without changing target status. Staff list/detail/edit access
+  is limited to owned/assigned requests; unrelated requests return 404. Change approver/read-only mutations
+  are denied with unchanged request history. After the owner selected own/assigned-only read_only scope,
+  listing/detail filtering was corrected and all twenty HTTP cases passed again against the selected scope.
+  Initial global-read implementation evidence remains preserved separately. The corrected local image
+  was applied and verified against the PostgreSQL main lab: USR-019 listed exactly its one eligible request,
+  could read that request, and received 404 for an unrelated request. Selected account/request business
+  digests matched before and after the app update. Windows and Linux suites each passed 161 tests. Owner
+  current dispositions are recorded separately: 15 scoped approvals, six conditional privileged approvals
+  requiring RBAC/PAM, and three access denials retaining disabled identities. PAM-001 remains open.'
+evidence_ids:
+- EVID-POL-01
+- EVID-IAM03-POPULATION-20261012
+- EVID-IAM03-HTTP-20261012
+- EVID-IAM03-RETEST-20261012
+- EVID-IAM03-DEPLOYMENT-20261012
+- EVID-OWNER-ACCESS-20261012
+exceptions:
+- Initial read_only role allowed global request reading, inconsistent with the scope selected by the owner
+  on 2026-10-12. Source corrected and applied to the local main app; isolated HTTP retest and one-account
+  PostgreSQL smoke passed. No historical control failure rating or full control closure is asserted.
 limitations:
-  - Privileged-account, role-matrix, and authorization-test evidence was not collected.
-  - The referenced authored policy establishes intended practice only and does not prove operation.
-  - The empty-content hash is a no-population sentinel, not a source population hash.
-  - No control procedure was executed, so no design or operating conclusion is supported.
-  - Project-owner substantive review remains outstanding; only an automated structural check occurred.
+- Observed implementation rules are not an owner-approved role matrix. Business approval of six privileged
+  assignments remains unverified.
+- Current HTTP ASGI tests use disposable SQLite databases; the full matrix does not exercise the running
+  main lab or browser behavior. A separate PostgreSQL main-lab smoke covers one read_only identity.
+- Selected endpoints and verbs only; all six privileged fixture identities and two non-privileged representatives
+  are covered, not every staff/read-only account or historical assignment.
+- No August 2026 operation or owner substantive sign-off is established.
+- Current owner dispositions do not prove PAM implementation or historical review. Six privileged approvals
+  remain conditional; PAM-001 and full role-matrix reconciliation remain open.
 design_status: not_assessed
-operating_status: not_tested
-assessor_decision: Retain no conclusion until all privileged accounts and negative paths are tested.
+operating_status: insufficient_evidence
+assessor_decision: Selected current HTTP authorization paths matched observed implementation rules; retain
+  an incomplete overall IAM-03 conclusion pending owner-approved role-matrix reconciliation and authorization
+  of all six privileged assignments.
 preparer: project_assessment_automation
 review_mode: self_reviewed
 review_comments:
-  - Structural schema and limitation wording checked; no independent or owner review is claimed.
-prepared_at: 2026-09-26T01:58:37Z
-reviewed_at: 2026-09-26T01:58:37Z
+- Prepared and structurally checked by automation. Owner has not substantively reviewed this population,
+  observed role matrix or new test execution.
+- Main lab population was collected read-only; mutations occur only in disposable fixture databases.
+- Owner explicitly selected own/assigned-only read_only scope on 2026-10-12. Other role rules, privileged
+  assignments and new test execution still await substantive review.
+prepared_at: '2026-10-12T11:48:20.088175+00:00'
+reviewed_at: '2026-10-12T12:37:03.878297+00:00'

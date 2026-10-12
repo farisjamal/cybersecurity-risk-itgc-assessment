@@ -1,0 +1,15 @@
+schema_version: '1.0'
+id: REV-OWNER-ACCESS-20261012
+artifact: fixtures/evidence/completion/owner-access-decisions-20261012.json
+artifact_version: e9d71f35720708861d6e0320aea7aad5b570d1b8df869e9ea09c74cc2e24642b
+reviewer: Faris Jamal (project owner)
+review_type: owner_self_review
+comment: Owner approved current scoped access for 15 employed nonprivileged accounts; conditionally approved
+  six privileged accounts subject to RBAC and PAM; denied access for USR-017, USR-022 and USR-023, which
+  remain disabled.
+resolution: Current dispositions are recorded. Keep PAM-001 and the privileged approval condition open;
+  verify implementation and reconcile the full role matrix before closing IAM-03/IAM-05. This is not project-wide
+  approval.
+status: open
+created_at: '2026-10-12T12:37:03.878297+00:00'
+resolved_at: null

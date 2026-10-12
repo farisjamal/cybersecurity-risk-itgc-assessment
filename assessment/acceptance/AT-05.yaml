@@ -1,14 +1,35 @@
-schema_version: "1.0"
+schema_version: '1.0'
 id: AT-05
-requirement_ids: [FR-05]
+requirement_ids:
+- FR-05
 status: partial
 revision: uncommitted-working-tree
-environment: Windows local Python 3.12 deterministic S01 fixture and application tests.
-evidence_ids: [EVID-POL-02, EVID-S01-POPULATION, EVID-S01-BASELINE, EVID-S01-RETEST]
+environment: Windows and isolated Linux/PostgreSQL verification; new service cases use disposable SQLite,
+  with a separate PostgreSQL READ ONLY validation smoke.
+evidence_ids:
+- EVID-POL-02
+- EVID-S01-POPULATION
+- EVID-S01-BASELINE
+- EVID-S01-RETEST
+- EVID-IAM01-WALKTHROUGH-20261012
+- EVID-IAM01-SELFAPPROVAL-20261012
+- EVID-IAM05-POPULATION-20261012
+- EVID-IAM05-BASELINE-20261012
+- EVID-IAM05-RETEST-20261012
+- EVID-IAM05-DEPLOYMENT-20261012
+- EVID-OWNER-ACCESS-20261012
 evidence_references:
-  - tests/acceptance/test_assessment_s01.py
-  - tests/integration/test_bank_portal.py::test_deactivation_invalidates_existing_cookie_and_new_login
-result: S01 is detected and the bounded deactivation path invalidates login and an existing session.
+- tests/acceptance/test_assessment_s01.py
+- tests/integration/test_bank_portal.py::test_deactivation_invalidates_existing_cookie_and_new_login
+- tests/acceptance/test_secure_control_acceptance.py::test_access_review_rejects_incomplete_population_and_emits_completion_event
+- tests/acceptance/test_secure_control_acceptance.py::test_access_review_rejects_ambiguous_decisions_without_completion
+- docs/iam05-access-review.md
+result: S01 is detected and the bounded deactivation path invalidates login and an existing session. Current
+  joiner service checks and exact reconciliation of 24 access-review decisions are recorded; duplicate/invalid
+  review decisions now rejected, with baseline failure preserved. Current owner dispositions are attributable,
+  with six privileged approvals still conditional on unverified PAM.
 limitations:
-  - Joiner provisioning, role-change approval, and complete periodic access-review coverage remain unassessed.
-recorded_at: 2026-09-26T02:34:58Z
+- Historical initial provisioning and periodic review operation remain unverified. Current owner dispositions
+  are recorded separately from generated ARV-001; full role-matrix reconciliation, PAM-001 and follow-up
+  evidence remain open.
+recorded_at: '2026-10-12T12:37:03.878297+00:00'

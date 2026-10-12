@@ -1,0 +1,19 @@
+schema_version: '1.0'
+id: EVID-IAM03-DEPLOYMENT-20261012
+path: fixtures/evidence/completion/iam03-deployment-20261012.json
+sha256: 279bc5bf076f2bf8d176b6a69b87cc18df250e5a776b40752059974abc7f5d36
+size: 1961
+media_type: application/json
+collector: project_assessment_automation
+collected_at: '2026-10-12T11:48:20.088175+00:00'
+source_period: Current verification on 2026-10-12 only.
+run_id: RUN-IAM03-DEPLOYMENT-20261012
+provenance: observed_lab
+sensitivity: sanitized
+parent_evidence_id: EVID-IAM03-RETEST-20261012
+query_or_action: Apply tested local app image; verify read-only HTTP scope and account/request
+  digests across update; retain full-suite Windows and Linux results.
+tool_version: 0.1.0; pytest 8.4.2
+redactions:
+- Credentials/cookies never retained in output; raw logs and JUnit environment metadata
+  remain ignored.

@@ -95,3 +95,22 @@ missing prerequisite, and `4` integrity/publication-gate failure.
 | Lock mismatch | Do not use an unlocked install. Reconcile `pyproject.toml` and `uv.lock` in a dedicated change. |
 | Database is not healthy | Inspect `docker compose logs db`; never publish port 5432 as a shortcut. |
 | OneDrive file contention | Keep database and runtime state in Docker volumes; source/docs may remain synchronized. |
+
+## API workflow and interface limitation
+
+The browser login page describes a JSON interface; its submit button is deliberately disabled.
+The current Content Security Policy also blocks Swagger's external assets, so `/docs` is not a
+verified interactive workflow. Do not interpret a click without a response as an authentication
+failure. Use a local JSON client with a cookie session instead; `/openapi.json` describes routes.
+
+For PowerShell, read the synthetic account email with `Read-Host` and its generated password
+with `Read-Host -AsSecureString`; send JSON to `POST /auth/login` using
+`Invoke-RestMethod -SessionVariable labSession`. Keep that session for subsequent calls.
+Privileged operations require `POST /auth/mfa` with the current generated TOTP code.
+Authenticated mutations (and privileged endpoints using the CSRF identity dependency) also
+require the `bank_csrf` cookie value in `X-CSRF-Token`. Never paste passwords, TOTP seeds,
+cookies or tokens into documentation, issues or screenshots.
+
+A successful login with `mfa_required=true` is only the password stage. A separate successful
+MFA response is required before the relevant privileged operation. Browser usability and
+accessibility review remain open; source publication does not claim these interfaces are complete.

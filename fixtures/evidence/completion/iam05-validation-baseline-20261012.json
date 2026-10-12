@@ -1,0 +1,38 @@
+{
+  "control_id": "IAM-05",
+  "collected_at": "2026-10-12T11:56:21.703610+00:00",
+  "cases": [
+    {
+      "name": "test_access_review_rejects_ambiguous_decisions_without_completion[duplicate]",
+      "outcome": "failed_expected_rejection_not_observed"
+    },
+    {
+      "name": "test_access_review_rejects_ambiguous_decisions_without_completion[conflicting_duplicate]",
+      "outcome": "failed_expected_rejection_not_observed"
+    },
+    {
+      "name": "test_access_review_rejects_ambiguous_decisions_without_completion[missing_decision]",
+      "outcome": "failed_expected_rejection_not_observed"
+    },
+    {
+      "name": "test_access_review_rejects_ambiguous_decisions_without_completion[blank_decision]",
+      "outcome": "failed_expected_rejection_not_observed"
+    },
+    {
+      "name": "test_access_review_rejects_ambiguous_decisions_without_completion[non_string_decision]",
+      "outcome": "failed_expected_rejection_not_observed"
+    }
+  ],
+  "failed": 5,
+  "source_hashes": [
+    {
+      "path": "src/bank_lab/services/access.py",
+      "sha256": "b09651c3f13d212a9a786aeac0737db7ecbeb4b01d8a9108a00249a89bb9ef74"
+    },
+    {
+      "path": "tests/acceptance/test_secure_control_acceptance.py",
+      "sha256": "a9d1ab5b820a64b96601ea7cacdc778d0912dc4fc461a9795a9ba0d5d10c67f4"
+    }
+  ],
+  "scope": "Service-level negative regression on disposable SQLite; malformed and duplicate decisions accepted before correction. No main-lab data mutated."
+}

@@ -67,7 +67,7 @@ mappings:
     rationale: Joiner approval and least-privilege checks support identity and access control outcomes.
     control_ids: [IAM-01]
     evidence_ids: [EVID-POL-01]
-    current_evidence: Authored access policy and limitation workpaper exist; joiner testing is absent.
+    current_evidence: Authored access policy and limitation workpaper exist; EVID-IAM01-WALKTHROUGH-20261012 records four passing current service tests. Historical joiner approval, initial activation and role-matrix reconciliation remain unverified.
     coverage_conclusion: not_assessed
   - <<: *nist_mapping
     id: MAP-NIST-IAM-02
@@ -86,8 +86,8 @@ mappings:
     reference_locator: [PR.AA]
     rationale: Role and object-level restrictions support least-privilege access outcomes.
     control_ids: [IAM-03]
-    evidence_ids: [EVID-POL-01]
-    current_evidence: Authored least-privilege policy and limitation workpaper exist; full testing is absent.
+    evidence_ids: [EVID-POL-01, EVID-IAM03-POPULATION-20261012, EVID-IAM03-HTTP-20261012, EVID-IAM03-RETEST-20261012]
+    current_evidence: Six privileged assignments enumerated; twenty selected current HTTP cases exercised. Owner selected own/assigned read-only scope; full role-matrix and assignment approval remain unverified.
     coverage_conclusion: not_assessed
   - <<: *nist_mapping
     id: MAP-NIST-IAM-04
@@ -104,8 +104,8 @@ mappings:
     reference_locator: [PR.AA]
     rationale: Complete periodic access review supports managed identity and authorization outcomes.
     control_ids: [IAM-05]
-    evidence_ids: [EVID-POL-03]
-    current_evidence: Authored review criterion and limitation workpaper exist; population testing is absent.
+    evidence_ids: [EVID-POL-03, EVID-IAM05-POPULATION-20261012, EVID-IAM05-BASELINE-20261012, EVID-IAM05-RETEST-20261012]
+    current_evidence: All 24 current accounts reconcile to generated ARV-001 decisions; attribution remains absent. Duplicate/invalid decision validation corrected and six service cases passed. Human account decisions and follow-up remain unverified.
     coverage_conclusion: not_assessed
   - <<: *nist_mapping
     id: MAP-NIST-CHG-01
@@ -266,7 +266,7 @@ mappings:
     rationale: IAM-01 and IAM-02 assess joiner approval and leaver deactivation.
     control_ids: [IAM-01, IAM-02]
     evidence_ids: [EVID-POL-01, EVID-POL-02, EVID-S01-BASELINE, EVID-S01-RETEST]
-    current_evidence: S01 supports a bounded leaver test; joiner testing and broader applicability are absent.
+    current_evidence: S01 supports a bounded leaver test; EVID-IAM01-WALKTHROUGH-20261012 records current synthetic joiner service checks. Historical joiner coverage and broader applicability remain unverified.
     gap: Only the S01 project criterion is supported; broader mapped requirements remain unassessed.
     priority: high
     action: Preserve S01 evidence, execute IAM-01, and revalidate both locators before publication.

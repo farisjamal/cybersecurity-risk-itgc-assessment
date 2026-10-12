@@ -41,14 +41,14 @@ def test_workpapers_distinguish_unexecuted_controls_from_bounded_scenario_retest
     unexecuted = [
         workpaper
         for workpaper in limitation_workpapers
-        if workpaper.control_id not in tested_controls
+        if workpaper.control_id not in tested_controls | {"IAM-01", "IAM-03", "IAM-05"}
     ]
     bounded_retests = [
         workpaper for workpaper in limitation_workpapers if workpaper.control_id in tested_controls
     ]
 
     assert len(limitation_workpapers) == 19
-    assert len(unexecuted) == 16
+    assert len(unexecuted) == 13
     assert len(bounded_retests) == 3
     for workpaper in unexecuted:
         assert workpaper.design_status == "not_assessed"
@@ -77,6 +77,49 @@ def test_workpapers_distinguish_unexecuted_controls_from_bounded_scenario_retest
             "project-owner substantive review remains outstanding" in limitation.lower()
             for limitation in workpaper.limitations
         )
+    joiner = next(
+        workpaper for workpaper in limitation_workpapers if workpaper.control_id == "IAM-01"
+    )
+    assert joiner.design_status == "not_assessed"
+    assert joiner.operating_status == "insufficient_evidence"
+    assert joiner.population_source == "not_collected"
+    assert joiner.population_hash == EMPTY_CONTENT_SHA256
+    assert joiner.population_count == 0
+    assert joiner.selected_record_ids == []
+    assert "initial activation dates" in joiner.assessor_decision
+    assert "role-matrix reconciliation" in joiner.assessor_decision
+    assert "EVID-IAM01-WALKTHROUGH-20261012" in joiner.evidence_ids
+    assert "EVID-IAM01-SELFAPPROVAL-20261012" in joiner.evidence_ids
+    privileged = next(
+        workpaper for workpaper in limitation_workpapers if workpaper.control_id == "IAM-03"
+    )
+    assert privileged.design_status == "not_assessed"
+    assert privileged.operating_status == "insufficient_evidence"
+    assert privileged.population_count == 24
+    assert privileged.population_hash != EMPTY_CONTENT_SHA256
+    assert privileged.selected_record_ids == [
+        *[f"USR-{number:03d}" for number in range(1, 7)],
+        "USR-007",
+        "USR-019",
+    ]
+    assert "owner-approved role-matrix reconciliation" in privileged.assessor_decision
+    assert "EVID-IAM03-POPULATION-20261012" in privileged.evidence_ids
+    assert "EVID-IAM03-HTTP-20261012" in privileged.evidence_ids
+    assert "EVID-IAM03-RETEST-20261012" in privileged.evidence_ids
+    assert any("read_only" in exception for exception in privileged.exceptions)
+    review = next(
+        workpaper for workpaper in limitation_workpapers if workpaper.control_id == "IAM-05"
+    )
+    assert review.design_status == "not_assessed"
+    assert review.operating_status == "insufficient_evidence"
+    assert review.population_count == 24
+    assert review.population_hash != EMPTY_CONTENT_SHA256
+    assert review.selected_record_ids == [f"USR-{number:03d}" for number in range(1, 25)]
+    assert "attributable substantive account decisions" in review.assessor_decision
+    assert "EVID-IAM05-POPULATION-20261012" in review.evidence_ids
+    assert "EVID-IAM05-BASELINE-20261012" in review.evidence_ids
+    assert "EVID-IAM05-RETEST-20261012" in review.evidence_ids
+    assert any("no matching completion event" in exception for exception in review.exceptions)
 
 
 def test_limitation_workpapers_preserve_policy_and_observed_evidence_provenance() -> None:
@@ -89,7 +132,11 @@ def test_limitation_workpapers_preserve_policy_and_observed_evidence_provenance(
         assert provenances.issubset({"authored_policy", "observed_lab"})
         for evidence_id in workpaper.evidence_ids:
             if evidence[evidence_id].provenance == "observed_lab":
-                assert workpaper.operating_status == "effective_in_tested_scope"
+                if workpaper.control_id in {"IAM-01", "IAM-03", "IAM-05"}:
+                    assert workpaper.operating_status == "insufficient_evidence"
+                    assert workpaper.design_status == "not_assessed"
+                else:
+                    assert workpaper.operating_status == "effective_in_tested_scope"
 
 
 def test_s01_workpaper_remains_identical_to_the_frozen_snapshot() -> None:

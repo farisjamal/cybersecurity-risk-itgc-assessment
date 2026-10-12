@@ -1,0 +1,308 @@
+{
+  "collected_at": "2026-10-12T11:53:54.879841+00:00",
+  "source": "Current PostgreSQL account/review enumeration in a read-only transaction; historical fixture dates are synthetic.",
+  "accounts": [
+    {
+      "id": "USR-001",
+      "role": "administrator",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-002",
+      "role": "administrator",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-003",
+      "role": "change_approver",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-004",
+      "role": "change_approver",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-005",
+      "role": "change_approver",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-006",
+      "role": "change_approver",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-007",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-008",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-009",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-010",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-011",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-012",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-013",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-014",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-015",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-016",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-017",
+      "role": "staff",
+      "account_status": "disabled",
+      "employment_status": "terminated"
+    },
+    {
+      "id": "USR-018",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-019",
+      "role": "read_only",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-020",
+      "role": "read_only",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-021",
+      "role": "read_only",
+      "account_status": "active",
+      "employment_status": "employed"
+    },
+    {
+      "id": "USR-022",
+      "role": "read_only",
+      "account_status": "disabled",
+      "employment_status": "terminated"
+    },
+    {
+      "id": "USR-023",
+      "role": "read_only",
+      "account_status": "disabled",
+      "employment_status": "terminated"
+    },
+    {
+      "id": "USR-024",
+      "role": "read_only",
+      "account_status": "active",
+      "employment_status": "employed"
+    }
+  ],
+  "reviews": [
+    {
+      "id": "ARV-001",
+      "period": "2026-Q3",
+      "population_snapshot": {
+        "count": 24,
+        "user_ids": [
+          "USR-001",
+          "USR-002",
+          "USR-003",
+          "USR-004",
+          "USR-005",
+          "USR-006",
+          "USR-007",
+          "USR-008",
+          "USR-009",
+          "USR-010",
+          "USR-011",
+          "USR-012",
+          "USR-013",
+          "USR-014",
+          "USR-015",
+          "USR-016",
+          "USR-017",
+          "USR-018",
+          "USR-019",
+          "USR-020",
+          "USR-021",
+          "USR-022",
+          "USR-023",
+          "USR-024"
+        ],
+        "captured_at": null
+      },
+      "reviewer_role": "change_approver",
+      "decisions": [
+        {
+          "user_id": "USR-001",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-002",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-003",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-004",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-005",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-006",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-007",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-008",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-009",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-010",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-011",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-012",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-013",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-014",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-015",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-016",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-017",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-018",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-019",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-020",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-021",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-022",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-023",
+          "decision": "retain"
+        },
+        {
+          "user_id": "USR-024",
+          "decision": "retain"
+        }
+      ],
+      "action_references": [],
+      "created_at": "2026-08-29 00:00:00+00:00",
+      "completed_at": "2026-08-30 00:00:00+00:00"
+    }
+  ],
+  "completion_events": [],
+  "reconciliation": [
+    {
+      "review_id": "ARV-001",
+      "account_count": 24,
+      "decision_count": 24,
+      "missing_account_ids": [],
+      "unknown_account_ids": [],
+      "duplicate_account_ids": [],
+      "snapshot_matches_current_ids": true,
+      "snapshot_count_matches": true,
+      "decision_counts": {
+        "retain": 24
+      },
+      "action_reference_count": 0,
+      "completion_event_count": 0,
+      "attributable_actor_ids": [],
+      "caution": "Generated retain decisions are not human approval of account appropriateness; retain on a disabled account does not prove reactivation."
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "control_id": "IAM-03",
+  "collected_at": "2026-10-12T11:37:41.840987+00:00",
+  "passed": 20,
+  "cases": [
+    {
+      "name": "test_privileged_account_endpoint_boundaries[1]",
+      "passed": true
+    },
+    {
+      "name": "test_privileged_account_endpoint_boundaries[2]",
+      "passed": true
+    },
+    {
+      "name": "test_privileged_account_endpoint_boundaries[3]",
+      "passed": true
+    },
+    {
+      "name": "test_privileged_account_endpoint_boundaries[4]",
+      "passed": true
+    },
+    {
+      "name": "test_privileged_account_endpoint_boundaries[5]",
+      "passed": true
+    },
+    {
+      "name": "test_privileged_account_endpoint_boundaries[6]",
+      "passed": true
+    },
+    {
+      "name": "test_privileged_account_endpoint_boundaries[7]",
+      "passed": true
+    },
+    {
+      "name": "test_privileged_account_endpoint_boundaries[19]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[owner-1]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[owner-3]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[owner-7]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[owner-19]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[assigned-1]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[assigned-3]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[assigned-7]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[assigned-19]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[unrelated-1]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[unrelated-3]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[unrelated-7]",
+      "passed": true
+    },
+    {
+      "name": "test_request_scope_and_mutation_matrix[unrelated-19]",
+      "passed": true
+    }
+  ],
+  "source_hashes": [
+    {
+      "path": "tests/integration/test_iam03_authorization.py",
+      "sha256": "631f45d0b31abf1f648c8f5ca0d440eeb785fbbcc416e165626ed30f36b99056"
+    },
+    {
+      "path": "src/bank_lab/app.py",
+      "sha256": "fc4f8c4d6150d73140e699242f063f381898c4ead17f04b4c281b9fd4ceb59c8"
+    },
+    {
+      "path": "src/bank_lab/services/requests.py",
+      "sha256": "91a0be867818fc0f725c0ffdb6566dcd76f51741a37094f0bfd5cf1c002c60f7"
+    },
+    {
+      "path": "src/bank_lab/services/authentication.py",
+      "sha256": "c4dd3bb0b547b2eeb913b6130c214a47ebbeafa084a1694305cba77155d3b63c"
+    }
+  ],
+  "limitations": [
+    "Observed implementation rules are not an owner-approved role matrix. Business approval of six privileged assignments remains unverified.",
+    "Current HTTP ASGI tests use disposable SQLite databases; they do not exercise the running main lab, network/browser behavior or PostgreSQL HTTP execution.",
+    "Selected endpoints and verbs only; all six privileged fixture identities and two non-privileged representatives are covered, not every staff/read-only account or historical assignment.",
+    "No August 2026 operation or owner substantive sign-off is established."
+  ]
+}

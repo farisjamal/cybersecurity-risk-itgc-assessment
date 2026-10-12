@@ -1,0 +1,178 @@
+{
+  "record_type": "current_owner_access_decision",
+  "reviewer": "Faris Jamal (project owner)",
+  "attribution": "Explicit owner instruction in the project chat on 12 October 2026; transcribed by automation.",
+  "recorded_at": "2026-10-12T12:37:03.878297+00:00",
+  "review_period": "2026-10-12 current synthetic account population only",
+  "source_population": "EVID-IAM05-POPULATION-20261012",
+  "counts": {
+    "retain_current_scoped_access": 15,
+    "conditional_retain": 6,
+    "deny_access_keep_disabled": 3
+  },
+  "decisions": [
+    {
+      "account_id": "USR-001",
+      "disposition": "conditional_retain",
+      "rationale": "Administrators and change approvers are needed for system health and maintenance.",
+      "condition": "RBAC and PAM required by owner; PAM implementation and acceptance evidence remain outstanding (PAM-001)."
+    },
+    {
+      "account_id": "USR-002",
+      "disposition": "conditional_retain",
+      "rationale": "Administrators and change approvers are needed for system health and maintenance.",
+      "condition": "RBAC and PAM required by owner; PAM implementation and acceptance evidence remain outstanding (PAM-001)."
+    },
+    {
+      "account_id": "USR-003",
+      "disposition": "conditional_retain",
+      "rationale": "Administrators and change approvers are needed for system health and maintenance.",
+      "condition": "RBAC and PAM required by owner; PAM implementation and acceptance evidence remain outstanding (PAM-001)."
+    },
+    {
+      "account_id": "USR-004",
+      "disposition": "conditional_retain",
+      "rationale": "Administrators and change approvers are needed for system health and maintenance.",
+      "condition": "RBAC and PAM required by owner; PAM implementation and acceptance evidence remain outstanding (PAM-001)."
+    },
+    {
+      "account_id": "USR-005",
+      "disposition": "conditional_retain",
+      "rationale": "Administrators and change approvers are needed for system health and maintenance.",
+      "condition": "RBAC and PAM required by owner; PAM implementation and acceptance evidence remain outstanding (PAM-001)."
+    },
+    {
+      "account_id": "USR-006",
+      "disposition": "conditional_retain",
+      "rationale": "Administrators and change approvers are needed for system health and maintenance.",
+      "condition": "RBAC and PAM required by owner; PAM implementation and acceptance evidence remain outstanding (PAM-001)."
+    },
+    {
+      "account_id": "USR-007",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-008",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-009",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-010",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-011",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-012",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-013",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-014",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-015",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-016",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-017",
+      "disposition": "deny_access_keep_disabled",
+      "rationale": "Employment terminated; access is no longer justified. Preserve the disabled identity for audit traceability.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-018",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-019",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-020",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-021",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-022",
+      "disposition": "deny_access_keep_disabled",
+      "rationale": "Employment terminated; access is no longer justified. Preserve the disabled identity for audit traceability.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-023",
+      "disposition": "deny_access_keep_disabled",
+      "rationale": "Employment terminated; access is no longer justified. Preserve the disabled identity for audit traceability.",
+      "condition": null
+    },
+    {
+      "account_id": "USR-024",
+      "disposition": "retain_current_scoped_access",
+      "rationale": "Support the daily operations of currently employed staff, within current role and ownership/assignment restrictions.",
+      "condition": null
+    }
+  ],
+  "follow_up": {
+    "id": "PAM-001",
+    "status": "open",
+    "responsible_role": "project owner",
+    "requirement": "Define, implement and test a proportionate privileged-access management workflow before treating the six privileged approvals as unconditional.",
+    "acceptance_evidence": [
+      "Document privileged access scope, approver, duration and revocation rules.",
+      "Demonstrate approval, time-limited elevation or credential checkout, expiration/revocation and attributable activity review.",
+      "Retest denial outside the approved scope and retain sanitized evidence."
+    ],
+    "current_boundary": "RBAC, privileged TOTP MFA, audit events and session revocation exist; privileged credential vaulting, approval-based temporary elevation and privileged session recording are not implemented or demonstrated."
+  },
+  "limitations": [
+    "This records the owner's current substantive disposition, not an independent audit or project-wide control sign-off.",
+    "The generated August ARV-001 and its lack of an attributable completion event are preserved; no database review or historical timestamp was manufactured.",
+    "Conditional approvals do not demonstrate PAM enforcement. Existing privileged lab accounts remain active under the observed RBAC/MFA rules.",
+    "Terminated accounts were already disabled. No actual security breach by those accounts is alleged.",
+    "Employment alone does not justify unlimited access. Full owner-approved endpoint/role reconciliation and historical effectiveness remain open."
+  ]
+}

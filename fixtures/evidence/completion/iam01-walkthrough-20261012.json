@@ -1,0 +1,50 @@
+{
+  "control_id": "IAM-01",
+  "started_at": "2026-10-12T11:18:17.595170+00:00",
+  "collected_at": "2026-10-12T11:18:20.227722+00:00",
+  "source_revision": "f28b3b481aac717e069a58424fc9b4674abd3ce1",
+  "command": [
+    "python",
+    "-m",
+    "pytest",
+    "tests/unit/test_bank_workflows.py::test_pending_joiner_requires_approval_before_activation",
+    "tests/unit/test_bank_workflows.py::test_approved_access_cannot_activate_an_ineligible_employee",
+    "-v",
+    "--no-cov"
+  ],
+  "passed": 4,
+  "cases": [
+    {
+      "name": "test_pending_joiner_requires_approval_before_activation",
+      "passed": true
+    },
+    {
+      "name": "test_approved_access_cannot_activate_an_ineligible_employee[terminated]",
+      "passed": true
+    },
+    {
+      "name": "test_approved_access_cannot_activate_an_ineligible_employee[not_started]",
+      "passed": true
+    },
+    {
+      "name": "test_approved_access_cannot_activate_an_ineligible_employee[employment_ended]",
+      "passed": true
+    }
+  ],
+  "limitations": [
+    "Historical joiner approval coverage, initial activation dates and approved role-matrix reconciliation remain unverified.",
+    "Temporary synthetic SQLite databases; no main-lab business data modified. These are service tests, not HTTP/MFA or access self-approval tests.",
+    "No operation during the generated August 2026 fixture period is established.",
+    "Coverage disabled only for this selected run; full-suite coverage requirement remains unchanged."
+  ],
+  "source_hashes": [
+    {
+      "path": "tests/unit/test_bank_workflows.py",
+      "sha256": "4f7a1d8636e98bee5650222ee9e6812b0417aa38ddcd263e5dd5b3f732b33afc"
+    },
+    {
+      "path": "src/bank_lab/services/access.py",
+      "sha256": "b09651c3f13d212a9a786aeac0737db7ecbeb4b01d8a9108a00249a89bb9ef74"
+    }
+  ]
+}

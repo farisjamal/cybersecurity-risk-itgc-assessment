@@ -177,6 +177,13 @@ class AccessService:
         population = {user.id for user in users}
         if reviewed != population:
             raise ConflictError("Access review must cover the complete account population")
+        if len(decisions) != len(population):
+            raise ConflictError("Access review requires exactly one decision per account")
+        if any(
+            not isinstance(item.get("decision"), str) or not item["decision"].strip()
+            for item in decisions
+        ):
+            raise ConflictError("Access review requires a non-empty decision for every account")
         review = AccessReview(
             period=period,
             population_snapshot={

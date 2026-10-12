@@ -11,6 +11,7 @@ from bank_lab.database import Base
 from bank_lab.models import (
     AccountStatus,
     Alert,
+    AuditEvent,
     ChangeRecord,
     Decision,
     EmploymentStatus,
@@ -135,6 +136,52 @@ async def test_pending_joiner_requires_approval_before_activation(db: AsyncSessi
     activated = await service.apply(request.id, admin)
     assert activated.account_status == AccountStatus.ACTIVE
     assert request.applied_at is not None
+
+
+@pytest.mark.asyncio
+async def test_access_self_approval_is_rejected_without_activating_account(
+    db: AsyncSession,
+) -> None:
+    with patch("bank_lab.seed.hash_password", side_effect=lambda value: f"test:{value}"):
+        await seed_database(db, password_factory=lambda: "Fixture-Pass-42!")
+    requester = await db.get(User, "USR-003")
+    independent_approver = await db.get(User, "USR-004")
+    administrator = await db.get(User, "USR-001")
+    target = await db.get(User, "USR-007")
+    assert requester and independent_approver and administrator and target
+    target.account_status = AccountStatus.PENDING
+    await db.commit()
+    service = AccessService(db, Settings(session_pepper="pepper"))
+    request = await service.submit(requester, target, Role.STAFF, "Synthetic joiner approval test")
+
+    with pytest.raises(ForbiddenError, match="Requester cannot approve their own request"):
+        await service.decide(request.id, requester, Decision.APPROVED)
+
+    await db.refresh(request)
+    await db.refresh(target)
+    assert request.decision == Decision.PENDING
+    assert request.approver_id is None
+    assert request.decided_at is None
+    assert request.applied_at is None
+    assert target.account_status == AccountStatus.PENDING
+    decisions = await db.scalar(
+        select(func.count())
+        .select_from(AuditEvent)
+        .where(
+            AuditEvent.object_id == request.id,
+            AuditEvent.action == "access_request.decided",
+        )
+    )
+    assert decisions == 0
+    with pytest.raises(ConflictError, match="Approved unapplied"):
+        await service.apply(request.id, administrator)
+
+    await service.decide(request.id, independent_approver, Decision.APPROVED)
+    activated = await service.apply(request.id, administrator)
+    assert request.approver_id == independent_approver.id
+    assert request.decision == Decision.APPROVED
+    assert request.applied_at is not None
+    assert activated.account_status == AccountStatus.ACTIVE
 
 
 @pytest.mark.asyncio

@@ -1,36 +1,59 @@
-schema_version: "1.0"
+schema_version: '1.0'
 id: WP-IAM-01-LIMITATION
 control_id: IAM-01
-control_version: "1.0"
-risk_ids: [RISK-IAM-01]
-criteria: [POL-01, RMIT-10.53]
-procedure_version: "1.0"
-test_type: inspection
-test_period: 2026-08-01/2026-08-30
+control_version: '1.0'
+risk_ids:
+- RISK-IAM-01
+criteria:
+- POL-01
+- RMIT-10.53
+procedure_version: '1.0'
+test_type: reperformance
+test_period: 2026-10-12/2026-10-12
 population_source: not_collected
 population_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
 population_count: 0
-population_query: No joiner or account population query was executed.
+population_query: Historical joiner population not collected for this workpaper. Five current synthetic
+  test cases are separately enumerated in the linked evidence; they are not a historical joiner sample.
 selected_record_ids: []
-selection_rationale: No records were selectable because the complete joiner population was not collected.
+selection_rationale: Purposive current service tests cover pending approval and three employee eligibility
+  exclusions. No historical account sampling claim. The additional self-approval case exercises separation
+  of duties with a valid approver role and an independent-approval positive control.
 sample_seed: null
 exclusions: []
 expected_behavior: Every joiner account matches an approved role and does not precede its activation date.
-actual_results: No inspection was executed and no observed result is asserted.
-evidence_ids: [EVID-POL-01]
+actual_results: 'Four current service tests passed: activation before approval rejected and subsequent
+  approved activation accepted; activation rejected for terminated, not-yet-started and employment-ended
+  employees. Each test uses a temporary SQLite database. A separate current service test also passed:
+  self-approval by a requester holding change_approver authority is denied without persisted approval
+  or activation; independent approval then permits application.'
+evidence_ids:
+- EVID-POL-01
+- EVID-IAM01-WALKTHROUGH-20261012
+- EVID-IAM01-SELFAPPROVAL-20261012
 exceptions: []
 limitations:
-  - Joiner, approval, role-matrix, and account-state evidence was not collected.
-  - The referenced authored policy establishes intended practice only and does not prove operation.
-  - The empty-content hash is a no-population sentinel, not a source population hash.
-  - No control procedure was executed, so no design or operating conclusion is supported.
-  - Project-owner substantive review remains outstanding; only an automated structural check occurred.
+- Historical joiner approval coverage, initial activation dates and approved role-matrix reconciliation
+  remain unverified.
+- Temporary synthetic SQLite databases; no main-lab business data modified. These are service tests, not
+  HTTP/MFA tests.
+- No operation during the generated August 2026 fixture period is established.
+- Coverage disabled only for this selected run; full-suite coverage requirement remains unchanged.
+- The empty-content population hash remains a no-historical-population sentinel.
+- Project-wide substantive owner self-review remains open.
 design_status: not_assessed
-operating_status: not_tested
-assessor_decision: Retain no conclusion until all joiners are reconciled to approvals and accounts.
+operating_status: insufficient_evidence
+assessor_decision: Current service-level tests passed for approval-before-activation and employee eligibility
+  checks. Historical joiner approval coverage, initial activation dates and approved role-matrix reconciliation
+  remain unverified. Retain an incomplete overall IAM-01 conclusion.
 preparer: project_assessment_automation
 review_mode: self_reviewed
 review_comments:
-  - Structural schema and limitation wording checked; no independent or owner review is claimed.
-prepared_at: 2026-09-26T01:58:37Z
-reviewed_at: 2026-09-26T01:58:37Z
+- Owner accepted this bounded conclusion wording in the current conversation before evidence capture.
+  No independent review or project-wide sign-off is asserted.
+- Updated execution captured automatically; timestamps below identify preparation and automated structural
+  review, not a new substantive owner review.
+- Self-approval execution was prepared and structurally checked by automation; owner has not yet substantively
+  reviewed this additional result.
+prepared_at: '2026-10-12T11:27:13.619789+00:00'
+reviewed_at: '2026-10-12T11:27:13.619789+00:00'

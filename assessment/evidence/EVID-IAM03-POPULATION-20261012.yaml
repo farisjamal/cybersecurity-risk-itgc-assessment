@@ -1,0 +1,17 @@
+schema_version: '1.0'
+id: EVID-IAM03-POPULATION-20261012
+path: fixtures/evidence/completion/iam03-population-20261012.json
+sha256: 3e91a685c70c123b084a7618525cda68abd4695bbb2886c4753722bc238fe7b1
+size: 4278
+media_type: application/json
+collector: project_assessment_automation
+collected_at: '2026-10-12T11:36:06.280163+00:00'
+source_period: Current observation on 2026-10-12; no historical operation claim.
+run_id: RUN-IAM03-20261012
+provenance: observed_lab
+sensitivity: sanitized
+query_or_action: Read-only main-lab PostgreSQL account enumeration using allowlisted
+  non-secret fields.
+tool_version: 0.1.0; pytest 8.4.2
+redactions:
+- Allowlisted non-secret output only; raw JUnit metadata retained in ignored runtime.

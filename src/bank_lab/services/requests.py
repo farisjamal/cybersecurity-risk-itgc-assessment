@@ -25,9 +25,12 @@ from bank_lab.services.errors import (
 
 
 def can_read_request(user: User, request: ServiceRequest) -> bool:
-    if user.role in {Role.ADMINISTRATOR, Role.CHANGE_APPROVER, Role.READ_ONLY}:
+    if user.role in {Role.ADMINISTRATOR, Role.CHANGE_APPROVER}:
         return True
-    return user.role == Role.STAFF and user.id in {request.owner_id, request.assigned_staff_id}
+    return user.role in {Role.STAFF, Role.READ_ONLY} and user.id in {
+        request.owner_id,
+        request.assigned_staff_id,
+    }
 
 
 def can_edit_request(user: User, request: ServiceRequest) -> bool:
@@ -43,7 +46,7 @@ class ServiceRequestService:
 
     async def list_for(self, user: User) -> list[ServiceRequest]:
         query = select(ServiceRequest).order_by(ServiceRequest.id)
-        if user.role == Role.STAFF:
+        if user.role in {Role.STAFF, Role.READ_ONLY}:
             query = query.where(
                 or_(
                     ServiceRequest.owner_id == user.id,

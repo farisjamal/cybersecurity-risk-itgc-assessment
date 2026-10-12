@@ -1,0 +1,182 @@
+{
+  "collected_at": "2026-10-12T11:36:06.280163+00:00",
+  "source": "Current main-lab PostgreSQL users table, read-only transaction; allowlisted non-secret fields only.",
+  "accounts": [
+    {
+      "id": "USR-001",
+      "role": "administrator",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": null
+    },
+    {
+      "id": "USR-002",
+      "role": "administrator",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": null
+    },
+    {
+      "id": "USR-003",
+      "role": "change_approver",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-002"
+    },
+    {
+      "id": "USR-004",
+      "role": "change_approver",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-001"
+    },
+    {
+      "id": "USR-005",
+      "role": "change_approver",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-002"
+    },
+    {
+      "id": "USR-006",
+      "role": "change_approver",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-001"
+    },
+    {
+      "id": "USR-007",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-002"
+    },
+    {
+      "id": "USR-008",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-001"
+    },
+    {
+      "id": "USR-009",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-002"
+    },
+    {
+      "id": "USR-010",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-001"
+    },
+    {
+      "id": "USR-011",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-002"
+    },
+    {
+      "id": "USR-012",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-001"
+    },
+    {
+      "id": "USR-013",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-002"
+    },
+    {
+      "id": "USR-014",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-001"
+    },
+    {
+      "id": "USR-015",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-002"
+    },
+    {
+      "id": "USR-016",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-001"
+    },
+    {
+      "id": "USR-017",
+      "role": "staff",
+      "account_status": "disabled",
+      "employment_status": "terminated",
+      "manager_id": "USR-002"
+    },
+    {
+      "id": "USR-018",
+      "role": "staff",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-001"
+    },
+    {
+      "id": "USR-019",
+      "role": "read_only",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-002"
+    },
+    {
+      "id": "USR-020",
+      "role": "read_only",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-001"
+    },
+    {
+      "id": "USR-021",
+      "role": "read_only",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-002"
+    },
+    {
+      "id": "USR-022",
+      "role": "read_only",
+      "account_status": "disabled",
+      "employment_status": "terminated",
+      "manager_id": "USR-001"
+    },
+    {
+      "id": "USR-023",
+      "role": "read_only",
+      "account_status": "disabled",
+      "employment_status": "terminated",
+      "manager_id": "USR-002"
+    },
+    {
+      "id": "USR-024",
+      "role": "read_only",
+      "account_status": "active",
+      "employment_status": "employed",
+      "manager_id": "USR-001"
+    }
+  ],
+  "privileged_ids": [
+    "USR-001",
+    "USR-002",
+    "USR-003",
+    "USR-004",
+    "USR-005",
+    "USR-006"
+  ]
+}

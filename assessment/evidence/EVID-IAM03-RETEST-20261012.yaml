@@ -1,0 +1,20 @@
+schema_version: '1.0'
+id: EVID-IAM03-RETEST-20261012
+path: fixtures/evidence/completion/iam03-http-retest-20261012.json
+sha256: f3f3882d321ad26a4b302072de810705f355e21c3dad72d15e4101fe1f444dc2
+size: 3566
+media_type: application/json
+collector: project_assessment_automation
+collected_at: '2026-10-12T11:41:39.029565+00:00'
+source_period: Current observation 2026-10-12; no historical operation claim.
+run_id: RUN-IAM03-RETEST-20261012
+provenance: observed_lab
+sensitivity: sanitized
+parent_evidence_id: EVID-IAM03-HTTP-20261012
+query_or_action: Retest twenty HTTP authorization cases after restricting read-only reads to owner/assignee
+  scope selected by owner.
+tool_version: pytest 8.4.2
+redactions:
+- Raw JUnit metadata remains in ignored runtime storage.
+- Source hash metadata normalized to explicit path/sha256 pairs for publication; original values and observations
+  preserved.

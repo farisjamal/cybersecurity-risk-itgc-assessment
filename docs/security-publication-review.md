@@ -1,9 +1,52 @@
 # Source publication security review
 
-Reviewed locally on 11 October 2026, starting from `6f4afb9` on `complete-assessment`.
+Reviewed locally on 11 October 2026 and refreshed on 12 October 2026 on `complete-assessment`.
 This review covers source publication and the local container baseline. It does not approve
 internet-facing deployment or close the outstanding assessment procedures and owner review in
 [the review packet](assessment-review.md).
+
+## Publication refresh, 12 October 2026
+
+The owner explicitly authorized **public GitHub source publication**. This remains an educational
+work in progress; it is not a final PRD v1 release or authorization to expose the running lab.
+
+| Check | Observed result |
+| --- | --- |
+| Candidate payload before the final documentation edit | 294 tracked/untracked source files; no forbidden-path or credential-pattern errors. |
+| Actual private local values | All 32 values from ignored local configuration and generated lab credentials, plus URL-encoded variants, compared against candidate and reachable blob content, nested ZIP/XLSX members and PDF text: zero matches. Values were never logged. |
+| Reachable Git commit history before the publication commit | Gitleaks 8.30.1 scanned all eight commits: zero findings. |
+| Additional blob/archive inspection | 400 reachable blobs, including local app capture trees, and 124 archive members/PDF extractions inspected. Five generic-key matches were verified as source SHA-256 integrity metadata, not secrets. Local capture refs are not published. |
+| Final candidate Gitleaks directory scan | Zero findings after representing source hashes as explicit path/sha256 pairs and clarifying one prose phrase. Hash values and observations preserved; evidence byte hashes refreshed. No detector rules disabled and no secret allowlists added. |
+| Locked Python dependency audit | 40 packages, zero known advisories at 12 October 2026 collection time. |
+| Current application image | 0 Critical, 44 High, 58 Medium, 61 Low, 1 Unknown; zero advisories with an available fix. |
+| Current maintained PostgreSQL image | Zero reported advisories. |
+
+The refreshed Trivy database was updated at `2026-10-12T09:47:21.509023105Z`.
+The unfiltered image counts remain unresolved vendor advisory records, not a zero-vulnerability
+claim or proof that all listed vulnerabilities are exploitable. Raw reports stay ignored under
+`runtime/publication-20261012/`. The exact committed history and staged payload must pass a final
+scan before pushing. Check the repository's live Actions page for hosted CI on the published revision.
+
+### Current application findings
+
+| Severity | Finding | Disposition |
+| --- | --- | --- |
+| Medium | Read-only accounts previously had global service-request visibility, conflicting with the owner's selected own/assigned scope. | Corrected list/detail authorization; twenty HTTP matrix cases and a separate PostgreSQL deployment smoke verify selected boundaries. Baseline and retest evidence preserved. |
+| Medium | Access-review validation accepted duplicate/conflicting IDs and missing/blank/non-string decisions. | Requires exactly one non-empty decision per account. Five negative cases now reject without persistence; the complete-population positive case still succeeds. |
+| Medium | Six privileged approvals require PAM, but implementation and acceptance evidence are absent. | Open **PAM-001** in the [owner decision packet](iam05-access-review.md). RBAC, TOTP MFA and audit events are not presented as complete PAM. Existing local accounts remain active under those observed controls. |
+| Low | Browser sign-in is disabled and Swagger assets are blocked by the current CSP. | Documented API-first workflow in [setup](setup.md). Interactive browser usability/accessibility acceptance remains open. |
+
+Targeted source inspection confirms SQLAlchemy-bound queries, identity dependencies on business
+routes, CSRF dependencies on authenticated mutations, role checks and generated seed credentials.
+The unauthenticated health/readiness, landing/login, OpenAPI and development documentation routes
+are intentional. The only raw SQL in the HTTP adapter is fixed `SELECT 1` readiness SQL; no
+user-supplied SQL concatenation was found in the reviewed paths. This bounded inspection and
+regression suite do not establish absence of every application vulnerability.
+
+Owner account dispositions are current policy evidence, not an independent assessment: 15 scoped
+approvals, six conditional RBAC/PAM approvals and three access denials preserving disabled records.
+No breach by the three terminated accounts is alleged. Historical effectiveness, full role-matrix
+reconciliation and sixteen overall incomplete control conclusions remain open.
 
 ## Findings and remediation
 
@@ -91,8 +134,8 @@ requires Secure cookies, but that setting alone does not make this lab productio
 Do not expose it publicly or introduce real banking/client data. Residual advisories require
 continued review, maintained base updates and a new deployment assessment before wider use.
 
-Source publication requires the exact reviewed payload, a fresh secret scan, intended repository
-visibility and successful hosted CI. Final PRD v1 release remains blocked by sixteen incomplete
+Source publication requires the exact reviewed payload, a fresh secret scan and intended repository
+visibility; hosted CI checks the published revision and must pass before treating it as a verified baseline. Final PRD v1 release remains blocked by sixteen incomplete
 control conclusions/procedures, owner review and remaining acceptance requirements. This security
 review does not change those conclusions or the frozen assessment snapshot.
 

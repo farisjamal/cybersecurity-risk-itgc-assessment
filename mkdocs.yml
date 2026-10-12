@@ -12,6 +12,8 @@ nav:
   - Testing: testing.md
   - Recovery runbook: recovery-runbook.md
   - Assessment review: assessment-review.md
+  - IAM-03 access review: iam03-access-review.md
+  - IAM-05 access review: iam05-access-review.md
   - Publication security review: security-publication-review.md
   - Demonstration: demo.md
   - Limitations: limitations.md

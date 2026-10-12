@@ -1,0 +1,53 @@
+{
+  "control_id": "IAM-05",
+  "collected_at": "2026-10-12T11:58:29.037378+00:00",
+  "cases": [
+    {
+      "name": "test_access_review_rejects_incomplete_population_and_emits_completion_event",
+      "passed": true
+    },
+    {
+      "name": "test_access_review_rejects_ambiguous_decisions_without_completion[duplicate]",
+      "passed": true
+    },
+    {
+      "name": "test_access_review_rejects_ambiguous_decisions_without_completion[conflicting_duplicate]",
+      "passed": true
+    },
+    {
+      "name": "test_access_review_rejects_ambiguous_decisions_without_completion[missing_decision]",
+      "passed": true
+    },
+    {
+      "name": "test_access_review_rejects_ambiguous_decisions_without_completion[blank_decision]",
+      "passed": true
+    },
+    {
+      "name": "test_access_review_rejects_ambiguous_decisions_without_completion[non_string_decision]",
+      "passed": true
+    }
+  ],
+  "passed": 6,
+  "source_hashes": [
+    {
+      "path": "src/bank_lab/services/access.py",
+      "sha256": "4d94c7203de62374c02a2515128e7dd9034febeebcfea6709d078a97c21e16d1"
+    },
+    {
+      "path": "tests/acceptance/test_secure_control_acceptance.py",
+      "sha256": "a9d1ab5b820a64b96601ea7cacdc778d0912dc4fc461a9795a9ba0d5d10c67f4"
+    }
+  ],
+  "observations": [
+    "Duplicate and conflicting account decisions are rejected.",
+    "Missing, blank and non-string decision values are rejected.",
+    "Rejected cases persist no new review or completion event.",
+    "Existing positive control verifies complete population and attributable completion event."
+  ],
+  "limitations": [
+    "Disposable SQLite service-level execution; not a substantive human account review.",
+    "Non-empty decision strings are required; no closed decision vocabulary or business appropriateness is established.",
+    "Follow-up references are not resolved or verified by this correction.",
+    "Historical fixture attribution and actual quarterly performance remain unverified."
+  ]
+}

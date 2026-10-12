@@ -1,36 +1,94 @@
-schema_version: "1.0"
+schema_version: '1.0'
 id: WP-IAM-05-LIMITATION
 control_id: IAM-05
-control_version: "1.0"
-risk_ids: [RISK-IAM-05]
-criteria: [POL-03, RMIT-10.56]
-procedure_version: "1.0"
-test_type: inspection
-test_period: 2026-08-01/2026-08-30
-population_source: not_collected
-population_hash: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855
-population_count: 0
-population_query: No account-export or access-review population query was executed.
-selected_record_ids: []
-selection_rationale: No records were selectable because the complete account export was not collected.
+control_version: '1.0'
+risk_ids:
+- RISK-IAM-05
+criteria:
+- POL-03
+- RMIT-10.56
+procedure_version: '1.0'
+test_type: combined
+test_period: 2026-10-12/2026-10-12
+population_source: fixtures/evidence/completion/iam05-population-20261012.json
+population_hash: 797f0379ca6ac186dfaf97a01777e499c6e788981128aa671a394dc26c821663
+population_count: 24
+population_query: Read-only SELECT of non-secret current accounts, access reviews and access_review.completed
+  events; exact-ID reconciliation of ARV-001 decisions and snapshot against all 24 accounts.
+selected_record_ids:
+- USR-001
+- USR-002
+- USR-003
+- USR-004
+- USR-005
+- USR-006
+- USR-007
+- USR-008
+- USR-009
+- USR-010
+- USR-011
+- USR-012
+- USR-013
+- USR-014
+- USR-015
+- USR-016
+- USR-017
+- USR-018
+- USR-019
+- USR-020
+- USR-021
+- USR-022
+- USR-023
+- USR-024
+selection_rationale: Full current account enumeration, including active and disabled identities; reconcile
+  all 24 to the single generated review without inferring historical or human approval.
 sample_seed: null
 exclusions: []
 expected_behavior: Every account appears in a review decision with traceable actions for exceptions.
-actual_results: No reconciliation was executed and no observed result is asserted.
-evidence_ids: [EVID-POL-03]
-exceptions: []
+actual_results: 'ARV-001 snapshot and 24 retain decisions reconcile exactly to all 24 current accounts:
+  no missing, unknown or duplicate IDs. The generated review has no attributable completion event or action
+  references. Five current negative cases exposed acceptance of duplicate/invalid decisions; after validation
+  correction, all six selected service cases passed, including complete-population event attribution.
+  The corrected main application image rejected all five invalid cases before writing in PostgreSQL READ
+  ONLY; existing review count stayed one and completion-event count stayed zero. Full Windows and Linux
+  suites each passed 166 tests. Owner current dispositions are recorded separately: 15 scoped approvals,
+  six conditional privileged approvals requiring RBAC/PAM, and three access denials retaining disabled
+  identities. PAM-001 remains open.'
+evidence_ids:
+- EVID-POL-03
+- EVID-IAM05-POPULATION-20261012
+- EVID-IAM05-BASELINE-20261012
+- EVID-IAM05-RETEST-20261012
+- EVID-IAM05-DEPLOYMENT-20261012
+- EVID-OWNER-ACCESS-20261012
+exceptions:
+- ARV-001 records reviewer_role only and has no matching completion event identifying an actor. Synthetic
+  timestamps and blanket retain decisions do not prove a substantive quarterly review.
+- Pre-correction service accepted duplicate/conflicting and missing/blank/non-string decisions. Validation
+  corrected and applied to the main app; isolated retest and five-case PostgreSQL READ ONLY smoke passed.
 limitations:
-  - Account-export, review-decision, and resulting-action evidence was not collected.
-  - The referenced authored policy establishes intended practice only and does not prove operation.
-  - The empty-content hash is a no-population sentinel, not a source population hash.
-  - No control procedure was executed, so no design or operating conclusion is supported.
-  - Project-owner substantive review remains outstanding; only an automated structural check occurred.
+- Generated August dates are synthetic; current inspection does not establish historical quarterly operation.
+- Blanket retain decisions are not owner authorization of roles; retaining a disabled identity is not
+  evidence of reactivation.
+- No closed decision vocabulary or referential verification of action_references is implemented by this
+  narrow validation correction.
+- Targeted tests use service-level SQLite; separate main-lab smoke checks denials with PostgreSQL READ
+  ONLY. Neither is a new substantive human review or manual HTTP workflow.
+- Project-owner substantive self-review remains open.
+- Current owner dispositions do not prove PAM implementation or historical review. Six privileged approvals
+  remain conditional; PAM-001 and full role-matrix reconciliation remain open.
 design_status: not_assessed
-operating_status: not_tested
-assessor_decision: Retain no conclusion until the complete account population is reconciled.
+operating_status: insufficient_evidence
+assessor_decision: Current population reconciliation and attributable substantive account decisions are
+  recorded, with selected validation tests passing. Retain an incomplete IAM-05 conclusion until the six
+  privileged PAM conditions and necessary follow-up evidence are verified; no historical quarterly effectiveness
+  is inferred.
 preparer: project_assessment_automation
 review_mode: self_reviewed
 review_comments:
-  - Structural schema and limitation wording checked; no independent or owner review is claimed.
-prepared_at: 2026-09-26T01:58:37Z
-reviewed_at: 2026-09-26T01:58:37Z
+- Current owner self-review is attributed to the explicit project chat instruction; 15 approvals, six
+  conditional approvals and three denials are transcribed in EVID-OWNER-ACCESS-20261012.
+- The original generated review is preserved; no backdating or new main-lab review is performed. PAM follow-up
+  and overall control review remain open.
+prepared_at: '2026-10-12T12:04:32.156037+00:00'
+reviewed_at: '2026-10-12T12:37:03.878297+00:00'

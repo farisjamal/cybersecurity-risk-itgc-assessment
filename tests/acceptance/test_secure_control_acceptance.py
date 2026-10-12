@@ -10,7 +10,7 @@ from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_asyn
 
 from bank_lab.config import Settings
 from bank_lab.database import Base
-from bank_lab.models import AuditEvent, ChangeStatus, Decision, Session, User
+from bank_lab.models import AccessReview, AuditEvent, ChangeStatus, Decision, Session, User
 from bank_lab.security import MfaError, SessionExpiredError, digest_secret, resolve_session
 from bank_lab.seed import seed_database
 from bank_lab.services import AccessService, AuthService, ChangeService, ConflictError
@@ -120,6 +120,53 @@ async def test_access_review_rejects_incomplete_population_and_emits_completion_
     assert review.population_snapshot["count"] == 24
     assert event.actor_id == reviewer.id
     assert event.context["population_count"] == 24
+
+
+@pytest.mark.asyncio
+@pytest.mark.acceptance
+@pytest.mark.parametrize(
+    "invalid_case",
+    [
+        "duplicate",
+        "conflicting_duplicate",
+        "missing_decision",
+        "blank_decision",
+        "non_string_decision",
+    ],
+)
+async def test_access_review_rejects_ambiguous_decisions_without_completion(
+    db: AsyncSession, invalid_case: str
+) -> None:
+    reviewer = await db.get(User, "USR-003")
+    assert reviewer
+    users = list((await db.execute(select(User).order_by(User.id))).scalars())
+    decisions = [{"user_id": user.id, "decision": "retain"} for user in users]
+    if invalid_case == "duplicate":
+        decisions.append(dict(decisions[0]))
+    elif invalid_case == "conflicting_duplicate":
+        decisions.append({"user_id": users[0].id, "decision": "revoke"})
+    elif invalid_case == "missing_decision":
+        del decisions[0]["decision"]
+    elif invalid_case == "blank_decision":
+        decisions[0]["decision"] = "  "
+    else:
+        decisions[0]["decision"] = 123  # type: ignore[assignment]
+
+    with pytest.raises(ConflictError):
+        await AccessService(db, Settings(session_pepper="acceptance-pepper")).record_review(
+            reviewer, "2026-Q3", decisions
+        )
+
+    reviews = list((await db.execute(select(AccessReview))).scalars())
+    assert [review.id for review in reviews] == ["ARV-001"]
+    events = list(
+        (
+            await db.execute(
+                select(AuditEvent).where(AuditEvent.action == "access_review.completed")
+            )
+        ).scalars()
+    )
+    assert events == []
 
 
 @pytest.mark.asyncio

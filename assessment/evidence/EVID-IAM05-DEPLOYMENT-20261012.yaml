@@ -1,0 +1,18 @@
+schema_version: '1.0'
+id: EVID-IAM05-DEPLOYMENT-20261012
+path: fixtures/evidence/completion/iam05-deployment-20261012.json
+sha256: dd7721b1440e37b8208a166a20a16cf1c0cf3352bd103c72269710a723341a78
+size: 1843
+media_type: application/json
+collector: project_assessment_automation
+collected_at: '2026-10-12T12:04:32.156037+00:00'
+source_period: Current verification on 2026-10-12 only.
+run_id: RUN-IAM05-DEPLOYMENT-20261012
+provenance: observed_lab
+sensitivity: sanitized
+parent_evidence_id: EVID-IAM05-RETEST-20261012
+query_or_action: Verify five invalid-review rejections on the updated main app in
+  PostgreSQL READ ONLY, and retain Windows/Linux full-suite counts.
+tool_version: 0.1.0; pytest 8.4.2
+redactions:
+- Non-secret summary only; raw logs and JUnit metadata remain ignored.
